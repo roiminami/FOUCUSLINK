@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FocusLink | Minami 学習ポータル</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap');
+        body { font-family: 'Inter', 'Noto Sans JP', sans-serif; background-color: #F8FAFC; }
+    </style>
+</head>
+<body class="text-slate-800 min-h-screen flex flex-col antialiased">
+
+    <!-- 顶部全局栏 -->
+    <div id="focuslink-bar-root"></div>
+
+    <!-- 主内容区 -->
+    <main class="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 py-10 sm:py-16 flex flex-col gap-10">
+        
+        <!-- Hero 标题区 -->
+        <section class="text-center flex flex-col items-center gap-3">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-bold">
+                <span class="w-2 h-2 rounded-full bg-teal-500"></span>
+                <span>FocusLink Learning Ecosystem</span>
+            </div>
+            <h1 class="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight">
+                在日中国人IT人材の成長と<br class="sm:hidden">スキルアップを支援する
+            </h1>
+            <p class="text-xs sm:text-sm text-slate-500 max-w-xl leading-relaxed">
+                情報処理技術者試験・英語学習・技術ブログを一元化した学習ポータル。目的のコンテンツを選択してください。
+            </p>
+        </section>
+
+        <!-- 四大核心板块卡片 -->
+        <section class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+            
+            <!-- 1. 応用情報技術者試験 -->
+            <a href="https://ipa.minami.ac.cn/ap" class="group bg-white border border-slate-200 hover:border-indigo-400 rounded-2xl p-5 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between gap-4">
+                <div class="flex items-start justify-between gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-teal-500 text-white flex items-center justify-center font-black text-base shadow-xs shrink-0">
+                        南
+                    </div>
+                    <span class="text-[10px] font-bold bg-teal-50 text-teal-700 border border-teal-200 px-2 py-0.5 rounded-full">公開中</span>
+                </div>
+                <div>
+                    <h2 class="text-base font-black text-slate-900 group-hover:text-indigo-600 transition-colors">南式応用情報速攻！（科目B）</h2>
+                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">厳選5分野の過去問演習とYouTube動画解説を統合した速攻学習ポータル。</p>
+                </div>
+                <div class="flex items-center text-xs font-bold text-indigo-600 gap-1">
+                    <span>学習を始める</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </a>
+
+            <!-- 2. 情報処理安全確保支援士 -->
+            <a href="https://sc.minami.ac.cn/" class="group bg-white border border-slate-200 hover:border-indigo-400 rounded-2xl p-5 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between gap-4">
+                <div class="flex items-start justify-between gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-slate-900 text-teal-400 flex items-center justify-center shrink-0">
+                        <i data-lucide="shield-check" class="w-5 h-5"></i>
+                    </div>
+                    <span class="text-[10px] font-bold bg-slate-100 text-slate-600 border border-slate-200 px-2 py-0.5 rounded-full">準備中</span>
+                </div>
+                <div>
+                    <h2 class="text-base font-black text-slate-900 group-hover:text-indigo-600 transition-colors">情報処理安全確保支援士</h2>
+                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">高度区分セキュリティスペシャリスト対策ノート・午後問題分析。</p>
+                </div>
+                <div class="flex items-center text-xs font-bold text-slate-600 group-hover:text-indigo-600 gap-1">
+                    <span>サイトへ移動</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </a>
+
+            <!-- 3. TOEIC -->
+            <a href="https://toeic.minami.ac.cn/" class="group bg-white border border-slate-200 hover:border-indigo-400 rounded-2xl p-5 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between gap-4">
+                <div class="flex items-start justify-between gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center shrink-0">
+                        <i data-lucide="languages" class="w-5 h-5"></i>
+                    </div>
+                    <span class="text-[10px] font-bold bg-amber-50 text-amber-700 border border-amber-200 px-2 py-0.5 rounded-full">英語学習</span>
+                </div>
+                <div>
+                    <h2 class="text-base font-black text-slate-900 group-hover:text-indigo-600 transition-colors">TOEIC 速攻トレーニング</h2>
+                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">頻出語彙・文法パターン・Xmind体系化マップによるスコアアップ演習。</p>
+                </div>
+                <div class="flex items-center text-xs font-bold text-slate-600 group-hover:text-indigo-600 gap-1">
+                    <span>サイトへ移動</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </a>
+
+            <!-- 4. ブログ (NotionNext) -->
+            <a href="https://blog.minami.ac.cn/" class="group bg-white border border-slate-200 hover:border-indigo-400 rounded-2xl p-5 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between gap-4">
+                <div class="flex items-start justify-between gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center shrink-0">
+                        <i data-lucide="book-open" class="w-5 h-5"></i>
+                    </div>
+                    <span class="text-[10px] font-bold bg-indigo-50 text-indigo-700 border border-indigo-200 px-2 py-0.5 rounded-full">Blog</span>
+                </div>
+                <div>
+                    <h2 class="text-base font-black text-slate-900 group-hover:text-indigo-600 transition-colors">Minami Tech & Study Blog</h2>
+                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">日本でのITキャリア、資格取得体験記、学習メソッドを発信するブログ。</p>
+                </div>
+                <div class="flex items-center text-xs font-bold text-slate-600 group-hover:text-indigo-600 gap-1">
+                    <span>記事を読む</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </a>
+
+        </section>
+    </main>
+
+    <footer class="border-t border-slate-200 bg-white py-4 text-center text-[11px] text-slate-400 font-medium">
+        © FocusLink / Minami. All rights reserved.
+    </footer>
+
+    <script src="focuslink-bar.js" defer></script>
+    <script>
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    </script>
+</body>
+</html>
