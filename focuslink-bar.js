@@ -1,13 +1,13 @@
 (function () {
-    // ================= 1. 统一配置区（以后新增站点只改这里） =================
-    const FOCUSLINK_HOME = 'https://minami.ac.cn/';
+    // ================= 1. 统一配置区 =================
+    const FOCUSLINK_HOME = 'https://focuslink.minami.ac.cn/';
     const FOCUSLINK_SITES = [
         { name: '応用情報',   url: 'https://ipa.minami.ac.cn/ap', match: '/ap' },
-        { name: '情報支援士', url: 'https://sc.minami.ac.cn/',    match: 'sc.' },
+        { name: '情報支援士', url: 'https://ipa.minami.ac.cn/sc', match: '/sc' },
         { name: 'TOEIC',      url: 'https://toeic.minami.ac.cn/', match: 'toeic.' },
-        { name: 'ブログ',     url: 'https://blog.minami.ac.cn/',  match: 'blog.' }
+        { name: 'ブログ',     url: 'https://minami.ac.cn/',       match: 'minami.ac.cn' }
     ];
-    // =====================================================================
+    // ================================================
 
     if (document.getElementById('focuslink-global-bar')) return;
 
@@ -91,7 +91,11 @@
     document.head.appendChild(style);
 
     const linksHtml = FOCUSLINK_SITES.map(site => {
-        const isActive = currentFullUrl.includes(site.match) || ((currentHost === '' || currentHost === 'localhost') && site.match === '/ap');
+        const isBlog = site.match === 'minami.ac.cn' && (currentHost === 'minami.ac.cn' || currentHost === 'www.minami.ac.cn');
+        const isSubSite = site.match !== 'minami.ac.cn' && currentFullUrl.includes(site.match);
+        const isLocalDefault = (currentHost === '' || currentHost === 'localhost') && site.match === '/ap';
+        const isActive = isBlog || isSubSite || isLocalDefault;
+
         return `<a href="${site.url}" class="fl-link${isActive ? ' active' : ''}"${isActive ? ' aria-current="page"' : ''}>${site.name}</a>`;
     }).join('');
 
