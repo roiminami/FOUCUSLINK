@@ -61,7 +61,6 @@
       letter-spacing: -0.02em;
     }
 
-    /* 首屏扣除全局条+局部导航，其余5屏仅扣除全局条，一屏完整呈现 */
     .hero-viewport {
       min-height: calc(100vh - 96px);
       display: flex;
@@ -81,18 +80,24 @@
       scroll-margin-top: 42px;
     }
 
-    /* 右侧 HUD 电梯导航点激活态 */
+    /* 右侧极简纯刻度条（悬停才浮现文字，绝不遮挡正文） */
     .hud-dot {
       transition: all 0.2s ease;
     }
-    .hud-dot.active .hud-bar {
-      width: 22px;
-      background-color: #00f0ff;
-      box-shadow: 0 0 10px rgba(0, 240, 255, 0.75);
+    .hud-dot .hud-label {
+      opacity: 0;
+      transform: translateX(6px);
+      pointer-events: none;
+      transition: all 0.18s ease;
     }
-    .hud-dot.active .hud-label {
-      color: #00f0ff;
+    .hud-dot:hover .hud-label {
       opacity: 1;
+      transform: translateX(0);
+    }
+    .hud-dot.active .hud-bar {
+      width: 18px;
+      background-color: #00f0ff;
+      box-shadow: 0 0 10px rgba(0, 240, 255, 0.85);
     }
 
     /* 赛博机甲切角按钮 */
@@ -231,35 +236,35 @@
 </head>
 <body class="antialiased selection:bg-[#00f0ff] selection:text-[#05070e]">
 
-  <!-- 右侧悬浮赛博 HUD 电梯导航刻度（00 ~ 05） -->
-  <aside aria-label="Section HUD Navigation" class="hidden xl:flex fixed right-4 top-1/2 -translate-y-1/2 z-40 flex-col items-end gap-3 font-mono-code text-[10px]">
-    <a href="#hero" data-target="hero" class="hud-dot active flex items-center gap-2 group">
-      <span class="hud-label text-slate-500 opacity-70 group-hover:text-[#00f0ff] group-hover:opacity-100">00_HOME</span>
-      <span class="hud-bar block w-3 h-[2px] bg-slate-600 group-hover:bg-[#00f0ff]"></span>
+  <!-- 右侧极简纯刻度导航（悬停才弹出文字，绝不压住正文） -->
+  <aside aria-label="Section HUD Navigation" class="hidden xl:flex fixed right-3 top-1/2 -translate-y-1/2 z-40 flex-col items-end gap-3 font-mono-code text-[10px]">
+    <a href="#hero" data-target="hero" class="hud-dot active flex items-center gap-2">
+      <span class="hud-label px-2 py-0.5 bg-[#05070e]/95 border border-[#00f0ff]/40 text-[#00f0ff]">00_HOME</span>
+      <span class="hud-bar block w-2.5 h-[2px] bg-slate-600"></span>
     </a>
-    <a href="#services" data-target="services" class="hud-dot flex items-center gap-2 group">
-      <span class="hud-label text-slate-500 opacity-70 group-hover:text-[#00f0ff] group-hover:opacity-100">01_PORTALS</span>
-      <span class="hud-bar block w-3 h-[2px] bg-slate-600 group-hover:bg-[#00f0ff]"></span>
+    <a href="#services" data-target="services" class="hud-dot flex items-center gap-2">
+      <span class="hud-label px-2 py-0.5 bg-[#05070e]/95 border border-[#00f0ff]/40 text-[#00f0ff]">01_PORTALS</span>
+      <span class="hud-bar block w-2.5 h-[2px] bg-slate-600"></span>
     </a>
-    <a href="#method" data-target="method" class="hud-dot flex items-center gap-2 group">
-      <span class="hud-label text-slate-500 opacity-70 group-hover:text-[#00f0ff] group-hover:opacity-100">02_METHOD</span>
-      <span class="hud-bar block w-3 h-[2px] bg-slate-600 group-hover:bg-[#00f0ff]"></span>
+    <a href="#method" data-target="method" class="hud-dot flex items-center gap-2">
+      <span class="hud-label px-2 py-0.5 bg-[#05070e]/95 border border-[#00f0ff]/40 text-[#00f0ff]">02_METHOD</span>
+      <span class="hud-bar block w-2.5 h-[2px] bg-slate-600"></span>
     </a>
-    <a href="#hsp" data-target="hsp" class="hud-dot flex items-center gap-2 group">
-      <span class="hud-label text-slate-500 opacity-70 group-hover:text-[#00f0ff] group-hover:opacity-100">03_HSP_CALC</span>
-      <span class="hud-bar block w-3 h-[2px] bg-slate-600 group-hover:bg-[#00f0ff]"></span>
+    <a href="#hsp" data-target="hsp" class="hud-dot flex items-center gap-2">
+      <span class="hud-label px-2 py-0.5 bg-[#05070e]/95 border border-[#00f0ff]/40 text-[#00f0ff]">03_HSP_CALC</span>
+      <span class="hud-bar block w-2.5 h-[2px] bg-slate-600"></span>
     </a>
-    <a href="#creator" data-target="creator" class="hud-dot flex items-center gap-2 group">
-      <span class="hud-label text-slate-500 opacity-70 group-hover:text-[#00f0ff] group-hover:opacity-100">04_36_CERTS</span>
-      <span class="hud-bar block w-3 h-[2px] bg-slate-600 group-hover:bg-[#00f0ff]"></span>
+    <a href="#creator" data-target="creator" class="hud-dot flex items-center gap-2">
+      <span class="hud-label px-2 py-0.5 bg-[#05070e]/95 border border-[#00f0ff]/40 text-[#00f0ff]">04_36_CERTS</span>
+      <span class="hud-bar block w-2.5 h-[2px] bg-slate-600"></span>
     </a>
-    <a href="#community" data-target="community" class="hud-dot flex items-center gap-2 group">
-      <span class="hud-label text-slate-500 opacity-70 group-hover:text-[#00f0ff] group-hover:opacity-100">05_NETWORK</span>
-      <span class="hud-bar block w-3 h-[2px] bg-slate-600 group-hover:bg-[#00f0ff]"></span>
+    <a href="#community" data-target="community" class="hud-dot flex items-center gap-2">
+      <span class="hud-label px-2 py-0.5 bg-[#05070e]/95 border border-[#00f0ff]/40 text-[#00f0ff]">05_NETWORK</span>
+      <span class="hud-bar block w-2.5 h-[2px] bg-slate-600"></span>
     </a>
   </aside>
 
-  <!-- 1. 局部导航栏（不粘性固定，释放后续5屏垂直空间） -->
+  <!-- 1. 局部导航栏 -->
   <header class="relative z-30 border-b border-[#00f0ff]/20 bg-[#05070e]/95">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-4">
       <a href="#hero" class="flex items-center gap-2.5 shrink-0 group">
@@ -297,7 +302,7 @@
 
   <main>
 
-    <!-- [版面 1/6] Hero 首屏 -->
+    <!-- [版面 1] Hero 首屏 -->
     <section id="hero" class="hero-viewport">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 w-full">
         <div class="grid lg:grid-cols-12 gap-8 lg:gap-10 items-center">
@@ -388,10 +393,10 @@
       </div>
     </section>
 
-    <!-- [版面 2/6] 学習ポータル -->
+    <!-- [版面 2] 学習ポータル + 轻量级 6 步攻略流程条 -->
     <section id="services" class="section-viewport">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 w-full space-y-5">
-        <div class="cyber-ruler">01 ─── SECTOR_01 // ACTIVE_LEARNING_NODES ─── 06</div>
+        <div class="cyber-ruler">01 ─── SECTOR_01 // ACTIVE_LEARNING_NODES ───</div>
 
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
           <div>
@@ -502,104 +507,63 @@
       </div>
     </section>
 
-    <!-- [版面 3/6] 独创学习方法论 -->
-    <section id="method" class="section-viewport">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 w-full space-y-5">
-        <div class="cyber-ruler">02 ─── SECTOR_02 // AP_DECODING_PROTOCOL ─── 06</div>
-
-        <div>
-          <span class="font-mono-code text-xs font-bold tracking-widest text-[#00f0ff]">// 02_AP_SITE_PRACTICE_METHOD</span>
-          <h2 class="text-2xl sm:text-3xl font-black text-white mt-0.5">「日本語の壁」を突破する6ステップ攻略法</h2>
-          <p class="text-sm text-slate-400 mt-0.5">応用情報技術者(AP)学習サイト開発の中で体系化した、難解な日本語長文を母語の直感でデコードする実践メソッド。</p>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 items-stretch">
-          <div class="cyber-card p-4 flex flex-col justify-between h-full">
-            <div>
-              <div class="flex items-center justify-between mb-1">
-                <span class="font-mono-code text-xs text-slate-400 font-bold">STEP_01</span>
-                <span class="font-mono-code text-[10px] text-[#00f0ff]">INPUT</span>
-              </div>
-              <div class="text-lg font-black text-white mb-1">抽出</div>
-              <p class="text-[13px] text-slate-300 leading-relaxed">問題文から解答に直結する専門知識だけを厳選して抜き出す</p>
-            </div>
+    <!-- [轻量级横向流程条] AP 6ステップ攻略法（不占整屏，视觉退居辅助） -->
+    <section id="method" class="py-10 border-y border-[#00f0ff]/15 bg-[#070b14]/75">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 space-y-4">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-2">
+          <div class="flex flex-wrap items-center gap-2.5">
+            <span class="font-mono-code text-xs font-bold text-[#00f0ff]">// 02_AP_METHOD</span>
+            <h2 class="text-lg sm:text-xl font-black text-white">日本語長文を突破する「6ステップ読解プロトコル」</h2>
           </div>
-
-          <div class="cyber-card p-4 flex flex-col justify-between h-full">
-            <div>
-              <div class="flex items-center justify-between mb-1">
-                <span class="font-mono-code text-xs text-slate-400 font-bold">STEP_02</span>
-                <span class="font-mono-code text-[10px] text-[#00f0ff]">CONCEPT</span>
-              </div>
-              <div class="text-lg font-black text-white mb-1">理解</div>
-              <p class="text-[13px] text-slate-300 leading-relaxed">身近な企業や日常の例え話で直感的にイメージ化する</p>
-            </div>
-          </div>
-
-          <div class="cyber-card p-4 flex flex-col justify-between h-full">
-            <div>
-              <div class="flex items-center justify-between mb-1">
-                <span class="font-mono-code text-xs text-[#38bdf8] font-bold">STEP_03</span>
-                <span class="font-mono-code text-[10px] text-[#38bdf8]">DECODE</span>
-              </div>
-              <div class="text-lg font-black text-white mb-1">通訳</div>
-              <p class="text-[13px] text-slate-300 leading-relaxed">難解な日本語長文を一文ずつ母語で構造分解して読む</p>
-            </div>
-          </div>
-
-          <div class="cyber-card p-4 flex flex-col justify-between h-full">
-            <div>
-              <div class="flex items-center justify-between mb-1">
-                <span class="font-mono-code text-xs text-[#38bdf8] font-bold">STEP_04</span>
-                <span class="font-mono-code text-[10px] text-[#38bdf8]">STRUCT</span>
-              </div>
-              <div class="text-lg font-black text-white mb-1">整理</div>
-              <p class="text-[13px] text-slate-300 leading-relaxed">登場人物・システム構成・制約条件を頭の中で図解する</p>
-            </div>
-          </div>
-
-          <div class="cyber-card p-4 flex flex-col justify-between h-full">
-            <div>
-              <div class="flex items-center justify-between mb-1">
-                <span class="font-mono-code text-xs text-[#00f0ff] font-bold">STEP_05</span>
-                <span class="font-mono-code text-[10px] text-[#00f0ff]">LOGIC</span>
-              </div>
-              <div class="text-lg font-black text-white mb-1">応用</div>
-              <p class="text-[13px] text-slate-300 leading-relaxed">「なぜこの技術・戦略を選ぶのか」の根拠を明確化する</p>
-            </div>
-          </div>
-
-          <div class="cyber-card p-4 flex flex-col justify-between h-full">
-            <div>
-              <div class="flex items-center justify-between mb-1">
-                <span class="font-mono-code text-xs text-[#00f0ff] font-bold">STEP_06</span>
-                <span class="font-mono-code text-[10px] text-[#00f0ff]">OUTPUT</span>
-              </div>
-              <div class="text-lg font-black text-white mb-1">記述</div>
-              <p class="text-[13px] text-slate-300 leading-relaxed">採点者に伝わる簡潔な日本語キーワードで回答を作成する</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="cyber-card p-5 sm:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
-          <div class="space-y-1.5 max-w-2xl">
-            <span class="inline-block px-2.5 py-0.5 bg-[#00f0ff]/12 text-[#00f0ff] border border-[#00f0ff]/40 font-mono-code text-[11px] font-bold">SAMPLE_DECODE // 応用情報・経営戦略</span>
-            <h3 class="text-base sm:text-lg font-black text-white">無味乾燥な「多角化戦略・負債リスク」も、リアルな企業事例なら一発で定着！</h3>
-            <p class="text-[13px] text-slate-300 leading-relaxed">
-              教科書通りの暗記ではなく、<strong>「中国・恒大集団の急拡大と資金繰り悪化」</strong>のような誰もが知るリアルな事例と試験の専門用語（財務レバレッジ・事業ポートフォリオ）を直結させて解説。だから忘れません。
-            </p>
-          </div>
-          <a href="https://ipa.minami.ac.cn/ap" target="_blank" rel="noopener" class="px-5 py-3 cyber-btn bg-[#00f0ff]/12 hover:bg-[#00f0ff]/22 border border-[#00f0ff]/60 font-mono-code text-[#00f0ff] text-xs font-extrabold whitespace-nowrap shrink-0">
+          <a href="https://ipa.minami.ac.cn/ap" target="_blank" rel="noopener" class="font-mono-code text-xs font-bold text-[#00f0ff] hover:underline whitespace-nowrap">
             応用情報サイトで実例を見る ▶
           </a>
         </div>
+
+        <!-- 紧凑单行流水线 -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5">
+          <div class="bg-[#05070e] border border-slate-800 px-3 py-2.5">
+            <div class="font-mono-code text-[10px] text-[#00f0ff]">01 // INPUT</div>
+            <div class="font-bold text-white text-sm mt-0.5">抽出</div>
+            <div class="text-[11px] text-slate-400 mt-0.5">解答直結の知識厳選</div>
+          </div>
+          <div class="bg-[#05070e] border border-slate-800 px-3 py-2.5">
+            <div class="font-mono-code text-[10px] text-[#00f0ff]">02 // CONCEPT</div>
+            <div class="font-bold text-white text-sm mt-0.5">理解</div>
+            <div class="text-[11px] text-slate-400 mt-0.5">身近な企業事例で把握</div>
+          </div>
+          <div class="bg-[#05070e] border border-slate-800 px-3 py-2.5">
+            <div class="font-mono-code text-[10px] text-[#38bdf8]">03 // DECODE</div>
+            <div class="font-bold text-white text-sm mt-0.5">通訳</div>
+            <div class="text-[11px] text-slate-400 mt-0.5">長文を母語で構造分解</div>
+          </div>
+          <div class="bg-[#05070e] border border-slate-800 px-3 py-2.5">
+            <div class="font-mono-code text-[10px] text-[#38bdf8]">04 // STRUCT</div>
+            <div class="font-bold text-white text-sm mt-0.5">整理</div>
+            <div class="text-[11px] text-slate-400 mt-0.5">構成・制約条件を図解</div>
+          </div>
+          <div class="bg-[#05070e] border border-slate-800 px-3 py-2.5">
+            <div class="font-mono-code text-[10px] text-[#00f0ff]">05 // LOGIC</div>
+            <div class="font-bold text-white text-sm mt-0.5">応用</div>
+            <div class="text-[11px] text-slate-400 mt-0.5">技術選定の根拠を明確化</div>
+          </div>
+          <div class="bg-[#05070e] border border-slate-800 px-3 py-2.5">
+            <div class="font-mono-code text-[10px] text-[#00f0ff]">06 // OUTPUT</div>
+            <div class="font-bold text-white text-sm mt-0.5">記述</div>
+            <div class="text-[11px] text-slate-400 mt-0.5">簡潔な日本語で回答作成</div>
+          </div>
+        </div>
+
+        <p class="text-xs text-slate-400 leading-relaxed">
+          <span class="text-[#00f0ff] font-mono-code font-bold">[CASE_EXAMPLE]</span> 教科書通りの丸暗記ではなく、<strong class="text-slate-200">「中国・恒大集団の急拡大と資金繰り悪化」</strong>のようなリアルな事例と試験用語（財務レバレッジ・事業ポートフォリオ）を直結させて解説しています。
+        </p>
       </div>
     </section>
 
-    <!-- [版面 4/6] 高度専門職（1号ロ）100% 真实法务省官方积分计算器 -->
+    <!-- [版面 3] 高度専門職（1号ロ）100% 真实法务省官方积分计算器 -->
     <section id="hsp" class="section-viewport">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 w-full space-y-4">
-        <div class="cyber-ruler">03 ─── SECTOR_03 // HSP_1(ロ)_OFFICIAL_SIMULATOR ─── 06</div>
+        <div class="cyber-ruler">03 ─── SECTOR_03 // HSP_1(ロ)_OFFICIAL_SIMULATOR ───</div>
 
         <div class="cyber-card p-5 sm:p-6">
           <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-3.5 mb-4 border-b border-slate-800">
@@ -788,10 +752,10 @@
       </div>
     </section>
 
-    <!-- [版面 5/6] 运营者・创作者档案（36资格矩阵） -->
+    <!-- [版面 4] 运营者・创作者档案（36资格矩阵） -->
     <section id="creator" class="section-viewport">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 w-full space-y-5">
-        <div class="cyber-ruler">04 ─── SECTOR_04 // CREATOR_ARCHIVE ─── 06</div>
+        <div class="cyber-ruler">04 ─── SECTOR_04 // CREATOR_ARCHIVE ───</div>
 
         <div>
           <span class="font-mono-code text-xs font-bold tracking-widest text-[#00f0ff]">// 04_CREATOR_ARCHIVE</span>
@@ -847,10 +811,10 @@
       </div>
     </section>
 
-    <!-- [版面 6/6] 学习社群入口 + 页脚 -->
+    <!-- [版面 5] 学习社群入口 + 页脚 -->
     <section id="community" class="section-viewport justify-between">
       <div class="my-auto max-w-5xl mx-auto px-4 sm:px-6 w-full space-y-6">
-        <div class="cyber-ruler">05 ─── SECTOR_05 // PEER_LEARNING_NETWORK ─── 06</div>
+        <div class="cyber-ruler">05 ─── SECTOR_05 // PEER_LEARNING_NETWORK ───</div>
 
         <div class="cyber-card p-7 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
           <div class="space-y-2.5">
