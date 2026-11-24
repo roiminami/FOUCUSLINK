@@ -11,14 +11,10 @@
   <style>
     :root {
       --bg-void: #05070e;
-      --bg-panel: #0b101d;
+      --bg-panel: #090e1a;
       --cyber-cyan: #00f0ff;
-      --cyber-magenta: #ff0055;
-      --cyber-pink-text: #ff4d8d;
-      --cyber-purple: #c084fc;
-      --cyber-yellow: #ffe600;
-      --cyber-emerald: #34d399;
-      --cyber-orange: #ff6b00;
+      --cyber-ice: #38bdf8;
+      --cyber-magenta: #ff2a6d;
     }
 
     html, body {
@@ -29,16 +25,16 @@
     body {
       font-family: 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
       background-color: var(--bg-void);
-      color: #e2e8f0;
+      color: #cbd5e1;
       background-image:
-        radial-gradient(circle at 15% 10%, rgba(0, 240, 255, 0.11), transparent 38%),
-        radial-gradient(circle at 85% 20%, rgba(255, 0, 85, 0.11), transparent 38%),
-        linear-gradient(rgba(0, 240, 255, 0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 240, 255, 0.035) 1px, transparent 1px);
-      background-size: 100% 100%, 100% 100%, 36px 36px, 36px 36px;
+        radial-gradient(circle at 12% 8%, rgba(0, 240, 255, 0.09), transparent 36%),
+        radial-gradient(circle at 88% 18%, rgba(255, 42, 109, 0.08), transparent 36%),
+        linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
     }
 
-    /* 轻微 CRT 扫描线氛围层 */
+    /* 极细腻 CRT 扫描线氛围层 */
     body::after {
       content: "";
       position: fixed;
@@ -49,7 +45,7 @@
         0deg,
         rgba(0, 0, 0, 0) 0px,
         rgba(0, 0, 0, 0) 3px,
-        rgba(0, 240, 255, 0.016) 4px
+        rgba(0, 240, 255, 0.015) 4px
       );
     }
 
@@ -64,24 +60,24 @@
     }
     .cyber-btn:hover {
       transform: translateY(-2px);
-      filter: brightness(1.12);
+      filter: brightness(1.1);
     }
 
-    /* 精确对齐四隅准星的硬朗 HUD 卡片 */
+    /* 克制赛博 HUD 卡片（统一电光青 + 战术洋红准星） */
     .cyber-card {
       position: relative;
       border-radius: 0 !important;
-      background: rgba(11, 16, 29, 0.9);
+      background: rgba(9, 14, 26, 0.92);
       backdrop-filter: blur(12px);
-      border: 1px solid rgba(0, 240, 255, 0.2);
+      border: 1px solid rgba(0, 240, 255, 0.16);
       transition: transform 0.24s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.2s ease, box-shadow 0.2s ease;
     }
     .cyber-card::before,
     .cyber-card::after {
       content: "";
       position: absolute;
-      width: 10px;
-      height: 10px;
+      width: 9px;
+      height: 9px;
       pointer-events: none;
       z-index: 2;
       transition: all 0.2s ease;
@@ -99,94 +95,65 @@
       border-right: 2px solid var(--cyber-magenta);
     }
     .cyber-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(0, 240, 255, 0.7);
-      box-shadow: 0 0 26px rgba(0, 240, 255, 0.16), inset 0 0 16px rgba(0, 240, 255, 0.05);
+      transform: translateY(-3px);
+      border-color: rgba(0, 240, 255, 0.55);
+      box-shadow: 0 0 24px rgba(0, 240, 255, 0.12), inset 0 0 14px rgba(0, 240, 255, 0.04);
     }
     .cyber-card:hover::before,
     .cyber-card:hover::after {
-      width: 16px;
-      height: 16px;
+      width: 14px;
+      height: 14px;
     }
 
-    /* 区块色彩锚点变体（黄金方法论区 / 翡翠档案区） */
-    .cyber-card-gold {
-      border-color: rgba(255, 230, 0, 0.22);
-    }
-    .cyber-card-gold::before {
-      border-top-color: var(--cyber-yellow);
-      border-left-color: var(--cyber-yellow);
-    }
-    .cyber-card-gold:hover {
-      border-color: rgba(255, 230, 0, 0.65);
-      box-shadow: 0 0 24px rgba(255, 230, 0, 0.14);
-    }
-
-    .cyber-card-emerald {
-      border-color: rgba(52, 211, 153, 0.22);
-    }
-    .cyber-card-emerald::before {
-      border-top-color: var(--cyber-emerald);
-      border-left-color: var(--cyber-emerald);
-    }
-    .cyber-card-emerald:hover {
-      border-color: rgba(52, 211, 153, 0.65);
-      box-shadow: 0 0 24px rgba(52, 211, 153, 0.14);
-    }
-
-    /* 开发中模块：全息幽灵线框态 */
+    /* 开发中模块：低对比幽灵线框态 */
     .cyber-ghost {
       position: relative;
       border-radius: 0 !important;
       background:
         repeating-linear-gradient(
           -45deg,
-          rgba(15, 23, 42, 0.65),
-          rgba(15, 23, 42, 0.65) 8px,
-          rgba(11, 16, 29, 0.85) 8px,
-          rgba(11, 16, 29, 0.85) 16px
+          rgba(15, 23, 42, 0.55),
+          rgba(15, 23, 42, 0.55) 8px,
+          rgba(9, 14, 26, 0.85) 8px,
+          rgba(9, 14, 26, 0.85) 16px
         );
-      border: 1px dashed rgba(100, 116, 139, 0.45);
+      border: 1px dashed rgba(100, 116, 139, 0.35);
       transition: all 0.22s ease;
     }
     .cyber-ghost:hover {
-      transform: translateY(-3px);
-      border-color: rgba(255, 77, 141, 0.65);
-      box-shadow: 0 0 20px rgba(255, 0, 85, 0.14);
+      transform: translateY(-2px);
+      border-color: rgba(255, 42, 109, 0.55);
     }
 
     /* 赛博坐标标尺分割线 */
     .cyber-ruler {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
       font-family: 'JetBrains Mono', monospace;
       font-size: 10px;
-      color: rgba(0, 240, 255, 0.5);
-      letter-spacing: 0.15em;
+      color: rgba(0, 240, 255, 0.42);
+      letter-spacing: 0.16em;
     }
     .cyber-ruler::before,
     .cyber-ruler::after {
       content: "";
       flex: 1;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.28), transparent);
-    }
-    .cyber-ruler-gold { color: rgba(255, 230, 0, 0.55); }
-    .cyber-ruler-gold::before, .cyber-ruler-gold::after {
-      background: linear-gradient(90deg, transparent, rgba(255, 230, 0, 0.28), transparent);
-    }
-    .cyber-ruler-pink { color: rgba(255, 77, 141, 0.6); }
-    .cyber-ruler-pink::before, .cyber-ruler-pink::after {
-      background: linear-gradient(90deg, transparent, rgba(255, 77, 141, 0.3), transparent);
-    }
-    .cyber-ruler-emerald { color: rgba(52, 211, 153, 0.55); }
-    .cyber-ruler-emerald::before, .cyber-ruler-emerald::after {
-      background: linear-gradient(90deg, transparent, rgba(52, 211, 153, 0.28), transparent);
+      background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.22), transparent);
     }
 
     .neon-text-cyan {
-      text-shadow: 0 0 14px rgba(0, 240, 255, 0.55);
+      text-shadow: 0 0 14px rgba(0, 240, 255, 0.45);
+    }
+
+    /* 吉祥物边缘融合暗角 */
+    .mascot-vignette::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      box-shadow: inset 0 0 26px rgba(5, 7, 14, 0.9);
     }
 
     @keyframes spinCyber {
@@ -194,49 +161,49 @@
       100% { transform: rotate(360deg); }
     }
     .cyber-aura {
-      background: conic-gradient(from 0deg, #00f0ff, #ff0055, #ffe600, #00f0ff);
-      animation: spinCyber 7s linear infinite;
+      background: conic-gradient(from 0deg, #00f0ff, #0284c7, #ff2a6d, #00f0ff);
+      animation: spinCyber 8s linear infinite;
     }
 
     @keyframes floatHud {
       0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-7px); }
+      50% { transform: translateY(-6px); }
     }
     .float-hud {
-      animation: floatHud 4s ease-in-out infinite;
+      animation: floatHud 4.2s ease-in-out infinite;
     }
   </style>
 </head>
 <body class="antialiased selection:bg-[#00f0ff] selection:text-[#05070e]">
 
-  <!-- 1. 主导航栏 -->
-  <header class="relative z-40 border-b border-[#00f0ff]/20 bg-[#05070e]/92 backdrop-blur-md">
+  <!-- 1. 主导航栏（克制双色赛博 HUD） -->
+  <header class="relative z-40 border-b border-[#00f0ff]/15 bg-[#05070e]/92 backdrop-blur-md">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
       <a href="#" class="flex items-center gap-3 shrink-0 group">
-        <div class="w-9 h-9 cyber-btn bg-gradient-to-br from-[#00f0ff] to-[#ff0055] p-[1.5px] shadow-[0_0_15px_rgba(0,240,255,0.4)]">
+        <div class="w-9 h-9 cyber-btn bg-gradient-to-br from-[#00f0ff] to-[#ff2a6d] p-[1.5px] shadow-[0_0_15px_rgba(0,240,255,0.35)]">
           <div class="w-full h-full bg-[#05070e] cyber-btn flex items-center justify-center font-mono-code font-black text-xs text-[#00f0ff]">
             FL//
           </div>
         </div>
         <div class="leading-none">
           <span class="font-mono-code font-black text-lg tracking-wider text-white">FOCUS<span class="text-[#00f0ff] neon-text-cyan">LINK</span></span>
-          <span class="block text-[9px] font-mono-code tracking-widest text-[#ff4d8d] mt-0.5">CYBER LEARNING OS v2.6</span>
+          <span class="block text-[9px] font-mono-code tracking-widest text-[#ff2a6d] mt-0.5">CYBER LEARNING OS v2.6</span>
         </div>
       </a>
 
-      <nav class="hidden md:flex items-center gap-6 font-mono-code text-xs font-bold text-slate-300 whitespace-nowrap">
+      <nav class="hidden md:flex items-center gap-6 font-mono-code text-xs font-bold text-slate-400 whitespace-nowrap">
         <a href="#services" class="hover:text-[#00f0ff] transition">[01_PORTALS]</a>
-        <a href="#method" class="hover:text-[#ffe600] transition">[02_AP_METHOD]</a>
-        <a href="#hsp" class="hover:text-[#ff4d8d] transition">[03_HSP_CALC]</a>
-        <a href="#creator" class="hover:text-[#34d399] transition">[04_36_CERTS]</a>
+        <a href="#method" class="hover:text-[#00f0ff] transition">[02_AP_METHOD]</a>
+        <a href="#hsp" class="hover:text-[#ff2a6d] transition">[03_HSP_CALC]</a>
+        <a href="#creator" class="hover:text-[#00f0ff] transition">[04_36_CERTS]</a>
         <a href="#community" class="hover:text-[#00f0ff] transition">[05_NETWORK]</a>
       </nav>
 
       <div class="flex items-center gap-2.5 shrink-0">
-        <a href="#hsp" class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 cyber-btn bg-[#0b101d] hover:bg-[#131c31] border border-[#00f0ff]/40 font-mono-code text-xs font-bold text-[#00f0ff] whitespace-nowrap">
+        <a href="#hsp" class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 cyber-btn bg-[#090e1a] hover:bg-[#11192e] border border-[#00f0ff]/35 font-mono-code text-xs font-bold text-[#00f0ff] whitespace-nowrap">
           <span>⚡ HSP試算</span>
         </a>
-        <a href="#services" class="inline-flex items-center gap-1.5 px-4 py-2 cyber-btn bg-gradient-to-r from-[#ff0055] to-[#ff6b00] text-white font-mono-code text-xs font-extrabold whitespace-nowrap shadow-[0_0_20px_rgba(255,0,85,0.45)]">
+        <a href="#services" class="inline-flex items-center gap-1.5 px-4 py-2 cyber-btn bg-[#ff2a6d] hover:bg-[#ff427e] text-white font-mono-code text-xs font-extrabold whitespace-nowrap shadow-[0_0_18px_rgba(255,42,109,0.4)]">
           <span>BOOT_LEARN</span>
           <span>▶</span>
         </a>
@@ -252,33 +219,33 @@
         <div class="grid lg:grid-cols-12 gap-10 items-center">
           
           <div class="lg:col-span-7 space-y-6">
-            <div class="inline-flex flex-wrap items-center gap-2 px-3 py-1 bg-[#00f0ff]/10 border border-[#00f0ff]/40 font-mono-code text-[11px] font-bold text-[#00f0ff]">
+            <div class="inline-flex flex-wrap items-center gap-2 px-3 py-1 bg-[#00f0ff]/8 border border-[#00f0ff]/35 font-mono-code text-[11px] font-bold text-[#00f0ff]">
               <span class="w-2 h-2 bg-[#00f0ff] animate-ping"></span>
               <span>SYS.READY // 36資格突破者の実践学習ポータル</span>
             </div>
 
             <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.15]">
               孤独な学びを、<br />
-              <span class="bg-gradient-to-r from-[#00f0ff] via-[#ffe600] to-[#ff4d8d] bg-clip-text text-transparent">
+              <span class="bg-gradient-to-r from-[#00f0ff] via-[#38bdf8] to-[#ff2a6d] bg-clip-text text-transparent">
                 共に進化する力へ。
               </span>
             </h1>
 
             <p class="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl">
               「日本語の長文が読めない」「一人で勉強が続かない」——そんな壁をハックする在日外国人向け実践ポータル。
-              国家資格の最短突破から、<span class="text-[#00f0ff] font-bold">「永住許可の早期化（最速1年）」</span>と<span class="text-[#ff4d8d] font-bold">「キャリアアップ」</span>まで直結させます。
+              国家資格の最短突破から、<span class="text-[#00f0ff] font-bold">「永住許可の早期化（最速1年）」</span>と<span class="text-[#ff2a6d] font-bold">「キャリアアップ」</span>まで直結させます。
             </p>
 
             <div class="flex flex-wrap items-center gap-4 pt-1">
-              <a href="#services" class="px-6 py-3.5 cyber-btn bg-gradient-to-r from-[#00f0ff] to-[#00b8d4] text-[#05070e] font-mono-code text-sm font-black shadow-[0_0_25px_rgba(0,240,255,0.45)]">
+              <a href="#services" class="px-6 py-3.5 cyber-btn bg-[#00f0ff] hover:bg-[#33f3ff] text-[#05070e] font-mono-code text-sm font-black shadow-[0_0_24px_rgba(0,240,255,0.4)]">
                 ▶ 学習ポータルへ接続
               </a>
-              <a href="#hsp" class="px-6 py-3.5 cyber-btn bg-[#0b101d] hover:bg-[#131b2e] text-[#ff4d8d] border border-[#ff4d8d]/60 font-mono-code text-sm font-extrabold">
+              <a href="#hsp" class="px-6 py-3.5 cyber-btn bg-[#090e1a] hover:bg-[#11192e] text-[#ff2a6d] border border-[#ff2a6d]/55 font-mono-code text-sm font-extrabold">
                 ⚡ 永住ポイント試算
               </a>
             </div>
 
-            <!-- 3个赛博数据读数模块 -->
+            <!-- 3个克制赛博数据读数模块 -->
             <div class="grid grid-cols-3 gap-3 pt-3 max-w-xl">
               <div class="cyber-card p-3.5">
                 <div class="font-mono-code text-[10px] text-slate-400">VERIFIED_CERTS</div>
@@ -286,11 +253,11 @@
               </div>
               <div class="cyber-card p-3.5">
                 <div class="font-mono-code text-[10px] text-slate-400">HSP_80PT_VISA</div>
-                <div class="text-2xl font-black text-white font-mono-code mt-0.5">最速1<span class="text-xs text-[#ff4d8d] ml-1">年永住</span></div>
+                <div class="text-2xl font-black text-white font-mono-code mt-0.5">最速1<span class="text-xs text-[#ff2a6d] ml-1">年永住</span></div>
               </div>
               <div class="cyber-card p-3.5">
                 <div class="font-mono-code text-[10px] text-slate-400">ACCESS_MODE</div>
-                <div class="text-2xl font-black text-white font-mono-code mt-0.5">100<span class="text-xs text-[#ffe600] ml-1">%FREE</span></div>
+                <div class="text-2xl font-black text-white font-mono-code mt-0.5">100<span class="text-xs text-[#00f0ff] ml-1">%FREE</span></div>
               </div>
             </div>
           </div>
@@ -298,32 +265,32 @@
           <!-- 右侧 Mascot 全息伴学终端 -->
           <div class="lg:col-span-5 flex justify-center">
             <div class="relative w-full max-w-[420px] float-hud">
-              <div class="absolute -inset-1 cyber-aura blur-md opacity-55"></div>
+              <div class="absolute -inset-1 cyber-aura blur-md opacity-45"></div>
 
-              <div class="relative bg-[#080c17] border border-[#00f0ff]/55 p-4 shadow-[0_0_40px_rgba(0,240,255,0.18)]">
-                <div class="flex items-center justify-between pb-3 mb-3 border-b border-[#00f0ff]/20 font-mono-code text-[11px]">
+              <div class="relative bg-[#070b14] border border-[#00f0ff]/45 p-4 shadow-[0_0_40px_rgba(0,240,255,0.15)]">
+                <div class="flex items-center justify-between pb-3 mb-3 border-b border-[#00f0ff]/15 font-mono-code text-[11px]">
                   <div class="flex items-center gap-2">
-                    <span class="px-1.5 py-0.5 bg-[#ff0055] text-white font-black text-[9px]">HUD</span>
+                    <span class="px-1.5 py-0.5 bg-[#ff2a6d] text-white font-black text-[9px]">HUD</span>
                     <span class="text-[#00f0ff] font-bold">BUDDY_CORE.EXE</span>
                   </div>
-                  <span class="text-[#ffe600] font-bold">● ONLINE</span>
+                  <span class="text-[#00f0ff] font-bold">● ONLINE</span>
                 </div>
 
-                <div class="relative overflow-hidden border border-[#00f0ff]/40 bg-[#111827] aspect-[16/10]">
+                <div class="relative overflow-hidden border border-[#00f0ff]/35 bg-[#05070e] aspect-[16/10] mascot-vignette">
                   <img src="hero-mascot.jpg" alt="FocusLink サイバー学習マスコット" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-                  <div class="absolute top-2.5 left-2.5 px-2.5 py-1 bg-[#05070e]/90 border border-[#00f0ff]/60 font-mono-code text-[10px] font-bold text-[#00f0ff]">
+                  <div class="absolute top-2.5 left-2.5 z-10 px-2.5 py-1 bg-[#05070e]/90 border border-[#00f0ff]/55 font-mono-code text-[10px] font-bold text-[#00f0ff]">
                     FOCUS_SYNC: <span id="live-focus">97.4</span>%
                   </div>
-                  <div class="absolute bottom-2.5 right-2.5 px-2.5 py-1 bg-[#05070e]/90 border border-[#ff4d8d]/70 font-mono-code text-[10px] font-bold text-[#ff4d8d]">
+                  <div class="absolute bottom-2.5 right-2.5 z-10 px-2.5 py-1 bg-[#05070e]/90 border border-[#ff2a6d]/65 font-mono-code text-[10px] font-bold text-[#ff2a6d]">
                     STREAK: 42_DAYS
                   </div>
                 </div>
 
-                <div class="mt-3 bg-[#05070e] border border-slate-800 p-3 font-mono-code text-[11px] leading-relaxed">
+                <div class="mt-3 bg-[#05070e] border border-slate-800/90 p-3 font-mono-code text-[11px] leading-relaxed">
                   <div class="text-[#00f0ff]">root@focuslink:~# ./deploy_study --target AP</div>
                   <div class="text-slate-300 mt-1">
                     [OK] 科目B 6段階読解プロトコル起動<br/>
-                    [UP] 国家資格取得 → 高度人材 <span class="text-[#ffe600] font-bold">+5pt BONUS</span>
+                    [UP] 国家資格取得 → 高度人材 <span class="text-[#ff2a6d] font-bold">+5pt BONUS</span>
                   </div>
                 </div>
               </div>
@@ -334,10 +301,10 @@
       </div>
     </section>
 
-    <!-- 3. 学習ポータル（主调：电光青 #00F0FF） -->
+    <!-- 3. 学習ポータル -->
     <section id="services" class="pt-6 pb-16">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 space-y-10">
-        <div class="cyber-ruler">00 ─── SECTOR_01 // NODES ─── 100</div>
+        <div class="cyber-ruler">00 ─── SECTOR_01 // ACTIVE_NODES ─── 100</div>
 
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div>
@@ -346,8 +313,8 @@
             <p class="text-sm text-slate-400 mt-1">独学の遠回りを排除するために構築された、実践特化型ナレッジ・ネットワーク。</p>
           </div>
           <div class="flex items-center gap-2.5 font-mono-code text-xs font-bold shrink-0">
-            <span class="px-3 py-1 bg-[#00f0ff]/10 text-[#00f0ff] border border-[#00f0ff]/40">● ONLINE_NOW</span>
-            <span class="px-3 py-1 bg-slate-800/80 text-slate-400 border border-slate-700">◌ IN_DEV</span>
+            <span class="px-3 py-1 bg-[#00f0ff]/10 text-[#00f0ff] border border-[#00f0ff]/35">● ONLINE_NOW</span>
+            <span class="px-3 py-1 bg-slate-900 text-slate-400 border border-slate-800">◌ IN_DEV</span>
           </div>
         </div>
 
@@ -356,7 +323,7 @@
              class="cyber-card p-6 flex flex-col justify-between group">
             <div>
               <div class="flex items-center justify-between mb-4 font-mono-code">
-                <span class="px-2.5 py-0.5 bg-[#00f0ff]/15 text-[#00f0ff] border border-[#00f0ff]/40 text-[11px] font-bold">NODE_01 // LIVE</span>
+                <span class="px-2.5 py-0.5 bg-[#00f0ff]/12 text-[#00f0ff] border border-[#00f0ff]/35 text-[11px] font-bold">NODE_01 // LIVE</span>
                 <span class="text-2xl">💻</span>
               </div>
               <h3 class="text-xl font-black text-white group-hover:text-[#00f0ff] transition mb-2">応用情報技術者試験 (AP) 攻略</h3>
@@ -374,7 +341,7 @@
              class="cyber-card p-6 flex flex-col justify-between group">
             <div>
               <div class="flex items-center justify-between mb-4 font-mono-code">
-                <span class="px-2.5 py-0.5 bg-[#00f0ff]/15 text-[#00f0ff] border border-[#00f0ff]/40 text-[11px] font-bold">NODE_02 // LIVE</span>
+                <span class="px-2.5 py-0.5 bg-[#00f0ff]/12 text-[#00f0ff] border border-[#00f0ff]/35 text-[11px] font-bold">NODE_02 // LIVE</span>
                 <span class="text-2xl">🌍</span>
               </div>
               <h3 class="text-xl font-black text-white group-hover:text-[#00f0ff] transition mb-2">TOEIC 実践対策ポータル</h3>
@@ -392,7 +359,7 @@
              class="cyber-card p-6 flex flex-col justify-between group">
             <div>
               <div class="flex items-center justify-between mb-4 font-mono-code">
-                <span class="px-2.5 py-0.5 bg-[#00f0ff]/15 text-[#00f0ff] border border-[#00f0ff]/40 text-[11px] font-bold">NODE_03 // LIVE</span>
+                <span class="px-2.5 py-0.5 bg-[#00f0ff]/12 text-[#00f0ff] border border-[#00f0ff]/35 text-[11px] font-bold">NODE_03 // LIVE</span>
                 <span class="text-2xl">✍️</span>
               </div>
               <h3 class="text-xl font-black text-white group-hover:text-[#00f0ff] transition mb-2">Minami 資格・技術ログ</h3>
@@ -407,13 +374,13 @@
           </a>
         </div>
 
-        <!-- 开发中节点（幽灵线框态） -->
+        <!-- 开发中节点（低对比幽灵线框态） -->
         <div class="grid md:grid-cols-3 gap-5 pt-1">
           <div onclick="openWipModal('🛡️ 情報処理安全確保支援士 (SC) 攻略', '応用情報(AP)合格後の次のステップとして、高度セキュリティ国家資格（スキルレベル4）の午後記述対策と多言語解説モジュールを構築中です。')"
                class="cyber-ghost cursor-pointer p-5 group">
             <div class="flex items-center justify-between mb-2 font-mono-code">
-              <span class="px-2 py-0.5 bg-slate-800/90 text-slate-400 group-hover:text-[#ff4d8d] text-[10px] font-bold transition">BUILDING // SC_SEC</span>
-              <span class="text-lg opacity-75 group-hover:opacity-100 transition">🛡️</span>
+              <span class="px-2 py-0.5 bg-slate-900 text-slate-400 group-hover:text-[#ff2a6d] text-[10px] font-bold transition">BUILDING // SC_SEC</span>
+              <span class="text-lg opacity-70 group-hover:opacity-100 transition">🛡️</span>
             </div>
             <h4 class="text-base font-extrabold text-slate-200 group-hover:text-white mb-1 transition">情報処理安全確保支援士 (SC)</h4>
             <p class="text-xs text-slate-400">高度セキュリティ国家資格の午後記述対策モジュール。</p>
@@ -422,8 +389,8 @@
           <div onclick="openWipModal('👁️ AI集中度トラッカー（Edge AI）', 'スマホを机に置くだけで、端末内のAIが視線や姿勢から集中度スコアをリアルタイム解析。サーバーに映像を送らないプライバシー保護設計です。')"
                class="cyber-ghost cursor-pointer p-5 group">
             <div class="flex items-center justify-between mb-2 font-mono-code">
-              <span class="px-2 py-0.5 bg-slate-800/90 text-slate-400 group-hover:text-[#ff4d8d] text-[10px] font-bold transition">BUILDING // VISION_AI</span>
-              <span class="text-lg opacity-75 group-hover:opacity-100 transition">👁️</span>
+              <span class="px-2 py-0.5 bg-slate-900 text-slate-400 group-hover:text-[#ff2a6d] text-[10px] font-bold transition">BUILDING // VISION_AI</span>
+              <span class="text-lg opacity-70 group-hover:opacity-100 transition">👁️</span>
             </div>
             <h4 class="text-base font-extrabold text-slate-200 group-hover:text-white mb-1 transition">AI集中度トラッカー</h4>
             <p class="text-xs text-slate-400">端末内AIで学習の集中度と継続時間をリアルタイム可視化。</p>
@@ -432,8 +399,8 @@
           <div onclick="openWipModal('🎬 タイムラプス自習室', '勉強の様子をタイムラプス動画で記録して仲間とシェア！一人だとサボりがちな資格勉強も、同じ目標を持つ仲間と接続すれば楽しく続きます。')"
                class="cyber-ghost cursor-pointer p-5 group">
             <div class="flex items-center justify-between mb-2 font-mono-code">
-              <span class="px-2 py-0.5 bg-slate-800/90 text-slate-400 group-hover:text-[#ff4d8d] text-[10px] font-bold transition">BUILDING // SYNC_ROOM</span>
-              <span class="text-lg opacity-75 group-hover:opacity-100 transition">🎬</span>
+              <span class="px-2 py-0.5 bg-slate-900 text-slate-400 group-hover:text-[#ff2a6d] text-[10px] font-bold transition">BUILDING // SYNC_ROOM</span>
+              <span class="text-lg opacity-70 group-hover:opacity-100 transition">🎬</span>
             </div>
             <h4 class="text-base font-extrabold text-slate-200 group-hover:text-white mb-1 transition">タイムラプス自習室</h4>
             <p class="text-xs text-slate-400">努力の軌跡をタイムラプスで記録し、仲間と同期・継続。</p>
@@ -442,170 +409,245 @@
       </div>
     </section>
 
-    <!-- 4. 独创学习方法论（主调：赛博金 #FFE600 + 渐进色谱 STEP_01~06） -->
+    <!-- 4. 独创学习方法论（克制双色：电光青 → 霓虹洋红） -->
     <section id="method" class="pt-6 pb-16">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 space-y-8">
-        <div class="cyber-ruler cyber-ruler-gold">00 ─── SECTOR_02 // AP_DECODING_PROTOCOL ─── 100</div>
+        <div class="cyber-ruler">00 ─── SECTOR_02 // AP_DECODING_PROTOCOL ─── 100</div>
 
         <div>
-          <span class="font-mono-code text-xs font-bold tracking-widest text-[#ffe600]">// 02_AP_SITE_PRACTICE_METHOD</span>
+          <span class="font-mono-code text-xs font-bold tracking-widest text-[#00f0ff]">// 02_AP_SITE_PRACTICE_METHOD</span>
           <h2 class="text-3xl font-black text-white mt-1">「日本語の壁」を突破する6ステップ攻略法</h2>
           <p class="text-sm text-slate-400 mt-1">応用情報技術者(AP)学習サイト開発の中で体系化した、難解な日本語長文を母語の直感でデコードする実践メソッド。</p>
         </div>
 
-        <!-- 渐进色温过渡：青（输入） → 紫（拆解整理） → 金（实战输出） -->
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-          <div class="cyber-card cyber-card-gold p-4">
+          <div class="cyber-card p-4">
             <div class="font-mono-code text-xs text-[#00f0ff] font-bold">STEP_01</div>
             <div class="text-lg font-black text-white my-1">抽出</div>
             <p class="text-[11px] text-slate-400 leading-[1.6]">問題文から解答に直結する専門知識だけを厳選</p>
           </div>
-          <div class="cyber-card cyber-card-gold p-4">
+          <div class="cyber-card p-4">
             <div class="font-mono-code text-xs text-[#00f0ff] font-bold">STEP_02</div>
             <div class="text-lg font-black text-white my-1">理解</div>
             <p class="text-[11px] text-slate-400 leading-[1.6]">身近な企業や日常の例え話で直感的にイメージ</p>
           </div>
-          <div class="cyber-card cyber-card-gold p-4">
-            <div class="font-mono-code text-xs text-[#c084fc] font-bold">STEP_03</div>
+          <div class="cyber-card p-4">
+            <div class="font-mono-code text-xs text-[#38bdf8] font-bold">STEP_03</div>
             <div class="text-lg font-black text-white my-1">通訳</div>
             <p class="text-[11px] text-slate-400 leading-[1.6]">難解な日本語長文を一文ずつ母語で構造分解</p>
           </div>
-          <div class="cyber-card cyber-card-gold p-4">
-            <div class="font-mono-code text-xs text-[#c084fc] font-bold">STEP_04</div>
+          <div class="cyber-card p-4">
+            <div class="font-mono-code text-xs text-[#38bdf8] font-bold">STEP_04</div>
             <div class="text-lg font-black text-white my-1">整理</div>
             <p class="text-[11px] text-slate-400 leading-[1.6]">登場人物・システム構成・制約条件を頭で図解</p>
           </div>
-          <div class="cyber-card cyber-card-gold p-4">
-            <div class="font-mono-code text-xs text-[#ffe600] font-bold">STEP_05</div>
+          <div class="cyber-card p-4">
+            <div class="font-mono-code text-xs text-[#ff2a6d] font-bold">STEP_05</div>
             <div class="text-lg font-black text-white my-1">応用</div>
             <p class="text-[11px] text-slate-400 leading-[1.6]">「なぜこの技術・戦略を選ぶか」の根拠を明確化</p>
           </div>
-          <div class="cyber-card cyber-card-gold p-4">
-            <div class="font-mono-code text-xs text-[#ffe600] font-bold">STEP_06</div>
+          <div class="cyber-card p-4">
+            <div class="font-mono-code text-xs text-[#ff2a6d] font-bold">STEP_06</div>
             <div class="text-lg font-black text-white my-1">記述</div>
             <p class="text-[11px] text-slate-400 leading-[1.6]">採点者に伝わる簡潔なキーワードで回答を作成</p>
           </div>
         </div>
 
-        <!-- 互动实战案例卡片 -->
-        <div class="cyber-card cyber-card-gold p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div class="cyber-card p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div class="space-y-2 max-w-2xl">
-            <span class="inline-block px-2.5 py-0.5 bg-[#ffe600]/15 text-[#ffe600] border border-[#ffe600]/40 font-mono-code text-xs font-bold">SAMPLE_DECODE // 応用情報・経営戦略</span>
+            <span class="inline-block px-2.5 py-0.5 bg-[#00f0ff]/12 text-[#00f0ff] border border-[#00f0ff]/35 font-mono-code text-xs font-bold">SAMPLE_DECODE // 応用情報・経営戦略</span>
             <h3 class="text-lg font-black text-white">無味乾燥な「多角化戦略・負債リスク」も、リアルな企業事例なら一発で定着！</h3>
             <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
               教科書通りの暗記ではなく、<strong>「中国・恒大集団の急拡大と資金繰り悪化」</strong>のような誰もが知るリアルな事例と試験の専門用語（財務レバレッジ・事業ポートフォリオ）を直結させて解説。だから忘れません。
             </p>
           </div>
-          <a href="https://ipa.minami.ac.cn/ap" target="_blank" rel="noopener" class="px-5 py-3 cyber-btn bg-[#ffe600]/15 hover:bg-[#ffe600]/25 border border-[#ffe600]/60 font-mono-code text-[#ffe600] text-xs font-extrabold whitespace-nowrap shrink-0">
+          <a href="https://ipa.minami.ac.cn/ap" target="_blank" rel="noopener" class="px-5 py-3 cyber-btn bg-[#00f0ff]/15 hover:bg-[#00f0ff]/25 border border-[#00f0ff]/55 font-mono-code text-[#00f0ff] text-xs font-extrabold whitespace-nowrap shrink-0">
             応用情報サイトで実例を見る ▶
           </a>
         </div>
       </div>
     </section>
 
-    <!-- 5. 高度専門職（HSP）永住短縮ポイント試算器（主调：珊瑚洋红 #FF4D8D） -->
+    <!-- 5. 高度専門職（HSP 1号ロ：高度専門・技術分野）リアル公式ポイント試算器 -->
     <section id="hsp" class="pt-6 pb-16">
-      <div class="max-w-5xl mx-auto px-4 sm:px-6 space-y-8">
-        <div class="cyber-ruler cyber-ruler-pink">00 ─── SECTOR_03 // HSP_SIMULATOR ─── 100</div>
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 space-y-8">
+        <div class="cyber-ruler">00 ─── SECTOR_03 // IMMIGRATION_HSP_1B_SIMULATOR ─── 100</div>
 
-        <div class="cyber-card p-6 sm:p-10 shadow-[0_0_45px_rgba(255,0,85,0.1)]">
-          <div class="mb-6">
-            <span class="font-mono-code text-xs font-bold tracking-widest text-[#ff4d8d]">// 03_HSP_VISA_SIMULATOR</span>
-            <h2 class="text-2xl sm:text-3xl font-black text-white mt-1">⚡ 高度専門職（HSP）永住短縮ポイント試算</h2>
-            <p class="text-sm text-slate-300 mt-1">
-              通常10年かかる日本の永住許可申請が、<strong class="text-[#ffe600]">70点で3年</strong>、<strong class="text-[#00f0ff]">80点以上で最速1年</strong>に短縮！今のスコアをシミュレーション。
-            </p>
+        <div class="cyber-card p-6 sm:p-10 shadow-[0_0_45px_rgba(0,240,255,0.06)]">
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 mb-6 border-b border-slate-800">
+            <div>
+              <span class="font-mono-code text-xs font-bold tracking-widest text-[#ff2a6d]">// 03_HSP_1(ロ)_OFFICIAL_SIMULATOR</span>
+              <h2 class="text-2xl sm:text-3xl font-black text-white mt-1">⚡ 高度専門職（HSP）永住短縮ポイント試算</h2>
+              <p class="text-sm text-slate-400 mt-1">
+                出入国在留管理庁「高度専門・技術分野（1号ロ）」基準準拠。通常10年の永住許可申請が、<strong class="text-white">70点で3年</strong>、<strong class="text-[#00f0ff]">80点以上で最速1年</strong>に短縮されます。
+              </p>
+            </div>
+            <button type="button" onclick="resetHsp()" class="self-start md:self-auto px-3 py-1.5 bg-[#05070e] hover:bg-slate-900 border border-slate-700 font-mono-code text-[11px] font-bold text-slate-400 hover:text-white transition">
+              RESET_DEFAULT ↺
+            </button>
           </div>
 
-          <div class="grid lg:grid-cols-12 gap-8 items-center">
-            <div class="lg:col-span-7 grid sm:grid-cols-2 gap-4">
+          <div class="grid lg:grid-cols-12 gap-8 items-start">
+            <!-- 左侧：官方完整计分项 -->
+            <div class="lg:col-span-8 space-y-6">
+              
+              <!-- A. 基本項目（学歴・職歴・年収・年齢） -->
               <div>
-                <label class="block font-mono-code text-xs font-bold text-slate-300 mb-1.5">🎓 EDUCATION // 最終学歴</label>
-                <select id="hsp-edu" class="w-full bg-[#05070e] border border-[#00f0ff]/35 px-3 py-2.5 text-xs font-bold text-white outline-none focus:border-[#00f0ff]">
-                  <option value="30">博士号 (+30pt)</option>
-                  <option value="20" selected>修士号 / MBA (+20pt)</option>
-                  <option value="10">学士号 / 大学卒 (+10pt)</option>
-                  <option value="0">専門学校・その他 (0pt)</option>
-                </select>
+                <div class="font-mono-code text-[11px] font-bold text-[#00f0ff] mb-3 tracking-wider">[A] BASE_CRITERIA // 学歴・職歴・年収・年齢</div>
+                <div class="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block font-mono-code text-xs font-bold text-slate-300 mb-1.5">🎓 最終学歴</label>
+                    <select id="hsp-edu" class="w-full bg-[#05070e] border border-slate-700 focus:border-[#00f0ff] px-3 py-2.5 text-xs font-bold text-white outline-none">
+                      <option value="30">博士号（技術経営(MOT)・MBA除く） (+30pt)</option>
+                      <option value="20" selected>修士号 / 専門職学位 (MBA・MOT等) (+20pt)</option>
+                      <option value="10">学士号（大学卒）または同等以上 (+10pt)</option>
+                      <option value="0">上記以外（専門学校・高専等） (0pt)</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label class="block font-mono-code text-xs font-bold text-slate-300 mb-1.5">💼 実務経験（従事しようとする業務）</label>
+                    <select id="hsp-exp" class="w-full bg-[#05070e] border border-slate-700 focus:border-[#00f0ff] px-3 py-2.5 text-xs font-bold text-white outline-none">
+                      <option value="20">10年以上 (+20pt)</option>
+                      <option value="15">7年以上 10年未満 (+15pt)</option>
+                      <option value="10">5年以上 7年未満 (+10pt)</option>
+                      <option value="5" selected>3年以上 5年未満 (+5pt)</option>
+                      <option value="0">3年未満 (0pt)</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label class="block font-mono-code text-xs font-bold text-slate-300 mb-1.5">🎂 申請時の年齢</label>
+                    <select id="hsp-age" class="w-full bg-[#05070e] border border-slate-700 focus:border-[#00f0ff] px-3 py-2.5 text-xs font-bold text-white outline-none">
+                      <option value="15" selected>29歳以下 (+15pt)</option>
+                      <option value="10">30歳〜34歳 (+10pt)</option>
+                      <option value="5">35歳〜39歳 (+5pt)</option>
+                      <option value="0">40歳以上 (0pt)</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label class="block font-mono-code text-xs font-bold text-slate-300 mb-1.5">💴 契約機関からの年間報酬（見込み年収）</label>
+                    <select id="hsp-income" class="w-full bg-[#05070e] border border-slate-700 focus:border-[#00f0ff] px-3 py-2.5 text-xs font-bold text-white outline-none">
+                      <option value="40">1,000万円以上 (+40pt)</option>
+                      <option value="35">900万円〜1,000万円未満 (+35pt)</option>
+                      <option value="30">800万円〜900万円未満 (+30pt)</option>
+                      <option value="25">700万円〜800万円未満（39歳以下） (+25pt)</option>
+                      <option value="20">600万円〜700万円未満（34歳以下） (+20pt)</option>
+                      <option value="15" selected>500万円〜600万円未満（29歳以下） (+15pt)</option>
+                      <option value="10">400万円〜500万円未満（29歳以下） (+10pt)</option>
+                      <option value="0">基準未満 / 300万円未満 (0pt)</option>
+                    </select>
+                  </div>
+                </div>
               </div>
 
+              <!-- B. 資格・日本語・研究実績（プルダウン選択） -->
               <div>
-                <label class="block font-mono-code text-xs font-bold text-slate-300 mb-1.5">🎂 AGE // 申請時年齢</label>
-                <select id="hsp-age" class="w-full bg-[#05070e] border border-[#00f0ff]/35 px-3 py-2.5 text-xs font-bold text-white outline-none focus:border-[#00f0ff]">
-                  <option value="15" selected>29歳以下 (+15pt)</option>
-                  <option value="10">30〜34歳 (+10pt)</option>
-                  <option value="5">35〜39歳 (+5pt)</option>
-                  <option value="0">40歳以上 (0pt)</option>
-                </select>
+                <div class="font-mono-code text-[11px] font-bold text-[#00f0ff] mb-3 tracking-wider">[B] QUALIFICATIONS & LANGUAGE // 資格・日本語・研究実績</div>
+                <div class="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block font-mono-code text-xs font-bold text-slate-300 mb-1.5">🇯🇵 日本語能力（JLPT / BJT）</label>
+                    <select id="hsp-jp" class="w-full bg-[#05070e] border border-slate-700 focus:border-[#00f0ff] px-3 py-2.5 text-xs font-bold text-white outline-none">
+                      <option value="15" selected>JLPT N1 合格 / BJT 480点以上 / 外国大学日本語専攻 (+15pt)</option>
+                      <option value="10">JLPT N2 合格 / BJT 400点以上 ※N1等と重複不可 (+10pt)</option>
+                      <option value="0">該当なし (0pt)</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label class="block font-mono-code text-xs font-bold text-slate-300 mb-1.5">💻 日本の国家資格（情報処理技術者試験 等）</label>
+                    <select id="hsp-cert" class="w-full bg-[#05070e] border border-slate-700 focus:border-[#00f0ff] px-3 py-2.5 text-xs font-bold text-white outline-none">
+                      <option value="10">複数保有（例：基本情報FE + 応用情報AP 等） (+10pt)</option>
+                      <option value="5" selected>1つ保有（例：基本情報FE / 応用情報AP 等） (+5pt)</option>
+                      <option value="0">保有なし (0pt)</option>
+                    </select>
+                  </div>
+                </div>
               </div>
 
+              <!-- C. 特別加算項目（公式チェックリスト） -->
               <div>
-                <label class="block font-mono-code text-xs font-bold text-slate-300 mb-1.5">💼 CAREER // 実務経験</label>
-                <select id="hsp-exp" class="w-full bg-[#05070e] border border-[#00f0ff]/35 px-3 py-2.5 text-xs font-bold text-white outline-none focus:border-[#00f0ff]">
-                  <option value="0">3年未満 (0pt)</option>
-                  <option value="5" selected>3年以上 (+5pt)</option>
-                  <option value="10">5年以上 (+10pt)</option>
-                  <option value="15">7年以上 (+15pt)</option>
-                  <option value="20">10年以上 (+20pt)</option>
-                </select>
-              </div>
+                <div class="font-mono-code text-[11px] font-bold text-[#00f0ff] mb-3 tracking-wider">[C] BONUS_FACTORS // 特別加算項目（該当するものを選択）</div>
+                <div class="grid sm:grid-cols-2 gap-2.5">
+                  <label class="flex items-start gap-2.5 bg-[#05070e] border border-slate-800 hover:border-slate-600 p-3 text-xs text-slate-200 cursor-pointer transition">
+                    <input type="checkbox" id="hsp-jpuni" checked class="accent-[#00f0ff] w-4 h-4 mt-0.5 shrink-0" />
+                    <span><strong class="text-white">日本の大学・大学院を卒業・修了</strong> <span class="text-[#00f0ff] font-mono-code font-bold">(+10pt)</span></span>
+                  </label>
 
-              <div>
-                <label class="block font-mono-code text-xs font-bold text-slate-300 mb-1.5">💴 INCOME // 見込み年収</label>
-                <select id="hsp-income" class="w-full bg-[#05070e] border border-[#00f0ff]/35 px-3 py-2.5 text-xs font-bold text-white outline-none focus:border-[#00f0ff]">
-                  <option value="10">400万〜500万円未満 (+10pt)</option>
-                  <option value="15" selected>500万〜600万円未満 (+15pt)</option>
-                  <option value="20">600万〜700万円未満 (+20pt)</option>
-                  <option value="25">700万〜800万円未満 (+25pt)</option>
-                  <option value="30">800万〜900万円未満 (+30pt)</option>
-                  <option value="40">1,000万円以上 (+40pt)</option>
-                </select>
-              </div>
+                  <label class="flex items-start gap-2.5 bg-[#05070e] border border-slate-800 hover:border-slate-600 p-3 text-xs text-slate-200 cursor-pointer transition">
+                    <input type="checkbox" id="hsp-topuni" class="accent-[#00f0ff] w-4 h-4 mt-0.5 shrink-0" />
+                    <span><strong class="text-white">法務大臣告示のトップ大学卒業</strong>（世界ランキング上位校等） <span class="text-[#00f0ff] font-mono-code font-bold">(+10pt)</span></span>
+                  </label>
 
-              <div>
-                <label class="block font-mono-code text-xs font-bold text-slate-300 mb-1.5">🇯🇵 JAPANESE // 日本語能力</label>
-                <select id="hsp-jp" class="w-full bg-[#05070e] border border-[#00f0ff]/35 px-3 py-2.5 text-xs font-bold text-white outline-none focus:border-[#00f0ff]">
-                  <option value="15" selected>JLPT N1 または BJT 480点以上 (+15pt)</option>
-                  <option value="10">JLPT N2 (+10pt ※他加点条件あり)</option>
-                  <option value="0">N3以下 / 未取得 (0pt)</option>
-                </select>
-              </div>
+                  <label class="flex items-start gap-2.5 bg-[#05070e] border border-slate-800 hover:border-slate-600 p-3 text-xs text-slate-200 cursor-pointer transition">
+                    <input type="checkbox" id="hsp-multi-deg" class="accent-[#00f0ff] w-4 h-4 mt-0.5 shrink-0" />
+                    <span><strong class="text-white">複数の専門分野で博士・修士号を取得</strong>（ダブルディグリー） <span class="text-[#00f0ff] font-mono-code font-bold">(+5pt)</span></span>
+                  </label>
 
-              <div>
-                <label class="block font-mono-code text-xs font-bold text-slate-300 mb-1.5">💻 IT_CERT // 国家資格加点</label>
-                <select id="hsp-it" class="w-full bg-[#05070e] border border-[#00f0ff]/35 px-3 py-2.5 text-xs font-bold text-white outline-none focus:border-[#00f0ff]">
-                  <option value="10">複数保有（FE + AP 等） (+10pt)</option>
-                  <option value="5" selected>1つ保有（基本情報 FE / 応用情報 AP） (+5pt)</option>
-                  <option value="0">未取得 (0pt)</option>
-                </select>
-              </div>
+                  <label class="flex items-start gap-2.5 bg-[#05070e] border border-slate-800 hover:border-slate-600 p-3 text-xs text-slate-200 cursor-pointer transition">
+                    <input type="checkbox" id="hsp-research" class="accent-[#00f0ff] w-4 h-4 mt-0.5 shrink-0" />
+                    <span><strong class="text-white">研究実績あり</strong>（特許発明1件以上・査読論文3本以上等） <span class="text-[#00f0ff] font-mono-code font-bold">(+15pt)</span></span>
+                  </label>
 
-              <div class="sm:col-span-2 grid sm:grid-cols-2 gap-2.5 pt-1">
-                <label class="flex items-center gap-2 bg-[#05070e] border border-slate-800 px-3.5 py-2.5 text-xs font-bold text-slate-200 cursor-pointer">
-                  <input type="checkbox" id="hsp-jpuni" checked class="accent-[#00f0ff] w-4 h-4" />
-                  <span>🏫 日本の大学・大学院卒 (+10pt)</span>
-                </label>
-                <label class="flex items-center gap-2 bg-[#05070e] border border-slate-800 px-3.5 py-2.5 text-xs font-bold text-slate-200 cursor-pointer">
-                  <input type="checkbox" id="hsp-topuni" class="accent-[#ff4d8d] w-4 h-4" />
-                  <span>🌟 加点対象大学卒 (+10pt)</span>
-                </label>
+                  <label class="flex items-start gap-2.5 bg-[#05070e] border border-slate-800 hover:border-slate-600 p-3 text-xs text-slate-200 cursor-pointer transition">
+                    <input type="checkbox" id="hsp-innov" class="accent-[#00f0ff] w-4 h-4 mt-0.5 shrink-0" />
+                    <span><strong class="text-white">イノベーション促進支援措置</strong>を受ける機関での就労 <span class="text-[#00f0ff] font-mono-code font-bold">(+10pt)</span></span>
+                  </label>
+
+                  <label class="flex items-start gap-2.5 bg-[#05070e] border border-slate-800 hover:border-slate-600 p-3 text-xs text-slate-200 cursor-pointer transition">
+                    <input type="checkbox" id="hsp-sme" class="accent-[#00f0ff] w-4 h-4 mt-0.5 shrink-0" />
+                    <span><strong class="text-white">試験研究費比率3%超の中小企業</strong>での就労 <span class="text-[#00f0ff] font-mono-code font-bold">(+5pt)</span></span>
+                  </label>
+
+                  <label class="flex items-start gap-2.5 bg-[#05070e] border border-slate-800 hover:border-slate-600 p-3 text-xs text-slate-200 cursor-pointer transition">
+                    <input type="checkbox" id="hsp-growth" class="accent-[#00f0ff] w-4 h-4 mt-0.5 shrink-0" />
+                    <span><strong class="text-white">先端成長事業（DX・GX等）</strong>に関与する業務 <span class="text-[#00f0ff] font-mono-code font-bold">(+10pt)</span></span>
+                  </label>
+
+                  <label class="flex items-start gap-2.5 bg-[#05070e] border border-slate-800 hover:border-slate-600 p-3 text-xs text-slate-200 cursor-pointer transition">
+                    <input type="checkbox" id="hsp-jica" class="accent-[#00f0ff] w-4 h-4 mt-0.5 shrink-0" />
+                    <span><strong class="text-white">JICA等 高度人材育成事業</strong>の研修修了 <span class="text-[#00f0ff] font-mono-code font-bold">(+5pt)</span></span>
+                  </label>
+                </div>
               </div>
             </div>
 
-            <!-- 右侧得分 HUD 面板 -->
-            <div class="lg:col-span-5 bg-[#05070e] border border-[#ff4d8d]/40 p-6 text-center space-y-4">
-              <div class="font-mono-code text-xs font-bold text-[#ff4d8d]">CALCULATED_SCORE</div>
-              <div class="text-6xl font-black font-mono-code text-white neon-text-cyan">
-                <span id="hsp-score">80</span><span class="text-xl text-[#ff4d8d] ml-1">PT</span>
+            <!-- 右侧：实时计算结果与明细 HUD 面板 -->
+            <div class="lg:col-span-4 lg:sticky lg:top-16 bg-[#05070e] border border-[#00f0ff]/35 p-6 space-y-5">
+              <div class="flex items-center justify-between font-mono-code text-[11px] border-b border-slate-800 pb-3">
+                <span class="text-[#00f0ff] font-bold">TOTAL_SCORE_HUD</span>
+                <span class="text-slate-400">TARGET: 70 / 80</span>
               </div>
-              <div class="w-full h-2.5 bg-slate-900 overflow-hidden border border-slate-800">
-                <div id="hsp-bar" class="h-full w-full bg-gradient-to-r from-[#ff4d8d] via-[#ffe600] to-[#00f0ff] transition-all duration-300"></div>
+
+              <div class="text-center py-2">
+                <div class="text-6xl font-black font-mono-code text-white neon-text-cyan">
+                  <span id="hsp-score">80</span><span class="text-xl text-[#ff2a6d] ml-1">PT</span>
+                </div>
+                <div class="w-full h-2 bg-slate-900 overflow-hidden border border-slate-800 mt-4">
+                  <div id="hsp-bar" class="h-full w-full bg-gradient-to-r from-[#0284c7] via-[#00f0ff] to-[#ff2a6d] transition-all duration-300"></div>
+                </div>
+                <div class="flex justify-between font-mono-code text-[10px] text-slate-500 mt-1.5">
+                  <span>0PT</span>
+                  <span>70PT (3年永住)</span>
+                  <span>80PT (1年永住)</span>
+                </div>
               </div>
-              <div id="hsp-status" class="p-3 bg-[#00f0ff]/15 border border-[#00f0ff]/50 font-mono-code text-xs font-extrabold text-[#00f0ff]">
+
+              <div id="hsp-status" class="p-3.5 bg-[#00f0ff]/12 border border-[#00f0ff]/45 font-mono-code text-xs font-extrabold text-[#00f0ff] leading-relaxed">
                 🏆 80pt達成！最速「1年」の在留で永住許可申請が可能です！
               </div>
+
+              <!-- 分数构成明细 -->
+              <div class="bg-[#090e1a] border border-slate-800 p-3.5 space-y-2 font-mono-code text-[11px]">
+                <div class="text-slate-400 font-bold pb-1 border-b border-slate-800">SCORE_BREAKDOWN // 内訳</div>
+                <div class="flex justify-between"><span>基本項目（学歴・職歴・年齢・年収）</span><span id="bd-base" class="text-white font-bold">55pt</span></div>
+                <div class="flex justify-between"><span>日本語・国家資格</span><span id="bd-qual" class="text-[#00f0ff] font-bold">20pt</span></div>
+                <div class="flex justify-between"><span>特別加算（大学卒・実績等）</span><span id="bd-bonus" class="text-[#ff2a6d] font-bold">10pt</span></div>
+              </div>
+
               <p class="text-[11px] text-slate-500 leading-relaxed">
-                ※基本情報(FE)・応用情報(AP)等のIT告示資格は、「技人国」ビザの学歴要件特例免除にも直結します。
+                ※年収が300万円未満の場合は他項目の合計に関わらず対象外となります。また、基本情報(FE)・応用情報(AP)等のIT告示資格は「技術・人文知識・国際業務」ビザの学歴要件免除にも直結します。
               </p>
             </div>
           </div>
@@ -613,53 +655,52 @@
       </div>
     </section>
 
-    <!-- 6. 运营者・创作者档案（主调：翡翠青绿 #34D399） -->
+    <!-- 6. 运营者・创作者档案（36资格矩阵） -->
     <section id="creator" class="pt-6 pb-16">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 space-y-8">
-        <div class="cyber-ruler cyber-ruler-emerald">00 ─── SECTOR_04 // CREATOR_ARCHIVE ─── 100</div>
+        <div class="cyber-ruler">00 ─── SECTOR_04 // CREATOR_ARCHIVE ─── 100</div>
 
         <div>
-          <span class="font-mono-code text-xs font-bold tracking-widest text-[#34d399]">// 04_CREATOR_ARCHIVE</span>
+          <span class="font-mono-code text-xs font-bold tracking-widest text-[#00f0ff]">// 04_CREATOR_ARCHIVE</span>
           <h2 class="text-3xl font-black text-white mt-1">運営者プロフィール＆保有資格マトリクス</h2>
           <p class="text-sm text-slate-400 mt-1">「次に同じことで困る人を減らしたい」——当事者としての独学ログから生まれた公開ナレッジ。</p>
         </div>
 
-        <div class="cyber-card cyber-card-emerald p-6 sm:p-8 space-y-6">
+        <div class="cyber-card p-6 sm:p-8 space-y-6">
           <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-slate-800">
             <div class="flex items-start gap-4">
-              <div class="w-14 h-14 cyber-btn bg-gradient-to-br from-[#34d399] to-[#00f0ff] flex items-center justify-center text-2xl shrink-0">
+              <div class="w-14 h-14 cyber-btn bg-gradient-to-br from-[#00f0ff] to-[#ff2a6d] flex items-center justify-center text-2xl shrink-0">
                 👨‍💻
               </div>
               <div>
                 <h3 class="text-2xl font-black text-white">盧 易南（Minami）</h3>
                 <p class="text-sm text-slate-300 mt-1 leading-relaxed">
-                  2017年に来日し、日本語学校・高崎経済大学を経て日本の大手IT企業へ就職。働きながら立教大学大学院ビジネスデザイン研究科で学びつつ、3年間で<strong class="text-[#34d399]">累計36資格（公的・国家資格5種）</strong>を取得。独学ノウハウを「誰でも使える公開資産」として発信中。
+                  2017年に来日し、日本語学校・高崎経済大学を経て日本の大手IT企業へ就職。働きながら立教大学大学院ビジネスデザイン研究科で学びつつ、3年間で<strong class="text-[#00f0ff]">累計36資格（公的・国家資格5種）</strong>を取得。独学ノウハウを「誰でも使える公開資産」として発信中。
                 </p>
               </div>
             </div>
 
             <div class="flex gap-3 shrink-0">
-              <div class="bg-[#05070e] border border-[#34d399]/45 px-4 py-3 text-center">
-                <div class="text-2xl font-black font-mono-code text-[#34d399]">36</div>
+              <div class="bg-[#05070e] border border-[#00f0ff]/40 px-4 py-3 text-center">
+                <div class="text-2xl font-black font-mono-code text-[#00f0ff]">36</div>
                 <div class="text-[11px] font-mono-code text-slate-400">TOTAL_CERTS</div>
               </div>
-              <div class="bg-[#05070e] border border-[#ff4d8d]/45 px-4 py-3 text-center">
-                <div class="text-2xl font-black font-mono-code text-[#ff4d8d]">05</div>
+              <div class="bg-[#05070e] border border-[#ff2a6d]/40 px-4 py-3 text-center">
+                <div class="text-2xl font-black font-mono-code text-[#ff2a6d]">05</div>
                 <div class="text-[11px] font-mono-code text-slate-400">NATIONAL_ID</div>
               </div>
             </div>
           </div>
 
-          <!-- 交互式资格分类过滤器 -->
           <div class="space-y-3">
             <div class="flex flex-wrap items-center justify-between gap-2">
               <span class="font-mono-code text-xs font-extrabold text-slate-300">FILTER_BY_DOMAIN // カテゴリ別：</span>
               <div class="flex flex-wrap gap-1.5" id="cert-filters">
-                <button data-cat="all" class="cert-filter-btn px-3 py-1 font-mono-code text-xs font-bold bg-[#34d399] text-[#05070e] transition">ALL</button>
-                <button data-cat="national" class="cert-filter-btn px-3 py-1 font-mono-code text-xs font-bold bg-[#05070e] border border-slate-700 text-slate-300 hover:border-[#34d399] transition">🏅 国家・公的資格</button>
-                <button data-cat="cloud" class="cert-filter-btn px-3 py-1 font-mono-code text-xs font-bold bg-[#05070e] border border-slate-700 text-slate-300 hover:border-[#34d399] transition">☁️ Cloud / K8s</button>
-                <button data-cat="infra" class="cert-filter-btn px-3 py-1 font-mono-code text-xs font-bold bg-[#05070e] border border-slate-700 text-slate-300 hover:border-[#34d399] transition">🖥️ Infra / Linux</button>
-                <button data-cat="ai" class="cert-filter-btn px-3 py-1 font-mono-code text-xs font-bold bg-[#05070e] border border-slate-700 text-slate-300 hover:border-[#34d399] transition">🤖 AI / Dev / Mgmt</button>
+                <button data-cat="all" class="cert-filter-btn px-3 py-1 font-mono-code text-xs font-bold bg-[#00f0ff] text-[#05070e] transition">ALL</button>
+                <button data-cat="national" class="cert-filter-btn px-3 py-1 font-mono-code text-xs font-bold bg-[#05070e] border border-slate-700 text-slate-300 hover:border-[#00f0ff] transition">🏅 国家・公的資格</button>
+                <button data-cat="cloud" class="cert-filter-btn px-3 py-1 font-mono-code text-xs font-bold bg-[#05070e] border border-slate-700 text-slate-300 hover:border-[#00f0ff] transition">☁️ Cloud / K8s</button>
+                <button data-cat="infra" class="cert-filter-btn px-3 py-1 font-mono-code text-xs font-bold bg-[#05070e] border border-slate-700 text-slate-300 hover:border-[#00f0ff] transition">🖥️ Infra / Linux</button>
+                <button data-cat="ai" class="cert-filter-btn px-3 py-1 font-mono-code text-xs font-bold bg-[#05070e] border border-slate-700 text-slate-300 hover:border-[#00f0ff] transition">🤖 AI / Dev / Mgmt</button>
               </div>
             </div>
             <div id="cert-list" class="flex flex-wrap gap-2"></div>
@@ -673,9 +714,9 @@
       <div class="max-w-5xl mx-auto px-4 sm:px-6 space-y-8">
         <div class="cyber-ruler">00 ─── SECTOR_05 // NETWORK ─── 100</div>
 
-        <div class="cyber-card p-7 sm:p-9 flex flex-col md:flex-row items-center justify-between gap-6 border-[#ff4d8d]/45">
+        <div class="cyber-card p-7 sm:p-9 flex flex-col md:flex-row items-center justify-between gap-6 border-[#ff2a6d]/40">
           <div class="space-y-2">
-            <div class="font-mono-code text-xs font-bold text-[#ff4d8d]">// 05_PEER_NETWORK</div>
+            <div class="font-mono-code text-xs font-bold text-[#ff2a6d]">// 05_PEER_NETWORK</div>
             <h3 class="text-2xl font-black text-white">🔥 南南伴你学！学搭俱乐部</h3>
             <p class="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-xl">
               「一人で勉強するとスマホを見てしまう…」そんな仲間が集まる無料学習コミュニティ。応用情報・TOEICの無料オンライン勉強会や、毎日の学習チェックインを定期開催中！
@@ -696,8 +737,8 @@
 
   </main>
 
-  <footer class="border-t border-[#00f0ff]/20 bg-[#03050a] py-10 text-center space-y-3">
-    <div class="inline-flex flex-wrap justify-center items-center gap-2 px-4 py-1.5 bg-[#0b101d] border border-[#00f0ff]/30 font-mono-code text-xs font-bold text-[#00f0ff]">
+  <footer class="border-t border-[#00f0ff]/15 bg-[#03050a] py-10 text-center space-y-3">
+    <div class="inline-flex flex-wrap justify-center items-center gap-2 px-4 py-1.5 bg-[#090e1a] border border-[#00f0ff]/25 font-mono-code text-xs font-bold text-[#00f0ff]">
       <span>LEARN</span><span>//</span><span>TRUST</span><span>//</span><span>CAREER</span><span>//</span><span>SOCIETY</span>
     </div>
     <p class="text-xs text-slate-400">
@@ -710,8 +751,8 @@
 
   <!-- 预告功能 HUD 弹窗 -->
   <div id="wip-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-xs p-4">
-    <div class="cyber-card max-w-md w-full p-6 space-y-4 border-[#ff4d8d]">
-      <div class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#ff4d8d]/15 text-[#ff4d8d] border border-[#ff4d8d]/40 font-mono-code text-xs font-bold">
+    <div class="cyber-card max-w-md w-full p-6 space-y-4 border-[#ff2a6d]">
+      <div class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#ff2a6d]/15 text-[#ff2a6d] border border-[#ff2a6d]/40 font-mono-code text-xs font-bold">
         ◌ MODULE_IN_DEVELOPMENT
       </div>
       <h3 id="wip-title" class="text-lg font-black text-white"></h3>
@@ -759,8 +800,8 @@
         .forEach(item => {
           const span = document.createElement("span");
           span.className = item.isNat
-            ? "px-2.5 py-1 font-mono-code text-[11px] font-bold bg-[#ff4d8d]/15 border border-[#ff4d8d]/50 text-[#ff85a2]"
-            : "px-2.5 py-1 font-mono-code text-[11px] bg-[#05070e] border border-[#34d399]/30 text-slate-300";
+            ? "px-2.5 py-1 font-mono-code text-[11px] font-bold bg-[#ff2a6d]/12 border border-[#ff2a6d]/45 text-[#ff7aa3]"
+            : "px-2.5 py-1 font-mono-code text-[11px] bg-[#05070e] border border-[#00f0ff]/25 text-slate-300";
           span.textContent = item.name;
           certListEl.appendChild(span);
         });
@@ -769,53 +810,88 @@
     filterBtns.forEach(btn => {
       btn.addEventListener("click", () => {
         filterBtns.forEach(b => {
-          b.classList.remove("bg-[#34d399]", "text-[#05070e]");
+          b.classList.remove("bg-[#00f0ff]", "text-[#05070e]");
           b.classList.add("bg-[#05070e]", "border", "border-slate-700", "text-slate-300");
         });
         btn.classList.remove("bg-[#05070e]", "border", "border-slate-700", "text-slate-300");
-        btn.classList.add("bg-[#34d399]", "text-[#05070e]");
+        btn.classList.add("bg-[#00f0ff]", "text-[#05070e]");
         renderCerts(btn.dataset.cat);
       });
     });
     renderCerts("all");
 
-    // 2. 高度专门职积分试算器
-    const hspFields = ["hsp-edu", "hsp-age", "hsp-exp", "hsp-income", "hsp-jp", "hsp-it", "hsp-jpuni", "hsp-topuni"];
+    // 2. 高度专门职（1号ロ）全量官方积分试算器
+    const hspInputs = [
+      "hsp-edu", "hsp-exp", "hsp-age", "hsp-income",
+      "hsp-jp", "hsp-cert",
+      "hsp-jpuni", "hsp-topuni", "hsp-multi-deg", "hsp-research",
+      "hsp-innov", "hsp-sme", "hsp-growth", "hsp-jica"
+    ];
+
     function calcHsp() {
       const edu = Number(document.getElementById("hsp-edu").value);
-      const age = Number(document.getElementById("hsp-age").value);
       const exp = Number(document.getElementById("hsp-exp").value);
+      const age = Number(document.getElementById("hsp-age").value);
       const income = Number(document.getElementById("hsp-income").value);
-      const jp = Number(document.getElementById("hsp-jp").value);
-      const it = Number(document.getElementById("hsp-it").value);
-      const jpUni = document.getElementById("hsp-jpuni").checked ? 10 : 0;
-      const topUni = document.getElementById("hsp-topuni").checked ? 10 : 0;
+      const baseTotal = edu + exp + age + income;
 
-      const total = edu + age + exp + income + jp + it + jpUni + topUni;
+      const jp = Number(document.getElementById("hsp-jp").value);
+      const cert = Number(document.getElementById("hsp-cert").value);
+      const qualTotal = jp + cert;
+
+      let bonusTotal = 0;
+      if (document.getElementById("hsp-jpuni").checked) bonusTotal += 10;
+      if (document.getElementById("hsp-topuni").checked) bonusTotal += 10;
+      if (document.getElementById("hsp-multi-deg").checked) bonusTotal += 5;
+      if (document.getElementById("hsp-research").checked) bonusTotal += 15;
+      if (document.getElementById("hsp-innov").checked) bonusTotal += 10;
+      if (document.getElementById("hsp-sme").checked) bonusTotal += 5;
+      if (document.getElementById("hsp-growth").checked) bonusTotal += 10;
+      if (document.getElementById("hsp-jica").checked) bonusTotal += 5;
+
+      const total = baseTotal + qualTotal + bonusTotal;
+
       document.getElementById("hsp-score").textContent = total;
+      document.getElementById("bd-base").textContent = baseTotal + "pt";
+      document.getElementById("bd-qual").textContent = qualTotal + "pt";
+      document.getElementById("bd-bonus").textContent = bonusTotal + "pt";
       document.getElementById("hsp-bar").style.width = Math.min((total / 80) * 100, 100) + "%";
 
       const statusEl = document.getElementById("hsp-status");
       if (total >= 80) {
-        statusEl.className = "p-3 bg-[#00f0ff]/15 border border-[#00f0ff]/50 font-mono-code text-xs font-extrabold text-[#00f0ff]";
+        statusEl.className = "p-3.5 bg-[#00f0ff]/12 border border-[#00f0ff]/45 font-mono-code text-xs font-extrabold text-[#00f0ff] leading-relaxed";
         statusEl.textContent = `🏆 ${total}pt達成！最速「1年」の在留で永住許可申請が可能です！`;
       } else if (total >= 70) {
-        statusEl.className = "p-3 bg-[#ffe600]/15 border border-[#ffe600]/50 font-mono-code text-xs font-extrabold text-[#ffe600]";
-        statusEl.textContent = `🎉 ${total}pt達成！永住申請まで「3年」に短縮（あと${80 - total}ptで1年短縮）`;
+        statusEl.className = "p-3.5 bg-[#38bdf8]/12 border border-[#38bdf8]/45 font-mono-code text-xs font-extrabold text-[#38bdf8] leading-relaxed";
+        statusEl.textContent = `⚡ ${total}pt達成！永住申請まで「3年」に短縮（あと${80 - total}ptで最速1年短縮）`;
       } else {
-        statusEl.className = "p-3 bg-slate-900 border border-slate-700 font-mono-code text-xs font-bold text-slate-300";
-        statusEl.textContent = `現在 ${total}pt（70ptまであと ${70 - total}pt！N1やIT国家資格で加点しよう ⚡）`;
+        statusEl.className = "p-3.5 bg-slate-900 border border-slate-700 font-mono-code text-xs font-bold text-slate-300 leading-relaxed";
+        statusEl.textContent = `現在 ${total}pt（70ptまであと ${70 - total}pt！JLPT N1やIT国家資格で加点しよう）`;
       }
     }
-    hspFields.forEach(id => document.getElementById(id).addEventListener("change", calcHsp));
+
+    function resetHsp() {
+      document.getElementById("hsp-edu").value = "20";
+      document.getElementById("hsp-exp").value = "5";
+      document.getElementById("hsp-age").value = "15";
+      document.getElementById("hsp-income").value = "15";
+      document.getElementById("hsp-jp").value = "15";
+      document.getElementById("hsp-cert").value = "5";
+      document.getElementById("hsp-jpuni").checked = true;
+      ["hsp-topuni", "hsp-multi-deg", "hsp-research", "hsp-innov", "hsp-sme", "hsp-growth", "hsp-jica"].forEach(id => {
+        document.getElementById(id).checked = false;
+      });
+      calcHsp();
+    }
+
+    hspInputs.forEach(id => document.getElementById(id).addEventListener("change", calcHsp));
     calcHsp();
 
     // 3. 实时学习集中度跳动微交互
     setInterval(() => {
       const el = document.getElementById("live-focus");
       if (el) {
-        const val = (95.8 + Math.random() * 3.4).toFixed(1);
-        el.textContent = val;
+        el.textContent = (95.8 + Math.random() * 3.4).toFixed(1);
       }
     }, 2400);
 
