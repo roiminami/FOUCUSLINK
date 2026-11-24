@@ -3,107 +3,156 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FocusLink 🔥 | 在日外国人のための資格攻略・学習ポータル</title>
+  <title>FocusLink // CYBER LEARNING PORTAL</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-base: #0b0f17;
-      --bg-card: #131926;
-      --neon-orange: #ff6b35;
-      --neon-pink: #ff2e93;
-      --neon-cyan: #00f5d4;
-      --neon-purple: #a855f7;
+      --bg-void: #05070e;
+      --bg-panel: #0b101d;
+      --cyber-cyan: #00f0ff;
+      --cyber-magenta: #ff0055;
+      --cyber-yellow: #ffe600;
+      --cyber-orange: #ff6b00;
     }
 
     body {
       font-family: 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: var(--bg-base);
-      color: #f8fafc;
+      background-color: var(--bg-void);
+      color: #e2e8f0;
       background-image:
-        radial-gradient(circle at 12% 8%, rgba(255, 107, 53, 0.12), transparent 34%),
-        radial-gradient(circle at 88% 18%, rgba(0, 245, 212, 0.08), transparent 34%),
-        radial-gradient(rgba(148, 163, 184, 0.11) 1px, transparent 1px);
-      background-size: 100% 100%, 100% 100%, 28px 28px;
+        radial-gradient(circle at 15% 10%, rgba(0, 240, 255, 0.12), transparent 38%),
+        radial-gradient(circle at 85% 20%, rgba(255, 0, 85, 0.12), transparent 38%),
+        linear-gradient(rgba(0, 240, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.04) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 36px 36px, 36px 36px;
+    }
+
+    /* 轻微 CRT 扫描线氛围层（不遮挡阅读） */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9990;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0) 0px,
+        rgba(0, 0, 0, 0) 3px,
+        rgba(0, 240, 255, 0.018) 4px
+      );
     }
 
     .font-mono-code {
       font-family: 'JetBrains Mono', monospace;
     }
 
-    /* Fireship / NeetCode 风格弹跳卡片 */
-    .fun-card {
-      background: rgba(19, 25, 38, 0.9);
+    /* 赛博机甲切角按钮 */
+    .cyber-btn {
+      clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+      transition: all 0.2s ease;
+    }
+    .cyber-btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.12);
+    }
+
+    /* 赛博 HUD 卡片与四隅瞄准框 */
+    .cyber-card {
+      position: relative;
+      background: rgba(11, 16, 29, 0.88);
       backdrop-filter: blur(12px);
-      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.22s ease, box-shadow 0.22s ease;
+      border: 1px solid rgba(0, 240, 255, 0.18);
+      transition: transform 0.24s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.2s ease, box-shadow 0.2s ease;
     }
-    .fun-card:hover {
-      transform: translateY(-6px);
+    .cyber-card::before,
+    .cyber-card::after {
+      content: "";
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      pointer-events: none;
+      transition: all 0.2s ease;
     }
-    .glow-orange:hover {
-      border-color: rgba(255, 107, 53, 0.65);
-      box-shadow: 0 14px 36px -8px rgba(255, 107, 53, 0.35);
+    .cyber-card::before {
+      top: -1px;
+      left: -1px;
+      border-top: 2px solid var(--cyber-cyan);
+      border-left: 2px solid var(--cyber-cyan);
     }
-    .glow-cyan:hover {
-      border-color: rgba(0, 245, 212, 0.65);
-      box-shadow: 0 14px 36px -8px rgba(0, 245, 212, 0.28);
+    .cyber-card::after {
+      bottom: -1px;
+      right: -1px;
+      border-bottom: 2px solid var(--cyber-magenta);
+      border-right: 2px solid var(--cyber-magenta);
     }
-    .glow-purple:hover {
-      border-color: rgba(168, 85, 247, 0.65);
-      box-shadow: 0 14px 36px -8px rgba(168, 85, 247, 0.32);
+    .cyber-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(0, 240, 255, 0.65);
+      box-shadow: 0 0 28px rgba(0, 240, 255, 0.18), inset 0 0 18px rgba(0, 240, 255, 0.05);
+    }
+    .cyber-card:hover::before,
+    .cyber-card:hover::after {
+      width: 16px;
+      height: 16px;
     }
 
-    @keyframes spinBorder {
-      0% { transform: rotate(0deg) scale(0.97); }
-      50% { transform: rotate(180deg) scale(1.03); }
-      100% { transform: rotate(360deg) scale(0.97); }
-    }
-    .mascot-aura {
-      background: conic-gradient(from 90deg, #ff6b35, #ff2e93, #00f5d4, #a855f7, #ff6b35);
-      animation: spinBorder 9s linear infinite;
+    .neon-text-cyan {
+      text-shadow: 0 0 14px rgba(0, 240, 255, 0.55);
     }
 
-    @keyframes floatSlow {
+    @keyframes spinCyber {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .cyber-aura {
+      background: conic-gradient(from 0deg, #00f0ff, #ff0055, #ffe600, #00f0ff);
+      animation: spinCyber 7s linear infinite;
+    }
+
+    @keyframes floatHud {
       0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-8px); }
+      50% { transform: translateY(-7px); }
     }
-    .float-mascot {
-      animation: floatSlow 4.2s ease-in-out infinite;
+    .float-hud {
+      animation: floatHud 4s ease-in-out infinite;
     }
   </style>
 </head>
-<body class="antialiased selection:bg-orange-500 selection:text-white">
+<body class="antialiased selection:bg-[#00f0ff] selection:text-[#05070e]">
 
-  <!-- 1. 主导航栏（防折行设计，紧贴 focuslink-bar.js 下方） -->
-  <header class="relative z-40 border-b border-slate-800/80 bg-[#0b0f17]/85 backdrop-blur-md">
+  <!-- 1. 主导航栏（赛博 HUD 控制台风格，防折行设计） -->
+  <header class="relative z-40 border-b border-[#00f0ff]/20 bg-[#05070e]/90 backdrop-blur-md">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
       <a href="#" class="flex items-center gap-3 shrink-0 group">
-        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-orange-500 via-pink-500 to-purple-600 flex items-center justify-center text-white font-black text-sm shadow-lg shadow-orange-500/25 group-hover:-rotate-6 transition-transform">
-          FL
+        <div class="w-9 h-9 cyber-btn bg-gradient-to-br from-[#00f0ff] to-[#ff0055] p-[1.5px] shadow-[0_0_15px_rgba(0,240,255,0.4)]">
+          <div class="w-full h-full bg-[#05070e] cyber-btn flex items-center justify-center font-mono-code font-black text-xs text-[#00f0ff]">
+            FL//
+          </div>
         </div>
         <div class="leading-none">
-          <span class="font-black text-lg tracking-tight text-white">Focus<span class="text-orange-400">Link</span></span>
-          <span class="block text-[10px] font-mono-code text-teal-400 mt-0.5">LEARN FAST. GROW TOGETHER.</span>
+          <span class="font-mono-code font-black text-lg tracking-wider text-white">FOCUS<span class="text-[#00f0ff] neon-text-cyan">LINK</span></span>
+          <span class="block text-[9px] font-mono-code tracking-widest text-[#ff0055] mt-0.5">CYBER LEARNING OS v2.6</span>
         </div>
       </a>
 
-      <nav class="hidden md:flex items-center gap-7 text-xs font-extrabold text-slate-300 whitespace-nowrap">
-        <a href="#services" class="hover:text-orange-400 transition">学習ポータル</a>
-        <a href="#method" class="hover:text-teal-400 transition">6ステップ攻略法</a>
-        <a href="#hsp" class="hover:text-purple-400 transition">高度人材試算</a>
-        <a href="#creator" class="hover:text-pink-400 transition">運営者・36資格</a>
-        <a href="#community" class="hover:text-cyan-400 transition">学搭コミュニティ</a>
+      <nav class="hidden md:flex items-center gap-6 font-mono-code text-xs font-bold text-slate-300 whitespace-nowrap">
+        <a href="#services" class="hover:text-[#00f0ff] transition">[01_PORTALS]</a>
+        <a href="#method" class="hover:text-[#00f0ff] transition">[02_PROTOCOL]</a>
+        <a href="#hsp" class="hover:text-[#ff0055] transition">[03_HSP_CALC]</a>
+        <a href="#creator" class="hover:text-[#ffe600] transition">[04_36_CERTS]</a>
+        <a href="#community" class="hover:text-[#00f0ff] transition">[05_NETWORK]</a>
       </nav>
 
       <div class="flex items-center gap-2.5 shrink-0">
-        <a href="#hsp" class="hidden sm:inline-flex items-center gap-1 px-3 py-2 rounded-xl bg-slate-800/90 hover:bg-slate-700 border border-slate-700 text-xs font-bold text-slate-200 whitespace-nowrap transition">
-          ⚡ 永住ポイント計算
+        <a href="#hsp" class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 cyber-btn bg-[#0b101d] hover:bg-[#131c31] border border-[#00f0ff]/40 font-mono-code text-xs font-bold text-[#00f0ff] whitespace-nowrap">
+          <span>⚡ HSP試算</span>
         </a>
-        <a href="#services" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-400 hover:to-pink-400 text-white text-xs font-extrabold whitespace-nowrap shadow-lg shadow-orange-500/25 transition active:scale-95">
-          <span>学習をはじめる</span>
-          <span>🚀</span>
+        <a href="#services" class="inline-flex items-center gap-1.5 px-4 py-2 cyber-btn bg-gradient-to-r from-[#ff0055] to-[#ff6b00] text-white font-mono-code text-xs font-extrabold whitespace-nowrap shadow-[0_0_20px_rgba(255,0,85,0.45)]">
+          <span>BOOT_LEARN</span>
+          <span>▶</span>
         </a>
       </div>
     </div>
@@ -111,89 +160,88 @@
 
   <main>
 
-    <!-- 2. Hero 首屏：面向学习者的直接价值 + Mascot 全息伴学终端 -->
+    <!-- 2. Hero 首屏：赛博指令区 + Mascot 全息伴学终端 -->
     <section class="relative overflow-hidden pt-12 pb-20 sm:pt-16 sm:pb-24">
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
         <div class="grid lg:grid-cols-12 gap-10 items-center">
           
-          <!-- 左侧学习者核心文案 -->
+          <!-- 左侧赛博标语与学习入口 -->
           <div class="lg:col-span-7 space-y-6">
-            <div class="inline-flex flex-wrap items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-800/90 border border-orange-500/35 text-xs font-bold text-orange-300 shadow-sm">
-              <span>🔥</span>
-              <span>36資格合格者の実践メソッド × 在日外国人向け学習ポータル</span>
+            <div class="inline-flex flex-wrap items-center gap-2 px-3 py-1 bg-[#00f0ff]/10 border border-[#00f0ff]/40 font-mono-code text-[11px] font-bold text-[#00f0ff]">
+              <span class="w-2 h-2 bg-[#00f0ff] animate-ping"></span>
+              <span>SYS.READY // 36資格突破者の実践学習ポータル</span>
             </div>
 
             <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.15]">
               孤独な学びを、<br />
-              <span class="bg-gradient-to-r from-orange-400 via-pink-500 to-teal-300 bg-clip-text text-transparent">
-                共に成長する力へ。
+              <span class="bg-gradient-to-r from-[#00f0ff] via-[#ffe600] to-[#ff0055] bg-clip-text text-transparent">
+                共に進化する力へ。
               </span>
             </h1>
 
             <p class="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl">
-              「日本語の長文が読めない」「一人で勉強が続かない」——そんな壁を突破するための実践学習サイト。
-              国家資格の取得から、在日外国人の<span class="text-teal-300 font-bold">「永住許可申請の早期化（最速1年）」</span>と<span class="text-orange-300 font-bold">「日本でのキャリアアップ」</span>まで楽しくサポートします。
+              「日本語の長文が読めない」「一人で勉強が続かない」——そんな壁をハックする在日外国人向け実践ポータル。
+              国家資格の最短突破から、<span class="text-[#00f0ff] font-bold">「永住許可の早期化（最速1年）」</span>と<span class="text-[#ff0055] font-bold">「キャリアアップ」</span>まで直結させます。
             </p>
 
-            <div class="flex flex-wrap items-center gap-3.5 pt-1">
-              <a href="#services" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-400 hover:to-pink-400 text-white text-sm font-extrabold shadow-lg shadow-orange-500/30 transition active:scale-95">
-                🔥 公開中の学習サイトを見る
+            <div class="flex flex-wrap items-center gap-4 pt-1">
+              <a href="#services" class="px-6 py-3.5 cyber-btn bg-gradient-to-r from-[#00f0ff] to-[#00b8d4] text-[#05070e] font-mono-code text-sm font-black shadow-[0_0_25px_rgba(0,240,255,0.45)]">
+                ▶ 学習ポータルへ接続
               </a>
-              <a href="#hsp" class="px-6 py-3.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-100 border border-slate-700 text-sm font-bold transition active:scale-95">
-                ⚡ 高度人材ポイントを計算
+              <a href="#hsp" class="px-6 py-3.5 cyber-btn bg-[#0b101d] hover:bg-[#131b2e] text-[#ff0055] border border-[#ff0055]/60 font-mono-code text-sm font-extrabold">
+                ⚡ 永住ポイント試算
               </a>
             </div>
 
-            <!-- 学习者最关心的 3 个实效指标 -->
+            <!-- 3个赛博数据读数模块 -->
             <div class="grid grid-cols-3 gap-3 pt-3 max-w-xl">
-              <div class="bg-[#131926]/90 border border-slate-800 rounded-2xl p-3.5">
-                <div class="text-[11px] text-slate-400">運営者実績</div>
-                <div class="text-xl font-black text-white font-mono-code mt-0.5">36<span class="text-xs text-orange-400 ml-1">資格突破</span></div>
+              <div class="cyber-card p-3.5">
+                <div class="font-mono-code text-[10px] text-slate-400">VERIFIED_CERTS</div>
+                <div class="text-2xl font-black text-white font-mono-code mt-0.5">36<span class="text-xs text-[#00f0ff] ml-1">資格</span></div>
               </div>
-              <div class="bg-[#131926]/90 border border-slate-800 rounded-2xl p-3.5">
-                <div class="text-[11px] text-slate-400">高度専門職80pt</div>
-                <div class="text-xl font-black text-white font-mono-code mt-0.5">最速1<span class="text-xs text-teal-400 ml-1">年永住</span></div>
+              <div class="cyber-card p-3.5">
+                <div class="font-mono-code text-[10px] text-slate-400">HSP_80PT_VISA</div>
+                <div class="text-2xl font-black text-white font-mono-code mt-0.5">最速1<span class="text-xs text-[#ff0055] ml-1">年永住</span></div>
               </div>
-              <div class="bg-[#131926]/90 border border-slate-800 rounded-2xl p-3.5">
-                <div class="text-[11px] text-slate-400">学習ポータル</div>
-                <div class="text-xl font-black text-white font-mono-code mt-0.5">100<span class="text-xs text-pink-400 ml-1">%無料公開</span></div>
+              <div class="cyber-card p-3.5">
+                <div class="font-mono-code text-[10px] text-slate-400">ACCESS_MODE</div>
+                <div class="text-2xl font-black text-white font-mono-code mt-0.5">100<span class="text-xs text-[#ffe600] ml-1">%FREE</span></div>
               </div>
             </div>
           </div>
 
-          <!-- 右侧 Mascot 学习伴侣交互终端（引用同级 hero-mascot.jpg） -->
+          <!-- 右侧 Mascot 全息伴学终端 -->
           <div class="lg:col-span-5 flex justify-center">
-            <div class="relative w-full max-w-[420px] float-mascot">
-              <div class="absolute -inset-2 rounded-3xl mascot-aura blur-xl opacity-45"></div>
+            <div class="relative w-full max-w-[420px] float-hud">
+              <div class="absolute -inset-1.5 rounded-2xl cyber-aura blur-md opacity-60"></div>
 
-              <div class="relative bg-[#131926] border border-slate-700/90 rounded-3xl p-4 shadow-2xl">
-                <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-800 font-mono-code text-[11px] text-slate-400">
-                  <div class="flex items-center gap-1.5">
-                    <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
-                    <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
-                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
-                    <span class="ml-1.5 text-slate-300 font-bold">study-buddy.sh</span>
+              <div class="relative bg-[#080c17] border border-[#00f0ff]/50 rounded-2xl p-4 shadow-[0_0_40px_rgba(0,240,255,0.2)]">
+                <!-- HUD 顶栏 -->
+                <div class="flex items-center justify-between pb-3 mb-3 border-b border-[#00f0ff]/20 font-mono-code text-[11px]">
+                  <div class="flex items-center gap-2">
+                    <span class="px-1.5 py-0.5 bg-[#ff0055] text-white font-black text-[9px]">HUD</span>
+                    <span class="text-[#00f0ff] font-bold">BUDDY_CORE.EXE</span>
                   </div>
-                  <span class="text-teal-400 font-bold">● STUDY MODE</span>
+                  <span class="text-[#ffe600] font-bold">● ONLINE</span>
                 </div>
 
-                <!-- 吉祥物图片容器 -->
-                <div class="relative rounded-2xl overflow-hidden border border-slate-700/80 bg-[#1a202c] aspect-[16/10]">
-                  <img src="hero-mascot.jpg" alt="FocusLink 学習マスコット" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-                  <div class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-full bg-[#0b0f17]/85 backdrop-blur-md border border-teal-400/40 text-[10px] font-mono-code font-bold text-teal-300">
-                    🔥 今日の集中度: <span id="live-focus">96.8</span>%
+                <!-- 吉祥物全息影像框（同目录放置 hero-mascot.jpg） -->
+                <div class="relative rounded-xl overflow-hidden border border-[#00f0ff]/40 bg-[#111827] aspect-[16/10]">
+                  <img src="hero-mascot.jpg" alt="FocusLink サイバー学習マスコット" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                  <div class="absolute top-2.5 left-2.5 px-2.5 py-1 bg-[#05070e]/90 border border-[#00f0ff]/60 font-mono-code text-[10px] font-bold text-[#00f0ff]">
+                    FOCUS_SYNC: <span id="live-focus">97.4</span>%
                   </div>
-                  <div class="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-full bg-[#0b0f17]/85 backdrop-blur-md border border-orange-400/50 text-[10px] font-mono-code font-bold text-orange-300">
-                    ⏱️ ストリーク: 42日連続
+                  <div class="absolute bottom-2.5 right-2.5 px-2.5 py-1 bg-[#05070e]/90 border border-[#ff0055]/70 font-mono-code text-[10px] font-bold text-[#ff0055]">
+                    STREAK: 42_DAYS
                   </div>
                 </div>
 
-                <!-- 模拟学习终端命令行 -->
-                <div class="mt-3 bg-[#0b0f17] border border-slate-800 rounded-xl p-3 font-mono-code text-[11px] leading-relaxed">
-                  <div class="text-teal-400">$ focuslink start --goal "応用情報技術者(AP)"</div>
+                <!-- 赛博终端输出 -->
+                <div class="mt-3 bg-[#05070e] border border-slate-800 rounded-xl p-3 font-mono-code text-[11px] leading-relaxed">
+                  <div class="text-[#00f0ff]">root@focuslink:~# ./deploy_study --target AP</div>
                   <div class="text-slate-300 mt-1">
-                    ✔ 科目B 長文読解6ステップ起動完了<br/>
-                    ✔ 合格で高度専門職ポイント <span class="text-orange-400 font-bold">+5pt UP!</span>
+                    [OK] 科目B 6段階読解プロトコル起動<br/>
+                    [UP] 国家資格取得 → 高度人材 <span class="text-[#ffe600] font-bold">+5pt BONUS</span>
                   </div>
                 </div>
               </div>
@@ -204,189 +252,188 @@
       </div>
     </section>
 
-    <!-- 3. 学習ポータル（已上线的实战学习网站 + 即将上线功能） -->
-    <section id="services" class="border-t border-slate-800/80 py-16">
+    <!-- 3. 学習ポータル（已上线学习网站 + 即将上线节点） -->
+    <section id="services" class="border-t border-[#00f0ff]/15 py-16">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 space-y-10">
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div>
-            <span class="font-mono-code text-xs font-bold uppercase tracking-widest text-orange-400">// LEARNING PORTALS</span>
-            <h2 class="text-3xl font-black text-white mt-1">公開中の学習サイト＆開発中ツール</h2>
-            <p class="text-sm text-slate-400 mt-1">独学の遠回りをなくすために作った、実践特化型のナレッジ・対策サイト群。</p>
+            <span class="font-mono-code text-xs font-bold tracking-widest text-[#00f0ff]">// 01_ACTIVE_LEARNING_NODES</span>
+            <h2 class="text-3xl font-black text-white mt-1">稼働中の学習ポータル＆開発ノード</h2>
+            <p class="text-sm text-slate-400 mt-1">独学の遠回りを排除するために構築された、実践特化型ナレッジ・ネットワーク。</p>
           </div>
-          <div class="flex items-center gap-2.5 text-xs font-bold shrink-0">
-            <span class="px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">🔥 今すぐ使える</span>
-            <span class="px-3 py-1 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/30">🚧 準備中</span>
+          <div class="flex items-center gap-2.5 font-mono-code text-xs font-bold shrink-0">
+            <span class="px-3 py-1 bg-[#00f0ff]/10 text-[#00f0ff] border border-[#00f0ff]/40">● ONLINE_NOW</span>
+            <span class="px-3 py-1 bg-[#ff0055]/10 text-[#ff0055] border border-[#ff0055]/40">◌ IN_DEV</span>
           </div>
         </div>
 
         <!-- 3个已公开学习网站 -->
         <div class="grid md:grid-cols-3 gap-6">
           <a href="https://ipa.minami.ac.cn/ap" target="_blank" rel="noopener"
-             class="fun-card glow-orange border border-slate-700/80 rounded-2xl p-6 flex flex-col justify-between">
+             class="cyber-card p-6 flex flex-col justify-between group">
             <div>
-              <div class="flex items-center justify-between mb-4">
-                <span class="px-2.5 py-1 rounded-lg bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 text-xs font-extrabold">🔥 公開中</span>
+              <div class="flex items-center justify-between mb-4 font-mono-code">
+                <span class="px-2.5 py-0.5 bg-[#00f0ff]/15 text-[#00f0ff] border border-[#00f0ff]/40 text-[11px] font-bold">NODE_01 // LIVE</span>
                 <span class="text-2xl">💻</span>
               </div>
-              <h3 class="text-xl font-black text-white mb-2">応用情報技術者試験 (AP) 攻略</h3>
+              <h3 class="text-xl font-black text-white group-hover:text-[#00f0ff] transition mb-2">応用情報技術者試験 (AP) 攻略</h3>
               <p class="text-sm text-slate-300 leading-relaxed mb-4">
-                合格率24.5%の国家資格を外国人目線で徹底分解。日本語長文の「科目B」を母語感覚で解く<strong>6ステップ攻略法</strong>と、身近な具体例による解説を公開中！
+                合格率24.5%の難関国家資格を外国人目線でハック。日本語長文の「科目B」を母語感覚で解く<strong class="text-[#00f0ff]">6ステップ攻略法</strong>と身近な企業事例解説を公開中！
               </p>
             </div>
-            <div class="flex items-center justify-between pt-4 border-t border-slate-800 text-xs font-mono-code font-bold text-orange-400">
+            <div class="flex items-center justify-between pt-4 border-t border-slate-800/90 font-mono-code text-xs font-bold text-[#00f0ff]">
               <span>ipa.minami.ac.cn/ap</span>
-              <span>学習サイトへ →</span>
+              <span>CONNECT ▶</span>
             </div>
           </a>
 
           <a href="https://toeic.minami.ac.cn/" target="_blank" rel="noopener"
-             class="fun-card glow-cyan border border-slate-700/80 rounded-2xl p-6 flex flex-col justify-between">
+             class="cyber-card p-6 flex flex-col justify-between group">
             <div>
-              <div class="flex items-center justify-between mb-4">
-                <span class="px-2.5 py-1 rounded-lg bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 text-xs font-extrabold">🔥 公開中</span>
+              <div class="flex items-center justify-between mb-4 font-mono-code">
+                <span class="px-2.5 py-0.5 bg-[#00f0ff]/15 text-[#00f0ff] border border-[#00f0ff]/40 text-[11px] font-bold">NODE_02 // LIVE</span>
                 <span class="text-2xl">🌍</span>
               </div>
-              <h3 class="text-xl font-black text-white mb-2">TOEIC 実践対策ポータル</h3>
+              <h3 class="text-xl font-black text-white group-hover:text-[#00f0ff] transition mb-2">TOEIC 実践対策ポータル</h3>
               <p class="text-sm text-slate-300 leading-relaxed mb-4">
-                ITエンジニアや留学生が最短距離でスコアを伸ばすためのTOEIC対策ハブ。日系グローバル企業や外資系案件へのキャリアアップを後押しします。
+                ITエンジニアや留学生が最短距離でスコアを伸ばすためのTOEIC対策ハブ。日系グローバル企業や外資系案件へのキャリアアップを加速します。
               </p>
             </div>
-            <div class="flex items-center justify-between pt-4 border-t border-slate-800 text-xs font-mono-code font-bold text-teal-400">
+            <div class="flex items-center justify-between pt-4 border-t border-slate-800/90 font-mono-code text-xs font-bold text-[#00f0ff]">
               <span>toeic.minami.ac.cn</span>
-              <span>学習サイトへ →</span>
+              <span>CONNECT ▶</span>
             </div>
           </a>
 
           <a href="https://minami.ac.cn/" target="_blank" rel="noopener"
-             class="fun-card glow-purple border border-slate-700/80 rounded-2xl p-6 flex flex-col justify-between">
+             class="cyber-card p-6 flex flex-col justify-between group">
             <div>
-              <div class="flex items-center justify-between mb-4">
-                <span class="px-2.5 py-1 rounded-lg bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 text-xs font-extrabold">🔥 公開中</span>
+              <div class="flex items-center justify-between mb-4 font-mono-code">
+                <span class="px-2.5 py-0.5 bg-[#00f0ff]/15 text-[#00f0ff] border border-[#00f0ff]/40 text-[11px] font-bold">NODE_03 // LIVE</span>
                 <span class="text-2xl">✍️</span>
               </div>
-              <h3 class="text-xl font-black text-white mb-2">Minami 資格・技術ブログ</h3>
+              <h3 class="text-xl font-black text-white group-hover:text-[#00f0ff] transition mb-2">Minami 資格・技術ログ</h3>
               <p class="text-sm text-slate-300 leading-relaxed mb-4">
-                AWS SAP / CKS / RHCE / 宅建士など累計36資格の独学ロードマップ、試験体験記、在日キャリア戦略をすべて無料で発信しているナレッジベース。
+                AWS SAP / CKS / RHCE / 宅建士など累計36資格の独学ロードマップ、試験体験記、在日キャリア戦略をすべて無料でアーカイブした知識ベース。
               </p>
             </div>
-            <div class="flex items-center justify-between pt-4 border-t border-slate-800 text-xs font-mono-code font-bold text-purple-400">
+            <div class="flex items-center justify-between pt-4 border-t border-slate-800/90 font-mono-code text-xs font-bold text-[#00f0ff]">
               <span>minami.ac.cn</span>
-              <span>記事を読む →</span>
+              <span>READ_LOG ▶</span>
             </div>
           </a>
         </div>
 
-        <!-- 即将上线的学习工具（面向用户预告） -->
+        <!-- 即将上线节点 -->
         <div class="grid md:grid-cols-3 gap-5 pt-2">
-          <div onclick="openWipModal('🛡️ 情報処理安全確保支援士 (SC) 攻略', '応用情報(AP)合格後の次のステップとして、高度セキュリティ国家資格（スキルレベル4）の午後記述対策と多言語解説サイトを制作中です！')"
-               class="fun-card cursor-pointer border border-dashed border-slate-700 hover:border-amber-400/70 rounded-2xl p-5">
-            <div class="flex items-center justify-between mb-2">
-              <span class="px-2 py-0.5 rounded bg-amber-500/15 text-amber-300 text-[11px] font-bold">🚧 制作中</span>
+          <div onclick="openWipModal('🛡️ 情報処理安全確保支援士 (SC) 攻略', '応用情報(AP)合格後の次のステップとして、高度セキュリティ国家資格（スキルレベル4）の午後記述対策と多言語解説モジュールを構築中です。')"
+               class="cyber-card cursor-pointer border-dashed border-slate-700 hover:border-[#ff0055] p-5">
+            <div class="flex items-center justify-between mb-2 font-mono-code">
+              <span class="px-2 py-0.5 bg-[#ff0055]/15 text-[#ff0055] text-[10px] font-bold">BUILDING // SC_SEC</span>
               <span class="text-xl">🛡️</span>
             </div>
             <h4 class="text-base font-extrabold text-white mb-1">情報処理安全確保支援士 (SC)</h4>
             <p class="text-xs text-slate-400">高度セキュリティ国家資格の午後記述対策モジュール。</p>
           </div>
 
-          <div onclick="openWipModal('👁️ AI集中学習アシスタント', 'スマホを机に置くだけで、端末内のAIが視線や姿勢から集中度スコアを自動グラフ化。自分の集中しやすい時間帯がひと目で分かります！')"
-               class="fun-card cursor-pointer border border-dashed border-slate-700 hover:border-amber-400/70 rounded-2xl p-5">
-            <div class="flex items-center justify-between mb-2">
-              <span class="px-2 py-0.5 rounded bg-amber-500/15 text-amber-300 text-[11px] font-bold">🚧 開発中</span>
+          <div onclick="openWipModal('👁️ AI集中度トラッカー（Edge AI）', 'スマホを机に置くだけで、端末内のAIが視線や姿勢から集中度スコアをリアルタイム解析。サーバーに映像を送らないプライバシー保護設計です。')"
+               class="cyber-card cursor-pointer border-dashed border-slate-700 hover:border-[#ff0055] p-5">
+            <div class="flex items-center justify-between mb-2 font-mono-code">
+              <span class="px-2 py-0.5 bg-[#ff0055]/15 text-[#ff0055] text-[10px] font-bold">BUILDING // VISION_AI</span>
               <span class="text-xl">👁️</span>
             </div>
             <h4 class="text-base font-extrabold text-white mb-1">AI集中度トラッカー</h4>
-            <p class="text-xs text-slate-400">スマホ1台で学習の集中度と継続時間を自動可視化。</p>
+            <p class="text-xs text-slate-400">端末内AIで学習の集中度と継続時間をリアルタイム可視化。</p>
           </div>
 
-          <div onclick="openWipModal('🎬 タイムラプス学習ログ＆仲間監督', '勉強の様子をタイムラプス動画で記録して仲間とシェア！一人だとサボりがちな資格勉強も、同じ目標を持つ仲間と励まし合えば楽しく続きます。')"
-               class="fun-card cursor-pointer border border-dashed border-slate-700 hover:border-amber-400/70 rounded-2xl p-5">
-            <div class="flex items-center justify-between mb-2">
-              <span class="px-2 py-0.5 rounded bg-amber-500/15 text-amber-300 text-[11px] font-bold">🚧 開発中</span>
+          <div onclick="openWipModal('🎬 タイムラプス自習室', '勉強の様子をタイムラプス動画で記録して仲間とシェア！一人だとサボりがちな資格勉強も、同じ目標を持つ仲間と接続すれば楽しく続きます。')"
+               class="cyber-card cursor-pointer border-dashed border-slate-700 hover:border-[#ff0055] p-5">
+            <div class="flex items-center justify-between mb-2 font-mono-code">
+              <span class="px-2 py-0.5 bg-[#ff0055]/15 text-[#ff0055] text-[10px] font-bold">BUILDING // SYNC_ROOM</span>
               <span class="text-xl">🎬</span>
             </div>
             <h4 class="text-base font-extrabold text-white mb-1">タイムラプス自習室</h4>
-            <p class="text-xs text-slate-400">努力の軌跡をタイムラプスで記録し、仲間と継続。</p>
+            <p class="text-xs text-slate-400">努力の軌跡をタイムラプスで記録し、仲間と同期・継続。</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 4. 独创学习方法论：6ステップ攻略法 + 互动体验示例 -->
-    <section id="method" class="border-t border-slate-800/80 py-16">
+    <!-- 4. 独创学习方法论：6ステップ攻略プロトコル -->
+    <section id="method" class="border-t border-[#00f0ff]/15 py-16">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 space-y-8">
         <div>
-          <span class="font-mono-code text-xs font-bold uppercase tracking-widest text-teal-400">// STUDY METHODOLOGY</span>
+          <span class="font-mono-code text-xs font-bold tracking-widest text-[#ffe600]">// 02_DECODING_PROTOCOL</span>
           <h2 class="text-3xl font-black text-white mt-1">「日本語の壁」を突破する6ステップ攻略法</h2>
-          <p class="text-sm text-slate-400 mt-1">専門用語と長文読解が重なる日本の国家試験を、母語の直感でスッキリ理解するための学習メソッド。</p>
+          <p class="text-sm text-slate-400 mt-1">専門用語と長文読解が重なる日本の国家試験を、母語の直感でデコードする学習アルゴリズム。</p>
         </div>
 
-        <!-- 6步流程图 -->
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-          <div class="bg-[#131926] border border-slate-800 rounded-2xl p-4">
-            <div class="font-mono-code text-xs text-orange-400 font-bold">STEP 01</div>
+          <div class="cyber-card p-4">
+            <div class="font-mono-code text-xs text-[#00f0ff] font-bold">STEP_01</div>
             <div class="text-lg font-black text-white my-1">抽出</div>
             <p class="text-xs text-slate-400 leading-relaxed">問題文から解答に直結する専門知識だけを抜き出す</p>
           </div>
-          <div class="bg-[#131926] border border-slate-800 rounded-2xl p-4">
-            <div class="font-mono-code text-xs text-orange-400 font-bold">STEP 02</div>
+          <div class="cyber-card p-4">
+            <div class="font-mono-code text-xs text-[#00f0ff] font-bold">STEP_02</div>
             <div class="text-lg font-black text-white my-1">理解</div>
             <p class="text-xs text-slate-400 leading-relaxed">身近な企業や日常の例え話で直感的にイメージ化</p>
           </div>
-          <div class="bg-[#131926] border border-slate-800 rounded-2xl p-4">
-            <div class="font-mono-code text-xs text-orange-400 font-bold">STEP 03</div>
+          <div class="cyber-card p-4">
+            <div class="font-mono-code text-xs text-[#00f0ff] font-bold">STEP_03</div>
             <div class="text-lg font-black text-white my-1">通訳</div>
             <p class="text-xs text-slate-400 leading-relaxed">難解な日本語長文を一文ずつ母語で構造分解</p>
           </div>
-          <div class="bg-[#131926] border border-slate-800 rounded-2xl p-4">
-            <div class="font-mono-code text-xs text-orange-400 font-bold">STEP 04</div>
+          <div class="cyber-card p-4">
+            <div class="font-mono-code text-xs text-[#ff0055] font-bold">STEP_04</div>
             <div class="text-lg font-black text-white my-1">整理</div>
             <p class="text-xs text-slate-400 leading-relaxed">登場人物・システム構成・制約条件を頭の中で図解</p>
           </div>
-          <div class="bg-[#131926] border border-slate-800 rounded-2xl p-4">
-            <div class="font-mono-code text-xs text-orange-400 font-bold">STEP 05</div>
+          <div class="cyber-card p-4">
+            <div class="font-mono-code text-xs text-[#ff0055] font-bold">STEP_05</div>
             <div class="text-lg font-black text-white my-1">応用</div>
             <p class="text-xs text-slate-400 leading-relaxed">「なぜこの技術・戦略を選ぶのか」の根拠を言語化</p>
           </div>
-          <div class="bg-[#131926] border border-slate-800 rounded-2xl p-4">
-            <div class="font-mono-code text-xs text-orange-400 font-bold">STEP 06</div>
+          <div class="cyber-card p-4">
+            <div class="font-mono-code text-xs text-[#ffe600] font-bold">STEP_06</div>
             <div class="text-lg font-black text-white my-1">記述</div>
             <p class="text-xs text-slate-400 leading-relaxed">採点者に伝わる簡潔な日本語キーワードで回答作成</p>
           </div>
         </div>
 
-        <!-- 互动体验：看看怎么把枯燥考点变成秒懂案例 -->
-        <div class="bg-[#131926] border border-slate-700/80 rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <!-- 互动实战案例卡片 -->
+        <div class="cyber-card p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div class="space-y-2 max-w-2xl">
-            <span class="inline-block px-2.5 py-0.5 rounded bg-teal-500/15 text-teal-300 font-mono-code text-xs font-bold">💡 実際の解説サンプル（応用情報・経営戦略）</span>
-            <h3 class="text-lg font-black text-white">無味乾燥な「多角化戦略・負債リスク」も、リアルな企業事例なら一発で記憶に残る！</h3>
+            <span class="inline-block px-2.5 py-0.5 bg-[#ffe600]/15 text-[#ffe600] border border-[#ffe600]/40 font-mono-code text-xs font-bold">SAMPLE_DECODE // 応用情報・経営戦略</span>
+            <h3 class="text-lg font-black text-white">無味乾燥な「多角化戦略・負債リスク」も、リアルな企業事例なら一発で定着！</h3>
             <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              教科書通りの暗記ではなく、<strong>「中国・恒大集団の急拡大と資金繰り悪化」</strong>のような誰もが知るニュースと試験の専門用語（財務レバレッジ・事業ポートフォリオ）を結びつけて解説。だから忘れません。
+              教科書通りの暗記ではなく、<strong>「中国・恒大集団の急拡大と資金繰り悪化」</strong>のような誰もが知るリアルな事例と試験の専門用語（財務レバレッジ・事業ポートフォリオ）を直結させて解説。だから忘れません。
             </p>
           </div>
-          <a href="https://ipa.minami.ac.cn/ap" target="_blank" rel="noopener" class="px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 border border-orange-500/40 text-orange-300 text-xs font-extrabold whitespace-nowrap transition shrink-0">
-            応用情報サイトで実例を見る →
+          <a href="https://ipa.minami.ac.cn/ap" target="_blank" rel="noopener" class="px-5 py-3 cyber-btn bg-[#00f0ff]/15 hover:bg-[#00f0ff]/25 border border-[#00f0ff]/60 font-mono-code text-[#00f0ff] text-xs font-extrabold whitespace-nowrap shrink-0">
+            実例デモを見る ▶
           </a>
         </div>
       </div>
     </section>
 
     <!-- 5. 高度専門職（HSP）永住短縮ポイント試算器 -->
-    <section id="hsp" class="border-t border-slate-800/80 py-16">
+    <section id="hsp" class="border-t border-[#00f0ff]/15 py-16">
       <div class="max-w-5xl mx-auto px-4 sm:px-6">
-        <div class="bg-[#131926] border border-purple-500/35 rounded-3xl p-6 sm:p-10 shadow-2xl">
+        <div class="cyber-card p-6 sm:p-10 shadow-[0_0_45px_rgba(255,0,85,0.12)]">
           <div class="mb-6">
-            <span class="font-mono-code text-xs font-bold uppercase tracking-widest text-purple-400">// INTERACTIVE VISA TOOL</span>
+            <span class="font-mono-code text-xs font-bold tracking-widest text-[#ff0055]">// 03_HSP_VISA_SIMULATOR</span>
             <h2 class="text-2xl sm:text-3xl font-black text-white mt-1">⚡ 高度専門職（HSP）永住短縮ポイント試算</h2>
             <p class="text-sm text-slate-300 mt-1">
-              通常10年かかる日本の永住許可申請が、<strong class="text-orange-300">70点で3年</strong>、<strong class="text-teal-300">80点以上で最速1年</strong>に短縮！今のあなたのスコアを計算してみよう。
+              通常10年かかる日本の永住許可申請が、<strong class="text-[#ffe600]">70点で3年</strong>、<strong class="text-[#00f0ff]">80点以上で最速1年</strong>に短縮！今のスコアをシミュレーション。
             </p>
           </div>
 
           <div class="grid lg:grid-cols-12 gap-8 items-center">
             <div class="lg:col-span-7 grid sm:grid-cols-2 gap-4">
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-1.5">🎓 最終学歴</label>
-                <select id="hsp-edu" class="w-full bg-[#0b0f17] border border-slate-700 rounded-xl px-3 py-2.5 text-xs font-bold text-white outline-none focus:border-purple-400">
+                <label class="block font-mono-code text-xs font-bold text-slate-300 mb-1.5">🎓 EDUCATION // 最終学歴</label>
+                <select id="hsp-edu" class="w-full bg-[#05070e] border border-[#00f0ff]/35 px-3 py-2.5 text-xs font-bold text-white outline-none focus:border-[#00f0ff]">
                   <option value="30">博士号 (+30pt)</option>
                   <option value="20" selected>修士号 / MBA (+20pt)</option>
                   <option value="10">学士号 / 大学卒 (+10pt)</option>
@@ -395,8 +442,8 @@
               </div>
 
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-1.5">🎂 年齢（申請時点）</label>
-                <select id="hsp-age" class="w-full bg-[#0b0f17] border border-slate-700 rounded-xl px-3 py-2.5 text-xs font-bold text-white outline-none focus:border-purple-400">
+                <label class="block font-mono-code text-xs font-bold text-slate-300 mb-1.5">🎂 AGE // 申請時年齢</label>
+                <select id="hsp-age" class="w-full bg-[#05070e] border border-[#00f0ff]/35 px-3 py-2.5 text-xs font-bold text-white outline-none focus:border-[#00f0ff]">
                   <option value="15" selected>29歳以下 (+15pt)</option>
                   <option value="10">30〜34歳 (+10pt)</option>
                   <option value="5">35〜39歳 (+5pt)</option>
@@ -405,8 +452,8 @@
               </div>
 
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-1.5">💼 実務経験年数</label>
-                <select id="hsp-exp" class="w-full bg-[#0b0f17] border border-slate-700 rounded-xl px-3 py-2.5 text-xs font-bold text-white outline-none focus:border-purple-400">
+                <label class="block font-mono-code text-xs font-bold text-slate-300 mb-1.5">💼 CAREER // 実務経験</label>
+                <select id="hsp-exp" class="w-full bg-[#05070e] border border-[#00f0ff]/35 px-3 py-2.5 text-xs font-bold text-white outline-none focus:border-[#00f0ff]">
                   <option value="0">3年未満 (0pt)</option>
                   <option value="5" selected>3年以上 (+5pt)</option>
                   <option value="10">5年以上 (+10pt)</option>
@@ -416,8 +463,8 @@
               </div>
 
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-1.5">💴 見込み年収</label>
-                <select id="hsp-income" class="w-full bg-[#0b0f17] border border-slate-700 rounded-xl px-3 py-2.5 text-xs font-bold text-white outline-none focus:border-purple-400">
+                <label class="block font-mono-code text-xs font-bold text-slate-300 mb-1.5">💴 INCOME // 見込み年収</label>
+                <select id="hsp-income" class="w-full bg-[#05070e] border border-[#00f0ff]/35 px-3 py-2.5 text-xs font-bold text-white outline-none focus:border-[#00f0ff]">
                   <option value="10">400万〜500万円未満 (+10pt)</option>
                   <option value="15" selected>500万〜600万円未満 (+15pt)</option>
                   <option value="20">600万〜700万円未満 (+20pt)</option>
@@ -428,8 +475,8 @@
               </div>
 
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-1.5">🇯🇵 日本語能力（JLPT / BJT）</label>
-                <select id="hsp-jp" class="w-full bg-[#0b0f17] border border-slate-700 rounded-xl px-3 py-2.5 text-xs font-bold text-white outline-none focus:border-purple-400">
+                <label class="block font-mono-code text-xs font-bold text-slate-300 mb-1.5">🇯🇵 JAPANESE // 日本語能力</label>
+                <select id="hsp-jp" class="w-full bg-[#05070e] border border-[#00f0ff]/35 px-3 py-2.5 text-xs font-bold text-white outline-none focus:border-[#00f0ff]">
                   <option value="15" selected>JLPT N1 または BJT 480点以上 (+15pt)</option>
                   <option value="10">JLPT N2 (+10pt ※他加点条件あり)</option>
                   <option value="0">N3以下 / 未取得 (0pt)</option>
@@ -437,8 +484,8 @@
               </div>
 
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-1.5">💻 IT国家資格（FE / AP / 相互認証）</label>
-                <select id="hsp-it" class="w-full bg-[#0b0f17] border border-slate-700 rounded-xl px-3 py-2.5 text-xs font-bold text-white outline-none focus:border-purple-400">
+                <label class="block font-mono-code text-xs font-bold text-slate-300 mb-1.5">💻 IT_CERT // 国家資格加点</label>
+                <select id="hsp-it" class="w-full bg-[#05070e] border border-[#00f0ff]/35 px-3 py-2.5 text-xs font-bold text-white outline-none focus:border-[#00f0ff]">
                   <option value="10">複数保有（FE + AP 等） (+10pt)</option>
                   <option value="5" selected>1つ保有（基本情報 FE / 応用情報 AP） (+5pt)</option>
                   <option value="0">未取得 (0pt)</option>
@@ -446,27 +493,27 @@
               </div>
 
               <div class="sm:col-span-2 grid sm:grid-cols-2 gap-2.5 pt-1">
-                <label class="flex items-center gap-2 bg-[#0b0f17] border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs font-bold text-slate-200 cursor-pointer">
-                  <input type="checkbox" id="hsp-jpuni" checked class="accent-orange-500 w-4 h-4" />
-                  <span>🏫 日本の大学・大学院を卒業 (+10pt)</span>
+                <label class="flex items-center gap-2 bg-[#05070e] border border-slate-800 px-3.5 py-2.5 text-xs font-bold text-slate-200 cursor-pointer">
+                  <input type="checkbox" id="hsp-jpuni" checked class="accent-[#00f0ff] w-4 h-4" />
+                  <span>🏫 日本の大学・大学院卒 (+10pt)</span>
                 </label>
-                <label class="flex items-center gap-2 bg-[#0b0f17] border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs font-bold text-slate-200 cursor-pointer">
-                  <input type="checkbox" id="hsp-topuni" class="accent-orange-500 w-4 h-4" />
-                  <span>🌟 法務大臣告示の加点大学卒 (+10pt)</span>
+                <label class="flex items-center gap-2 bg-[#05070e] border border-slate-800 px-3.5 py-2.5 text-xs font-bold text-slate-200 cursor-pointer">
+                  <input type="checkbox" id="hsp-topuni" class="accent-[#ff0055] w-4 h-4" />
+                  <span>🌟 加点対象大学卒 (+10pt)</span>
                 </label>
               </div>
             </div>
 
-            <!-- 右侧得分结果 -->
-            <div class="lg:col-span-5 bg-[#0b0f17] border border-slate-800 rounded-2xl p-6 text-center space-y-4">
-              <div class="font-mono-code text-xs font-bold text-slate-400">YOUR HSP SCORE</div>
-              <div class="text-6xl font-black font-mono-code text-white">
-                <span id="hsp-score">80</span><span class="text-xl text-purple-400 ml-1">pt</span>
+            <!-- 右侧得分 HUD 面板 -->
+            <div class="lg:col-span-5 bg-[#05070e] border border-[#00f0ff]/35 p-6 text-center space-y-4">
+              <div class="font-mono-code text-xs font-bold text-[#00f0ff]">CALCULATED_SCORE</div>
+              <div class="text-6xl font-black font-mono-code text-white neon-text-cyan">
+                <span id="hsp-score">80</span><span class="text-xl text-[#ff0055] ml-1">PT</span>
               </div>
-              <div class="w-full h-3 bg-slate-800 rounded-full overflow-hidden">
-                <div id="hsp-bar" class="h-full w-full bg-gradient-to-r from-orange-500 via-pink-500 to-teal-400 transition-all duration-300"></div>
+              <div class="w-full h-2.5 bg-slate-900 overflow-hidden border border-slate-800">
+                <div id="hsp-bar" class="h-full w-full bg-gradient-to-r from-[#ff0055] via-[#ffe600] to-[#00f0ff] transition-all duration-300"></div>
               </div>
-              <div id="hsp-status" class="p-3 rounded-xl bg-teal-500/15 border border-teal-500/40 text-xs font-extrabold text-teal-300">
+              <div id="hsp-status" class="p-3 bg-[#00f0ff]/15 border border-[#00f0ff]/50 font-mono-code text-xs font-extrabold text-[#00f0ff]">
                 🏆 80pt達成！最速「1年」の在留で永住許可申請が可能です！
               </div>
               <p class="text-[11px] text-slate-500 leading-relaxed">
@@ -478,37 +525,37 @@
       </div>
     </section>
 
-    <!-- 6. 运营者・创作者档案（36资格筛选展示） -->
-    <section id="creator" class="border-t border-slate-800/80 py-16">
+    <!-- 6. 运营者・创作者档案（36资格矩阵） -->
+    <section id="creator" class="border-t border-[#00f0ff]/15 py-16">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 space-y-6">
         <div>
-          <span class="font-mono-code text-xs font-bold uppercase tracking-widest text-pink-400">// ABOUT THE CREATOR</span>
-          <h2 class="text-3xl font-black text-white mt-1">運営者プロフィール＆保有資格一覧</h2>
-          <p class="text-sm text-slate-400 mt-1">「次に同じことで困る人を減らしたい」——当事者としての独学経験から生まれた知識ポータル。</p>
+          <span class="font-mono-code text-xs font-bold tracking-widest text-[#00f0ff]">// 04_CREATOR_ARCHIVE</span>
+          <h2 class="text-3xl font-black text-white mt-1">運営者プロフィール＆保有資格マトリクス</h2>
+          <p class="text-sm text-slate-400 mt-1">「次に同じことで困る人を減らしたい」——当事者としての独学ログから生まれた公開ナレッジ。</p>
         </div>
 
-        <div class="bg-[#131926] border border-slate-700/80 rounded-3xl p-6 sm:p-8 space-y-6">
+        <div class="cyber-card p-6 sm:p-8 space-y-6">
           <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-slate-800">
             <div class="flex items-start gap-4">
-              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500 to-pink-500 flex items-center justify-center text-2xl shrink-0 shadow-lg">
+              <div class="w-14 h-14 cyber-btn bg-gradient-to-br from-[#00f0ff] to-[#ff0055] flex items-center justify-center text-2xl shrink-0">
                 👨‍💻
               </div>
               <div>
                 <h3 class="text-2xl font-black text-white">盧 易南（Minami）</h3>
                 <p class="text-sm text-slate-300 mt-1 leading-relaxed">
-                  2017年に来日し、日本語学校・高崎経済大学を経て日本の大手IT企業へ就職。働きながら立教大学大学院ビジネスデザイン研究科で学びつつ、3年間で<strong>累計36資格（公的・国家資格5種）</strong>を取得。自身の独学ノウハウを「誰でも使える公開資産」として発信中。
+                  2017年に来日し、日本語学校・高崎経済大学を経て日本の大手IT企業へ就職。働きながら立教大学大学院ビジネスデザイン研究科で学びつつ、3年間で<strong class="text-[#00f0ff]">累計36資格（公的・国家資格5種）</strong>を取得。独学ノウハウを「誰でも使える公開資産」として発信中。
                 </p>
               </div>
             </div>
 
             <div class="flex gap-3 shrink-0">
-              <div class="bg-[#0b0f17] border border-slate-800 rounded-2xl px-4 py-3 text-center">
-                <div class="text-2xl font-black font-mono-code text-orange-400">36</div>
-                <div class="text-[11px] text-slate-400">累計取得資格</div>
+              <div class="bg-[#05070e] border border-[#00f0ff]/40 px-4 py-3 text-center">
+                <div class="text-2xl font-black font-mono-code text-[#00f0ff]">36</div>
+                <div class="text-[11px] font-mono-code text-slate-400">TOTAL_CERTS</div>
               </div>
-              <div class="bg-[#0b0f17] border border-slate-800 rounded-2xl px-4 py-3 text-center">
-                <div class="text-2xl font-black font-mono-code text-teal-400">05</div>
-                <div class="text-[11px] text-slate-400">国家・公的資格</div>
+              <div class="bg-[#05070e] border border-[#ff0055]/40 px-4 py-3 text-center">
+                <div class="text-2xl font-black font-mono-code text-[#ff0055]">05</div>
+                <div class="text-[11px] font-mono-code text-slate-400">NATIONAL_ID</div>
               </div>
             </div>
           </div>
@@ -516,13 +563,13 @@
           <!-- 交互式资格分类过滤器 -->
           <div class="space-y-3">
             <div class="flex flex-wrap items-center justify-between gap-2">
-              <span class="text-xs font-extrabold text-slate-300">🗂️ 保有資格カテゴリ別フィルター：</span>
+              <span class="font-mono-code text-xs font-extrabold text-slate-300">FILTER_BY_DOMAIN // カテゴリ別：</span>
               <div class="flex flex-wrap gap-1.5" id="cert-filters">
-                <button data-cat="all" class="cert-filter-btn px-3 py-1 rounded-full text-xs font-bold bg-orange-500 text-white transition">すべて</button>
-                <button data-cat="national" class="cert-filter-btn px-3 py-1 rounded-full text-xs font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">🏅 国家・公的資格</button>
-                <button data-cat="cloud" class="cert-filter-btn px-3 py-1 rounded-full text-xs font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">☁️ Cloud / AWS / K8s</button>
-                <button data-cat="infra" class="cert-filter-btn px-3 py-1 rounded-full text-xs font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">🖥️ Infra / Linux</button>
-                <button data-cat="ai" class="cert-filter-btn px-3 py-1 rounded-full text-xs font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">🤖 AI / Dev / Mgmt</button>
+                <button data-cat="all" class="cert-filter-btn px-3 py-1 font-mono-code text-xs font-bold bg-[#00f0ff] text-[#05070e] transition">ALL</button>
+                <button data-cat="national" class="cert-filter-btn px-3 py-1 font-mono-code text-xs font-bold bg-[#05070e] border border-slate-700 text-slate-300 hover:border-[#00f0ff] transition">🏅 国家・公的資格</button>
+                <button data-cat="cloud" class="cert-filter-btn px-3 py-1 font-mono-code text-xs font-bold bg-[#05070e] border border-slate-700 text-slate-300 hover:border-[#00f0ff] transition">☁️ Cloud / K8s</button>
+                <button data-cat="infra" class="cert-filter-btn px-3 py-1 font-mono-code text-xs font-bold bg-[#05070e] border border-slate-700 text-slate-300 hover:border-[#00f0ff] transition">🖥️ Infra / Linux</button>
+                <button data-cat="ai" class="cert-filter-btn px-3 py-1 font-mono-code text-xs font-bold bg-[#05070e] border border-slate-700 text-slate-300 hover:border-[#00f0ff] transition">🤖 AI / Dev / Mgmt</button>
               </div>
             </div>
             <div id="cert-list" class="flex flex-wrap gap-2"></div>
@@ -532,23 +579,23 @@
     </section>
 
     <!-- 7. 学习社群入口：学搭俱乐部 -->
-    <section id="community" class="border-t border-slate-800/80 py-16">
+    <section id="community" class="border-t border-[#00f0ff]/15 py-16">
       <div class="max-w-5xl mx-auto px-4 sm:px-6">
-        <div class="bg-gradient-to-r from-indigo-950/85 via-[#131926] to-purple-950/75 border border-purple-500/35 rounded-3xl p-7 sm:p-9 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
+        <div class="cyber-card p-7 sm:p-9 flex flex-col md:flex-row items-center justify-between gap-6 border-[#ff0055]/45">
           <div class="space-y-2">
-            <div class="font-mono-code text-xs font-bold text-purple-300">STUDY BUDDY COMMUNITY</div>
+            <div class="font-mono-code text-xs font-bold text-[#ff0055]">// 05_PEER_NETWORK</div>
             <h3 class="text-2xl font-black text-white">🔥 南南伴你学！学搭俱乐部</h3>
             <p class="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-xl">
-              「一人で勉強するとスマホを見てしまう…」そんな仲間が集まる無料学習コミュニティ。応用情報・TOEICの無料オンライン勉強会や、毎日の学習打卡（チェックイン）を定期開催中！
+              「一人で勉強するとスマホを見てしまう…」そんな仲間が集まる無料学習コミュニティ。応用情報・TOEICの無料オンライン勉強会や、毎日の学習チェックインを定期開催中！
             </p>
           </div>
-          <div class="flex items-center gap-3 bg-[#0b0f17] border border-slate-700 rounded-2xl px-4 py-3 shrink-0">
+          <div class="flex items-center gap-3 bg-[#05070e] border border-[#00f0ff]/40 px-4 py-3 shrink-0">
             <div>
-              <span class="block text-[10px] font-mono-code text-slate-400">WECHAT ID</span>
-              <code id="wechat-id" class="text-sm font-mono-code font-bold text-teal-400">FocusLink_Minami</code>
+              <span class="block text-[10px] font-mono-code text-slate-400">WECHAT_ID</span>
+              <code id="wechat-id" class="text-sm font-mono-code font-bold text-[#00f0ff]">FocusLink_Minami</code>
             </div>
-            <button id="copy-btn" onclick="copyWeChat()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-teal-400 to-emerald-500 hover:from-teal-300 hover:to-emerald-400 text-slate-950 text-xs font-black transition active:scale-95">
-              コピー 📋
+            <button id="copy-btn" onclick="copyWeChat()" class="px-4 py-2 cyber-btn bg-[#00f0ff] hover:bg-[#33f3ff] text-[#05070e] font-mono-code text-xs font-black">
+              COPY 📋
             </button>
           </div>
         </div>
@@ -557,29 +604,29 @@
 
   </main>
 
-  <footer class="border-t border-slate-800/80 bg-[#080b11] py-10 text-center space-y-3">
-    <div class="inline-flex flex-wrap justify-center items-center gap-2 px-4 py-1.5 rounded-full bg-[#131926] border border-slate-800 font-mono-code text-xs font-bold text-teal-400">
-      <span>LEARN</span><span>→</span><span>TRUST</span><span>→</span><span>CAREER</span><span>→</span><span>SOCIETY</span>
+  <footer class="border-t border-[#00f0ff]/20 bg-[#03050a] py-10 text-center space-y-3">
+    <div class="inline-flex flex-wrap justify-center items-center gap-2 px-4 py-1.5 bg-[#0b101d] border border-[#00f0ff]/30 font-mono-code text-xs font-bold text-[#00f0ff]">
+      <span>LEARN</span><span>//</span><span>TRUST</span><span>//</span><span>CAREER</span><span>//</span><span>SOCIETY</span>
     </div>
     <p class="text-xs text-slate-400">
       FocusLink Portal — 在日外国人のための資格取得・キャリア学習プラットフォーム
     </p>
     <p class="text-[11px] font-mono-code text-slate-600">
-      © 2026 FocusLink (focuslink.minami.ac.cn)
+      © 2026 FOCUSLINK_SYSTEM (focuslink.minami.ac.cn)
     </p>
   </footer>
 
-  <!-- 预告功能弹窗 -->
-  <div id="wip-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/75 backdrop-blur-xs p-4">
-    <div class="bg-[#131926] border border-slate-700 rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4">
-      <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/30 text-xs font-bold">
-        🚧 近日公開予定の機能
+  <!-- 预告功能 HUD 弹窗 -->
+  <div id="wip-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-xs p-4">
+    <div class="cyber-card max-w-md w-full p-6 space-y-4 border-[#ff0055]">
+      <div class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#ff0055]/15 text-[#ff0055] border border-[#ff0055]/40 font-mono-code text-xs font-bold">
+        ◌ MODULE_IN_DEVELOPMENT
       </div>
       <h3 id="wip-title" class="text-lg font-black text-white"></h3>
       <p id="wip-desc" class="text-sm text-slate-300 leading-relaxed"></p>
       <div class="pt-2 flex justify-end">
-        <button onclick="closeWipModal()" class="px-5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold transition">
-          閉じる
+        <button onclick="closeWipModal()" class="px-5 py-2 cyber-btn bg-[#00f0ff] text-[#05070e] font-mono-code text-xs font-black">
+          CLOSE_HUD
         </button>
       </div>
     </div>
@@ -620,8 +667,8 @@
         .forEach(item => {
           const span = document.createElement("span");
           span.className = item.isNat
-            ? "px-2.5 py-1 rounded-lg font-mono-code text-[11px] font-bold bg-orange-500/15 border border-orange-500/40 text-orange-200"
-            : "px-2.5 py-1 rounded-lg font-mono-code text-[11px] bg-slate-800/90 border border-slate-700 text-slate-300";
+            ? "px-2.5 py-1 font-mono-code text-[11px] font-bold bg-[#ff0055]/15 border border-[#ff0055]/50 text-[#ff85a2]"
+            : "px-2.5 py-1 font-mono-code text-[11px] bg-[#05070e] border border-[#00f0ff]/25 text-slate-300";
           span.textContent = item.name;
           certListEl.appendChild(span);
         });
@@ -630,11 +677,11 @@
     filterBtns.forEach(btn => {
       btn.addEventListener("click", () => {
         filterBtns.forEach(b => {
-          b.classList.remove("bg-orange-500", "text-white");
-          b.classList.add("bg-slate-800", "text-slate-300");
+          b.classList.remove("bg-[#00f0ff]", "text-[#05070e]");
+          b.classList.add("bg-[#05070e]", "border", "border-slate-700", "text-slate-300");
         });
-        btn.classList.remove("bg-slate-800", "text-slate-300");
-        btn.classList.add("bg-orange-500", "text-white");
+        btn.classList.remove("bg-[#05070e]", "border", "border-slate-700", "text-slate-300");
+        btn.classList.add("bg-[#00f0ff]", "text-[#05070e]");
         renderCerts(btn.dataset.cat);
       });
     });
@@ -658,14 +705,14 @@
 
       const statusEl = document.getElementById("hsp-status");
       if (total >= 80) {
-        statusEl.className = "p-3 rounded-xl bg-teal-500/15 border border-teal-500/40 text-xs font-extrabold text-teal-300";
+        statusEl.className = "p-3 bg-[#00f0ff]/15 border border-[#00f0ff]/50 font-mono-code text-xs font-extrabold text-[#00f0ff]";
         statusEl.textContent = `🏆 ${total}pt達成！最速「1年」の在留で永住許可申請が可能です！`;
       } else if (total >= 70) {
-        statusEl.className = "p-3 rounded-xl bg-orange-500/15 border border-orange-500/40 text-xs font-extrabold text-orange-300";
+        statusEl.className = "p-3 bg-[#ffe600]/15 border border-[#ffe600]/50 font-mono-code text-xs font-extrabold text-[#ffe600]";
         statusEl.textContent = `🎉 ${total}pt達成！永住申請まで「3年」に短縮（あと${80 - total}ptで1年短縮）`;
       } else {
-        statusEl.className = "p-3 rounded-xl bg-slate-800/80 border border-slate-700 text-xs font-bold text-slate-300";
-        statusEl.textContent = `現在 ${total}pt（70ptまであと ${70 - total}pt！N1やIT国家資格で加点しよう 🔥）`;
+        statusEl.className = "p-3 bg-slate-900 border border-slate-700 font-mono-code text-xs font-bold text-slate-300";
+        statusEl.textContent = `現在 ${total}pt（70ptまであと ${70 - total}pt！N1やIT国家資格で加点しよう ⚡）`;
       }
     }
     hspFields.forEach(id => document.getElementById(id).addEventListener("change", calcHsp));
@@ -675,18 +722,18 @@
     setInterval(() => {
       const el = document.getElementById("live-focus");
       if (el) {
-        const val = (95.4 + Math.random() * 3.5).toFixed(1);
+        const val = (95.8 + Math.random() * 3.4).toFixed(1);
         el.textContent = val;
       }
-    }, 2600);
+    }, 2400);
 
     // 4. 复制微信号与弹窗
     function copyWeChat() {
       const id = document.getElementById("wechat-id").textContent;
       const btn = document.getElementById("copy-btn");
       navigator.clipboard.writeText(id).then(() => {
-        btn.textContent = "コピー完了 ✅";
-        setTimeout(() => btn.textContent = "コピー 📋", 1800);
+        btn.textContent = "COPIED ✅";
+        setTimeout(() => btn.textContent = "COPY 📋", 1800);
       });
     }
 
