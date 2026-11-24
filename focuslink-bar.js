@@ -1,11 +1,11 @@
 (function () {
     // ================= 1. 统一配置区 =================
     const FOCUSLINK_HOME = 'https://focuslink.minami.ac.cn/';
-    const FOCUSLINK_NOTICE = '新着：応用情報(AP)・TOEIC対策サイト公開中';
+    const FOCUSLINK_NOTICE = 'SYS.UPDATE // 応用情報(AP)・TOEICポータル稼働中';
 
     // wip: true 表示该站点/模块尚未开发，点击会弹出提示而不跳转
     const FOCUSLINK_SITES = [
-        { name: 'Portal',     url: 'https://focuslink.minami.ac.cn/', match: 'focuslink.',   wip: false, icon: '🔥' },
+        { name: 'Portal',     url: 'https://focuslink.minami.ac.cn/', match: 'focuslink.',   wip: false, icon: '⚡' },
         { name: '応用情報',   url: 'https://ipa.minami.ac.cn/ap',     match: '/ap',          wip: false, icon: '💻' },
         { name: '情報支援士', url: 'https://ipa.minami.ac.cn/sc',     match: '/sc',          wip: true,  icon: '🛡️' },
         { name: 'TOEIC',      url: 'https://toeic.minami.ac.cn/',     match: 'toeic.',       wip: false, icon: '🌍' },
@@ -21,12 +21,12 @@
     const style = document.createElement('style');
     style.textContent = `
         #focuslink-global-bar {
-            background: rgba(11, 15, 25, 0.94);
+            background: rgba(5, 7, 14, 0.95);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
             color: #cbd5e1;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            font-family: 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+            border-bottom: 1px solid rgba(0, 240, 255, 0.25);
+            font-family: 'JetBrains Mono', 'Inter', 'Noto Sans JP', monospace;
             font-size: 11px;
             line-height: 1;
             user-select: none;
@@ -35,7 +35,7 @@
             position: sticky;
             top: 0;
             z-index: 9999;
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+            box-shadow: 0 4px 24px rgba(0, 240, 255, 0.08);
         }
         #focuslink-global-bar * { box-sizing: border-box; }
         .fl-inner {
@@ -61,37 +61,33 @@
             color: #ffffff;
             text-decoration: none;
             font-weight: 900;
-            letter-spacing: 0.06em;
+            letter-spacing: 0.08em;
             text-transform: uppercase;
-            font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
             font-size: 12px;
         }
-        .fl-brand:hover { opacity: 0.92; }
+        .fl-brand:hover { color: #00f0ff; }
         .fl-dot {
             width: 8px;
             height: 8px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #ff6b35, #00f5d4);
-            box-shadow: 0 0 10px rgba(255, 107, 53, 0.85);
+            background: #00f0ff;
+            box-shadow: 0 0 10px #00f0ff;
             display: inline-block;
-            animation: flPulse 2s infinite ease-in-out;
+            animation: flPulse 1.8s infinite ease-in-out;
         }
         @keyframes flPulse {
             0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.25); opacity: 0.7; }
+            50% { transform: scale(1.25); opacity: 0.65; }
         }
         .fl-wip-banner {
             display: inline-flex;
             align-items: center;
             gap: 5px;
             padding: 3px 8px;
-            border-radius: 999px;
-            background: linear-gradient(90deg, rgba(249, 115, 22, 0.16), rgba(236, 72, 153, 0.16));
-            border: 1px solid rgba(249, 115, 22, 0.38);
-            color: #fdba74;
+            background: rgba(255, 0, 85, 0.12);
+            border: 1px solid rgba(255, 0, 85, 0.45);
+            color: #ff6b9d;
             font-size: 10px;
             font-weight: 700;
-            letter-spacing: 0.02em;
         }
         .fl-right-group {
             display: flex;
@@ -114,7 +110,6 @@
             align-items: center;
             gap: 5px;
             padding: 5px 10px;
-            border-radius: 7px;
             color: #cbd5e1;
             text-decoration: none;
             font-weight: 700;
@@ -124,44 +119,42 @@
             border: 1px solid transparent;
         }
         .fl-link:hover {
-            color: #ffffff;
-            background-color: rgba(30, 41, 59, 0.85);
-            border-color: rgba(255, 255, 255, 0.1);
+            color: #00f0ff;
+            background-color: rgba(0, 240, 255, 0.08);
+            border-color: rgba(0, 240, 255, 0.3);
         }
         .fl-link.active {
-            background: linear-gradient(135deg, rgba(249, 115, 22, 0.22), rgba(236, 72, 153, 0.22));
-            border-color: rgba(249, 115, 22, 0.55);
-            color: #ffffff;
-            box-shadow: 0 0 12px rgba(249, 115, 22, 0.25);
+            background: rgba(0, 240, 255, 0.14);
+            border-color: #00f0ff;
+            color: #00f0ff;
+            box-shadow: 0 0 12px rgba(0, 240, 255, 0.25);
         }
         .fl-link.is-wip {
             color: #64748b;
             cursor: not-allowed;
         }
         .fl-link.is-wip:hover {
-            color: #94a3b8;
-            background-color: rgba(30, 41, 59, 0.45);
+            color: #ff0055;
+            background-color: rgba(255, 0, 85, 0.08);
+            border-color: rgba(255, 0, 85, 0.3);
         }
         .fl-tag {
             font-size: 9px;
-            padding: 1px 5px;
-            border-radius: 4px;
-            background: #1e293b;
-            color: #94a3b8;
-            border: 1px solid #334155;
+            padding: 1px 4px;
+            background: rgba(255, 0, 85, 0.15);
+            color: #ff6b9d;
+            border: 1px solid rgba(255, 0, 85, 0.35);
         }
         .fl-badge-cert {
             display: none;
             align-items: center;
             gap: 4px;
             padding: 4px 8px;
-            border-radius: 6px;
-            background: rgba(0, 245, 212, 0.1);
-            border: 1px solid rgba(0, 245, 212, 0.3);
-            color: #5eead4;
-            font-family: 'JetBrains Mono', monospace;
+            background: rgba(255, 230, 0, 0.1);
+            border: 1px solid rgba(255, 230, 0, 0.45);
+            color: #ffe600;
             font-size: 10px;
-            font-weight: 700;
+            font-weight: 800;
             white-space: nowrap;
         }
         @media (min-width: 900px) {
@@ -174,15 +167,15 @@
             position: fixed;
             top: 48px;
             right: 16px;
-            background: rgba(15, 23, 42, 0.96);
+            background: rgba(5, 7, 14, 0.96);
             backdrop-filter: blur(10px);
-            color: #f8fafc;
-            border: 1px solid #f97316;
+            color: #00f0ff;
+            border: 1px solid #ff0055;
             padding: 10px 14px;
-            border-radius: 10px;
-            font-size: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
             font-weight: 700;
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.55);
+            box-shadow: 0 0 25px rgba(255, 0, 85, 0.35);
             z-index: 10000;
             opacity: 0;
             transform: translateY(-6px);
@@ -208,9 +201,9 @@
         const isActive = !site.wip && (isPortal || isBlog || isSubSite);
 
         if (site.wip) {
-            return `<a href="javascript:void(0)" class="fl-link is-wip" data-wip-name="${site.name}" title="現在準備中です">
+            return `<a href="javascript:void(0)" class="fl-link is-wip" data-wip-name="${site.name}" title="現在開発中です">
                 <span>${site.icon} ${site.name}</span>
-                <span class="fl-tag">準備中</span>
+                <span class="fl-tag">DEV</span>
             </a>`;
         }
 
@@ -237,7 +230,7 @@
                     <nav aria-label="FocusLink サイト切替" class="fl-nav">
                         ${linksHtml}
                     </nav>
-                    <span class="fl-badge-cert" title="運営者 累計取得資格数">🏆 36 CERTS</span>
+                    <span class="fl-badge-cert" title="運営者 累計取得資格数">🏆 36_CERTS</span>
                 </div>
             </div>
         </div>
@@ -269,8 +262,8 @@
                 const wipLink = e.target.closest('.fl-link.is-wip');
                 if (wipLink) {
                     e.preventDefault();
-                    const name = wipLink.getAttribute('data-wip-name') || 'このページ';
-                    showToast(`🚧 「${name}」モジュールは現在制作中です（近日公開予定）`);
+                    const name = wipLink.getAttribute('data-wip-name') || 'このモジュール';
+                    showToast(`[DEV_LOCK] 「${name}」モジュールは現在構築中です`);
                 }
             });
         }
