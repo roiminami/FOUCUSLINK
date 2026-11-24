@@ -1,7 +1,7 @@
 (function () {
     // ================= 1. 统一配置区 =================
     const FOCUSLINK_HOME = 'https://focuslink.minami.ac.cn/';
-    const FOCUSLINK_NOTICE = '2026 修士論文・事業計画公開中';
+    const FOCUSLINK_NOTICE = '新着：応用情報(AP)・TOEIC対策サイト公開中';
 
     // wip: true 表示该站点/模块尚未开发，点击会弹出提示而不跳转
     const FOCUSLINK_SITES = [
@@ -208,7 +208,7 @@
         const isActive = !site.wip && (isPortal || isBlog || isSubSite);
 
         if (site.wip) {
-            return `<a href="javascript:void(0)" class="fl-link is-wip" data-wip-name="${site.name}" title="現在開発中です">
+            return `<a href="javascript:void(0)" class="fl-link is-wip" data-wip-name="${site.name}" title="現在準備中です">
                 <span>${site.icon} ${site.name}</span>
                 <span class="fl-tag">準備中</span>
             </a>`;
@@ -237,7 +237,7 @@
                     <nav aria-label="FocusLink サイト切替" class="fl-nav">
                         ${linksHtml}
                     </nav>
-                    <span class="fl-badge-cert" title="運営者 盧易南 累計取得資格数">🏆 36 CERTS</span>
+                    <span class="fl-badge-cert" title="運営者 累計取得資格数">🏆 36 CERTS</span>
                 </div>
             </div>
         </div>
@@ -270,7 +270,7 @@
                 if (wipLink) {
                     e.preventDefault();
                     const name = wipLink.getAttribute('data-wip-name') || 'このページ';
-                    showToast(`🚧 「${name}」モジュールは現在開発中です（近日公開予定）`);
+                    showToast(`🚧 「${name}」モジュールは現在制作中です（近日公開予定）`);
                 }
             });
         }
