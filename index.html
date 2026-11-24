@@ -71,6 +71,23 @@
       filter: brightness(1.1);
     }
 
+    /* 自定义赛博 HUD 下拉框 */
+    .cyber-select {
+      appearance: none;
+      -webkit-appearance: none;
+      padding-right: 2.5rem;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2300f0ff' d='M2 4l4 4 4-4z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.85rem center;
+      background-size: 12px 12px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .cyber-select:hover,
+    .cyber-select:focus {
+      border-color: #00f0ff;
+      box-shadow: 0 0 14px rgba(0, 240, 255, 0.22);
+    }
+
     /* 克制单主色 HUD 卡片 + 四隅准星 */
     .cyber-card {
       position: relative;
@@ -241,10 +258,10 @@
             </p>
 
             <div class="flex flex-wrap items-center gap-4 pt-1">
-              <a href="#services" class="px-7 py-3.5 cyber-btn bg-[#00f0ff] text-[#05070e] font-mono-code text-sm font-black shadow-[0_0_24px_rgba(0,240,255,0.4)]">
+              <a href="#services" class="px-7 py-3.5 cyber-btn bg-[#00f0ff] text-[#05070e] font-mono-code text-sm font-black shadow-[0_0_24px_rgba(0,240,255,0.4)] whitespace-nowrap">
                 ▶ 学習ポータルへ接続
               </a>
-              <a href="#hsp" class="px-7 py-3.5 cyber-btn bg-[#090e1a] hover:bg-[#111a2e] text-[#ff4d8d] border border-[#ff4d8d]/55 font-mono-code text-sm font-extrabold">
+              <a href="#hsp" class="px-7 py-3.5 cyber-btn bg-[#090e1a] hover:bg-[#111a2e] text-[#ff4d8d] border border-[#ff4d8d]/55 font-mono-code text-sm font-extrabold whitespace-nowrap">
                 ⚡ 永住ポイント試算
               </a>
             </div>
@@ -318,8 +335,8 @@
             <p class="text-sm sm:text-[15px] text-slate-400 mt-1.5">独学の遠回りを排除するために構築された、実践特化型ナレッジ・ネットワーク。</p>
           </div>
           <div class="flex items-center gap-2.5 font-mono-code text-xs font-bold shrink-0">
-            <span class="px-3 py-1.5 bg-[#00f0ff]/10 text-[#00f0ff] border border-[#00f0ff]/40">● ONLINE_NOW</span>
-            <span class="px-3 py-1.5 bg-slate-900 text-slate-400 border border-slate-700">◌ IN_DEV</span>
+            <span class="px-3 py-1.5 bg-[#00f0ff]/10 text-[#00f0ff] border border-[#00f0ff]/40 whitespace-nowrap">● ONLINE_NOW</span>
+            <span class="px-3 py-1.5 bg-slate-900 text-slate-400 border border-slate-700 whitespace-nowrap">◌ IN_DEV</span>
           </div>
         </div>
 
@@ -420,7 +437,7 @@
       </div>
     </section>
 
-    <!-- 4. 独创学习方法论（清晰大字号 + 统一 3 行对齐） -->
+    <!-- 4. 独创学习方法论 -->
     <section id="method" class="pt-6 pb-20">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 space-y-8">
         <div class="cyber-ruler">00 ─── SECTOR_02 // AP_DECODING_PROTOCOL ─── 100</div>
@@ -528,7 +545,7 @@
                 出入国在留管理庁「高度専門・技術分野（1号ロ）」公式基準に完全準拠。<strong class="text-white">70点で3年</strong>、<strong class="text-[#00f0ff]">80点以上で最速1年</strong>での永住許可申請が可能になります。
               </p>
             </div>
-            <button type="button" onclick="resetHspDefault()" class="px-4 py-2 bg-[#05070e] hover:bg-slate-900 border border-slate-700 font-mono-code text-xs font-bold text-slate-300 self-start md:self-auto">
+            <button type="button" onclick="resetHspDefault()" class="px-4 py-2 bg-[#05070e] hover:bg-slate-900 border border-slate-700 hover:border-[#00f0ff]/50 font-mono-code text-xs font-bold text-slate-300 hover:text-[#00f0ff] self-start md:self-auto whitespace-nowrap shrink-0 transition">
               RESET_DEFAULT ↺
             </button>
           </div>
@@ -543,7 +560,7 @@
                 <div class="grid sm:grid-cols-2 gap-4">
                   <div>
                     <label class="block text-[13px] font-bold text-slate-200 mb-2">🎓 最終学歴</label>
-                    <select id="hsp-edu" class="w-full bg-[#05070e] border border-[#00f0ff]/35 px-3.5 py-3 text-[13px] font-bold text-white outline-none focus:border-[#00f0ff]">
+                    <select id="hsp-edu" class="cyber-select w-full bg-[#05070e] border border-[#00f0ff]/35 px-3.5 py-3 text-[13px] font-bold text-white outline-none">
                       <option value="30">博士号（技術経営(MOT)・MBA除く） (+30pt)</option>
                       <option value="20" selected>修士号 / 専門職学位 (MBA・MOT等) (+20pt)</option>
                       <option value="10">学士号（大学卒）または同等以上 (+10pt)</option>
@@ -553,7 +570,7 @@
 
                   <div>
                     <label class="block text-[13px] font-bold text-slate-200 mb-2">🎂 申請時の年齢</label>
-                    <select id="hsp-age" class="w-full bg-[#05070e] border border-[#00f0ff]/35 px-3.5 py-3 text-[13px] font-bold text-white outline-none focus:border-[#00f0ff]">
+                    <select id="hsp-age" class="cyber-select w-full bg-[#05070e] border border-[#00f0ff]/35 px-3.5 py-3 text-[13px] font-bold text-white outline-none">
                       <option value="15" selected>29歳以下 (+15pt)</option>
                       <option value="10">30歳〜34歳 (+10pt)</option>
                       <option value="5">35歳〜39歳 (+5pt)</option>
@@ -563,7 +580,7 @@
 
                   <div>
                     <label class="block text-[13px] font-bold text-slate-200 mb-2">💼 実務経験（従事しようとする業務）</label>
-                    <select id="hsp-exp" class="w-full bg-[#05070e] border border-[#00f0ff]/35 px-3.5 py-3 text-[13px] font-bold text-white outline-none focus:border-[#00f0ff]">
+                    <select id="hsp-exp" class="cyber-select w-full bg-[#05070e] border border-[#00f0ff]/35 px-3.5 py-3 text-[13px] font-bold text-white outline-none">
                       <option value="0">3年未満 (0pt)</option>
                       <option value="5" selected>3年以上 5年未満 (+5pt)</option>
                       <option value="10">5年以上 7年未満 (+10pt)</option>
@@ -574,7 +591,7 @@
 
                   <div>
                     <label class="block text-[13px] font-bold text-slate-200 mb-2">💴 契約機関からの見込み年収</label>
-                    <select id="hsp-income" class="w-full bg-[#05070e] border border-[#00f0ff]/35 px-3.5 py-3 text-[13px] font-bold text-white outline-none focus:border-[#00f0ff]">
+                    <select id="hsp-income" class="cyber-select w-full bg-[#05070e] border border-[#00f0ff]/35 px-3.5 py-3 text-[13px] font-bold text-white outline-none">
                       <option value="0">300万円未満（※高度専門職対象外）</option>
                       <option value="0_300">300万〜400万円未満 (0pt ※29歳以下のみ)</option>
                       <option value="10">400万〜500万円未満 (+10pt ※34歳以下のみ)</option>
@@ -595,7 +612,7 @@
                 <div class="grid sm:grid-cols-2 gap-4">
                   <div>
                     <label class="block text-[13px] font-bold text-slate-200 mb-2">🇯🇵 日本語能力（JLPT / BJT）</label>
-                    <select id="hsp-lang" class="w-full bg-[#05070e] border border-[#00f0ff]/35 px-3.5 py-3 text-[13px] font-bold text-white outline-none focus:border-[#00f0ff]">
+                    <select id="hsp-lang" class="cyber-select w-full bg-[#05070e] border border-[#00f0ff]/35 px-3.5 py-3 text-[13px] font-bold text-white outline-none">
                       <option value="15" selected>JLPT N1 / BJT 480点以上 / 外国大学日本語専攻 (+15pt)</option>
                       <option value="10">JLPT N2 / BJT 400点以上 ※日本大学卒と重複不可 (+10pt)</option>
                       <option value="0">該当なし (0pt)</option>
@@ -604,7 +621,7 @@
 
                   <div>
                     <label class="block text-[13px] font-bold text-slate-200 mb-2">💻 日本の国家資格（情報処理技術者試験 等）</label>
-                    <select id="hsp-cert" class="w-full bg-[#05070e] border border-[#00f0ff]/35 px-3.5 py-3 text-[13px] font-bold text-white outline-none focus:border-[#00f0ff]">
+                    <select id="hsp-cert" class="cyber-select w-full bg-[#05070e] border border-[#00f0ff]/35 px-3.5 py-3 text-[13px] font-bold text-white outline-none">
                       <option value="10">複数保有（例：基本情報FE ＋ 応用情報AP） (+10pt)</option>
                       <option value="5" selected>1つ保有（例：基本情報FE / 応用情報AP / 宅建等） (+5pt)</option>
                       <option value="0">保有なし (0pt)</option>
@@ -613,7 +630,7 @@
                 </div>
               </div>
 
-              <!-- C. 特別加算項目（100% 官方精准分值） -->
+              <!-- C. 特別加算項目 -->
               <div>
                 <div class="font-mono-code text-xs font-bold text-[#00f0ff] mb-3.5 tracking-wider">[C] BONUS_FACTORS // 特別加算項目（該当するものを選択）</div>
                 <div class="grid sm:grid-cols-2 gap-3">
@@ -792,7 +809,7 @@
               <span class="block text-[11px] font-mono-code text-slate-400">WECHAT_ID</span>
               <code id="wechat-id" class="text-base font-mono-code font-bold text-[#00f0ff]">FocusLink_Minami</code>
             </div>
-            <button id="copy-btn" onclick="copyWeChat()" class="px-4 py-2.5 cyber-btn bg-[#00f0ff] hover:bg-[#33f3ff] text-[#05070e] font-mono-code text-xs font-black">
+            <button id="copy-btn" onclick="copyWeChat()" class="px-4 py-2.5 cyber-btn bg-[#00f0ff] hover:bg-[#33f3ff] text-[#05070e] font-mono-code text-xs font-black whitespace-nowrap">
               COPY 📋
             </button>
           </div>
@@ -885,13 +902,41 @@
     });
     renderCerts("all");
 
-    // 2. 高度専門職（1号ロ）100% 真实法务省官方积分计算器
+    // 2. 高度専門職（1号ロ）100% 真实法务省官方积分计算器 + HUD 跳数动效
     const hspIds = [
       "hsp-edu", "hsp-age", "hsp-exp", "hsp-income",
       "hsp-lang", "hsp-cert",
       "hsp-jpuni", "hsp-topuni", "hsp-mba", "hsp-research",
       "hsp-innov", "hsp-rd", "hsp-dx", "hsp-jica"
     ];
+
+    let displayedScore = 85;
+    let scoreAnimFrame = null;
+
+    function animateScore(target) {
+      if (scoreAnimFrame) cancelAnimationFrame(scoreAnimFrame);
+      const start = displayedScore;
+      const diff = target - start;
+      if (diff === 0) {
+        document.getElementById("hsp-score").textContent = target;
+        return;
+      }
+      const duration = 240;
+      const startTime = performance.now();
+
+      function tick(now) {
+        const progress = Math.min((now - startTime) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        displayedScore = Math.round(start + diff * eased);
+        document.getElementById("hsp-score").textContent = displayedScore;
+        if (progress < 1) {
+          scoreAnimFrame = requestAnimationFrame(tick);
+        } else {
+          displayedScore = target;
+        }
+      }
+      scoreAnimFrame = requestAnimationFrame(tick);
+    }
 
     function calcHsp() {
       const edu = Number(document.getElementById("hsp-edu").value);
@@ -900,7 +945,6 @@
       const incomeRaw = document.getElementById("hsp-income").value;
       const income = incomeRaw === "0_300" ? 0 : Number(incomeRaw);
 
-      // 法务省最低年収门槛校验
       let minIncomeOk = true;
       let minReqText = "";
       if (incomeRaw === "0") {
@@ -919,14 +963,12 @@
 
       const basicTotal = edu + age + exp + income;
 
-      // 資格・日本語能力（含日本大学卒与N2不重复加算规则）
       const langRaw = Number(document.getElementById("hsp-lang").value);
       const jpUniChecked = document.getElementById("hsp-jpuni").checked;
       const langPts = (langRaw === 10 && jpUniChecked) ? 0 : langRaw;
       const certPts = Number(document.getElementById("hsp-cert").value);
       const qualLangTotal = langPts + certPts;
 
-      // 特別加算（博士・修士基础上MBA/MOT额外 +5pt、研究実績 +10pt）
       const jpUniPts = jpUniChecked ? 10 : 0;
       const topUniPts = document.getElementById("hsp-topuni").checked ? 10 : 0;
       const mbaChecked = document.getElementById("hsp-mba").checked;
@@ -940,7 +982,7 @@
       const bonusTotal = jpUniPts + topUniPts + mbaPts + researchPts + innovPts + rdPts + dxPts + jicaPts;
       const total = basicTotal + qualLangTotal + bonusTotal;
 
-      document.getElementById("hsp-score").textContent = total;
+      animateScore(total);
       document.getElementById("bd-basic").textContent = basicTotal + "pt";
       document.getElementById("bd-cert").textContent = qualLangTotal + "pt";
       document.getElementById("bd-bonus").textContent = bonusTotal + "pt";
