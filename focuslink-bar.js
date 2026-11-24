@@ -7,7 +7,7 @@
     const FOCUSLINK_SITES = [
         { name: '応用情報',   url: 'https://ipa.minami.ac.cn/ap', match: '/ap',          wip: false },
         { name: '情報支援士', url: 'https://ipa.minami.ac.cn/sc', match: '/sc',          wip: true  },
-        { name: 'TOEIC',      url: 'https://toeic.minami.ac.cn/', match: 'toeic.',       wip: true  },
+        { name: 'TOEIC',      url: 'https://toeic.minami.ac.cn/', match: 'toeic.',       wip: false },
         { name: 'ブログ',     url: 'https://minami.ac.cn/',       match: 'minami.ac.cn', wip: false }
     ];
     // ================================================
