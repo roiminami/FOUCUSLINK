@@ -1,28 +1,44 @@
 <!DOCTYPE html>
-<html lang="ja" class="dark">
+<html lang="ja" class="dark scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FocusLink | Minami 学習ポータル</title>
+    <title>FocusLink | Minami 学習・キャリア支援ポータル</title>
+    <meta name="description" content="孤独な学びを、共に成長する力へ。在日外国人・IT人材の資格突破（IPA応用情報・TOEIC・JLPT）、AI学習可視化、日本でのキャリア接続を支えるプラットフォーム。">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%2338bdf8'/%3E%3Cstop offset='100%25' stop-color='%2314b8a6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3Ctext x='16' y='22' font-family='sans-serif' font-weight='900' font-size='18' fill='white' text-anchor='middle'%3E南%3C/text%3E%3C/svg%3E">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&family=JetBrains+Mono:wght@600;700;800&display=swap');
 
+        :root {
+            --bg-main: #07090F;
+            --bg-card: #111622;
+            --border-base: #263044;
+        }
+
         body {
             font-family: 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: #07090F;
+            background-color: var(--bg-main);
             color: #F8FAFC;
+            background-image:
+                radial-gradient(circle at 15% 0%, rgba(56, 189, 248, 0.12), transparent 38%),
+                radial-gradient(circle at 85% 10%, rgba(45, 212, 191, 0.10), transparent 36%),
+                linear-gradient(rgba(38, 48, 68, 0.18) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(38, 48, 68, 0.18) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
         }
+
         .font-mono-code {
             font-family: 'JetBrains Mono', monospace;
         }
+
+        /* Neo-Brutalist Hard Cards */
         .hard-card {
             background-color: #111622;
             border: 2px solid #263044;
             box-shadow: 5px 5px 0px #020408;
-            transition: transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease;
+            transition: transform 150ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 150ms ease, border-color 150ms ease;
         }
         .hard-card:hover {
             transform: translate(-2px, -2px);
@@ -37,6 +53,11 @@
             box-shadow: 7px 7px 0px #2dd4bf;
             border-color: #2dd4bf;
         }
+        .hard-card-rose:hover {
+            box-shadow: 7px 7px 0px #fb7185;
+            border-color: #fb7185;
+        }
+
         .hard-flagship {
             background: linear-gradient(135deg, #121929 0%, #171530 55%, #0e2229 100%);
             border: 2px solid #38bdf8;
@@ -48,6 +69,8 @@
             box-shadow: 10px 10px 0px #facc15;
             border-color: #facc15;
         }
+
+        /* Buttons */
         .hard-btn-yellow {
             background-color: #facc15;
             color: #07090F;
@@ -72,83 +95,190 @@
             transform: translate(1px, 1px);
             box-shadow: 2px 2px 0px #020408;
         }
+
+        /* Interactive Chip Toggle */
+        .pt-chip {
+            border: 2px solid #263044;
+            background: #0b0f19;
+            transition: all 140ms ease;
+        }
+        .pt-chip.active {
+            border-color: #2dd4bf;
+            background: rgba(45, 212, 191, 0.14);
+            color: #ffffff;
+            box-shadow: 3px 3px 0px #2dd4bf;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-amber-300 selection:text-slate-950">
 
-    <!-- 顶部全局导航栏 -->
+    <!-- 兼容原有全局导航栏脚本 -->
     <div id="focuslink-bar-root"></div>
 
+    <!-- 顶部粘性导航栏 -->
+    <header class="sticky top-0 z-40 backdrop-blur-md bg-[#07090F]/85 border-b-2 border-slate-800/90">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+            <a href="#" class="flex items-center gap-2.5 group">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-400 to-teal-300 text-slate-950 border-2 border-slate-950 flex items-center justify-center font-black text-lg shadow-[3px_3px_0px_#020408] group-hover:-translate-y-0.5 transition-transform">
+                    南
+                </div>
+                <div class="flex flex-col leading-none">
+                    <span class="font-black text-base tracking-tight text-white">FocusLink</span>
+                    <span class="text-[10px] font-mono-code font-bold text-sky-400">MINAMI PORTAL</span>
+                </div>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-6 text-xs font-extrabold text-slate-300">
+                <a href="#modules" class="hover:text-sky-300 transition-colors">学習モジュール</a>
+                <a href="#visa-sim" class="hover:text-teal-300 transition-colors">永住ポイント試算</a>
+                <a href="#solution" class="hover:text-amber-300 transition-colors">AI×コミュニティ</a>
+                <a href="#about" class="hover:text-white transition-colors">運営者・実績</a>
+                <a href="#enterprise" class="hover:text-rose-300 transition-colors">採用企業様へ</a>
+            </nav>
+
+            <div class="flex items-center gap-2.5">
+                <a href="https://ipa.minami.ac.cn/ap" class="hard-btn-yellow text-xs font-black px-3.5 py-2 rounded-xl inline-flex items-center gap-1.5">
+                    <span>科目B 速攻へ</span>
+                    <i data-lucide="zap" class="w-3.5 h-3.5 fill-slate-950"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
     <!-- 主内容区 -->
-    <main class="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 py-10 sm:py-14 flex flex-col gap-12">
+    <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-10 sm:py-16 flex flex-col gap-16 sm:gap-20">
 
-        <!-- 1. Hero：融合 PPT 核心立意（孤独な学びを、共に成長する力へ） -->
-        <section class="flex flex-col items-center text-center gap-4">
-            <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-sky-400/10 border-2 border-sky-400/40 text-sky-300 text-xs font-extrabold tracking-wider uppercase">
-                <span class="w-2 h-2 rounded-full bg-teal-300 animate-ping"></span>
-                <span>FOCUSLINK · LEARN → TRUST → CAREER</span>
+        <!-- 1. HERO SECTION -->
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+            <!-- 左侧文案 -->
+            <div class="lg:col-span-6 flex flex-col items-start gap-5">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-400/10 border-2 border-sky-400/40 text-sky-300 text-[11px] font-extrabold tracking-wider uppercase">
+                    <span class="w-2 h-2 rounded-full bg-teal-300 animate-ping"></span>
+                    <span>FOCUSLINK · LEARN → TRUST → CAREER</span>
+                </div>
+
+                <h1 class="text-4xl sm:text-5xl font-black tracking-tight leading-[1.14] text-white">
+                    孤独な学びを、<br>
+                    <span class="px-2.5 py-0.5 bg-sky-400 text-slate-950 rounded-lg inline-block -rotate-1 mt-1">共に成長する力</span>へ。
+                </h1>
+
+                <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+                    在日外国人・IT人材の<strong class="text-white">資格突破（IPA・TOEIC・JLPT）</strong>、AIによる<strong class="text-teal-300">学習プロセスの可視化</strong>、そして日本企業での<strong class="text-amber-300">就職・永住権早期化</strong>を一貫支援する学習ポータル。
+                </p>
+
+                <div class="flex flex-wrap items-center gap-3 pt-1 w-full sm:w-auto">
+                    <a href="https://ipa.minami.ac.cn/ap" class="hard-btn-yellow inline-flex items-center justify-center gap-2 font-black text-xs sm:text-sm px-5 py-3 rounded-xl">
+                        <span>科目B 速攻演習を始める</span>
+                        <i data-lucide="zap" class="w-4 h-4 fill-slate-950"></i>
+                    </a>
+                    <a href="#visa-sim" class="hard-card inline-flex items-center justify-center gap-2 text-teal-300 font-extrabold text-xs sm:text-sm px-4 py-3 rounded-xl">
+                        <i data-lucide="calculator" class="w-4 h-4"></i>
+                        <span>永住ポイント試算</span>
+                    </a>
+                    <a href="https://www.youtube.com/playlist?list=PLI9LZ_5sMCR4" target="_blank" rel="noopener noreferrer" class="hard-card hard-card-rose inline-flex items-center justify-center gap-2 text-slate-200 font-extrabold text-xs sm:text-sm px-4 py-3 rounded-xl">
+                        <i data-lucide="play-circle" class="w-4 h-4 text-rose-400"></i>
+                        <span>YouTube解説</span>
+                    </a>
+                </div>
+
+                <!-- 关键指标条 -->
+                <div class="grid grid-cols-3 gap-3 w-full pt-3 border-t border-slate-800/90">
+                    <div>
+                        <div class="text-xl sm:text-2xl font-black font-mono-code text-sky-400">36<span class="text-xs text-slate-400 ml-0.5">資格</span></div>
+                        <div class="text-[11px] text-slate-400 font-semibold">運営者の独学合格実績</div>
+                    </div>
+                    <div>
+                        <div class="text-xl sm:text-2xl font-black font-mono-code text-teal-300">最速1年</div>
+                        <div class="text-[11px] text-slate-400 font-semibold">80pt達成で永住申請</div>
+                    </div>
+                    <div>
+                        <div class="text-xl sm:text-2xl font-black font-mono-code text-amber-300">厳選5分野</div>
+                        <div class="text-[11px] text-slate-400 font-semibold">科目B 論理速攻メソッド</div>
+                    </div>
+                </div>
             </div>
 
-            <h1 class="text-3xl sm:text-5xl font-black tracking-tight leading-[1.16] max-w-3xl">
-                孤独な学びを、<br class="sm:hidden">
-                <span class="px-2 py-0.5 bg-sky-400 text-slate-950 rounded-md inline-block -rotate-1">共に成長する力</span>へ。
-            </h1>
-
-            <p class="text-xs sm:text-sm text-slate-400 max-w-2xl leading-relaxed">
-                在日外国人・IT人材の資格突破、学習の習慣化・可視化、そして日本でのキャリア接続を支える学習ポータル。
-                <strong class="text-white font-bold">「わかる状態」をつくり、努力を確かな資産に変える。</strong>
-            </p>
-
-            <div class="flex flex-wrap items-center justify-center gap-3 pt-1">
-                <a href="https://ipa.minami.ac.cn/ap" class="hard-btn-yellow inline-flex items-center gap-2 font-black text-xs sm:text-sm px-5 py-2.5 rounded-xl">
-                    <span>科目B 速攻演習を始める</span>
-                    <i data-lucide="zap" class="w-4 h-4 fill-slate-950"></i>
-                </a>
-                <a href="https://www.youtube.com/playlist?list=PLI9LZ_5sMCR4" target="_blank" rel="noopener noreferrer" class="hard-card inline-flex items-center gap-2 text-slate-200 font-extrabold text-xs sm:text-sm px-4 py-2.5 rounded-xl">
-                    <i data-lucide="play-circle" class="w-4 h-4 text-rose-400"></i>
-                    <span>YouTube解説一覧</span>
-                </a>
+            <!-- 右侧视觉看板预览图（存放在 ./img/focuslink-ai-dashboard.jpg） -->
+            <div class="lg:col-span-6">
+                <div class="hard-flagship rounded-2xl p-2.5 sm:p-3 relative overflow-hidden">
+                    <div class="flex items-center justify-between px-2 pb-2 text-[11px] font-mono-code text-slate-400">
+                        <div class="flex items-center gap-1.5">
+                            <span class="w-2.5 h-2.5 rounded-full bg-rose-400"></span>
+                            <span class="w-2.5 h-2.5 rounded-full bg-amber-300"></span>
+                            <span class="w-2.5 h-2.5 rounded-full bg-teal-300"></span>
+                            <span class="ml-2 text-slate-300 font-bold">focuslink.app / ai-analytics</span>
+                        </div>
+                        <span class="text-teal-300 font-bold">● EDGE AI LIVE</span>
+                    </div>
+                    <div class="rounded-xl overflow-hidden border border-slate-700/80 bg-[#07090F] aspect-video relative">
+                        <img
+                            src="./img/focuslink-ai-dashboard.jpg"
+                            alt="FocusLink AI 学習・集中度解析ダッシュボード"
+                            class="w-full h-full object-cover"
+                            onerror="this.style.display='none'; document.getElementById('hero-img-fallback').style.display='flex';"
+                        >
+                        <!-- 图片未放置时的优雅降级 -->
+                        <div id="hero-img-fallback" style="display:none;" class="absolute inset-0 flex-col items-center justify-center p-6 text-center bg-gradient-to-br from-[#0e172a] to-[#07090F]">
+                            <i data-lucide="activity" class="w-10 h-10 text-sky-400 mb-2"></i>
+                            <p class="text-sm font-black text-white">FocusLink AI 学習可視化ダッシュボード</p>
+                            <p class="text-xs text-slate-400 mt-1 font-mono-code">./img/focuslink-ai-dashboard.jpg を配置すると表示されます</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- 2. 四つの壁を突破するアプローチ（PPT 課題分析 × 解決の視点） -->
-        <section class="grid grid-cols-2 lg:grid-cols-4 gap-3.5">
-            <div class="bg-[#111622]/90 border border-slate-800 rounded-xl p-4 flex flex-col gap-1.5">
-                <span class="text-[10px] font-black font-mono-code text-sky-400">01 / 情報の壁</span>
-                <h2 class="text-sm font-black text-white">迷わず選べる入口</h2>
-                <p class="text-[11px] text-slate-400 leading-relaxed">分散しがちな対策情報・演習・体験記を一箇所に整理。</p>
-            </div>
-            <div class="bg-[#111622]/90 border border-slate-800 rounded-xl p-4 flex flex-col gap-1.5">
-                <span class="text-[10px] font-black font-mono-code text-teal-300">02 / 言語の壁</span>
-                <h2 class="text-sm font-black text-white">「解ける前提」をつくる</h2>
-                <p class="text-[11px] text-slate-400 leading-relaxed">専門用語や読解のハードルを噛み砕き、論理から理解。</p>
-            </div>
-            <div class="bg-[#111622]/90 border border-slate-800 rounded-xl p-4 flex flex-col gap-1.5">
-                <span class="text-[10px] font-black font-mono-code text-amber-300">03 / 継続の壁</span>
-                <h2 class="text-sm font-black text-white">習慣と記録の見える化</h2>
-                <p class="text-[11px] text-slate-400 leading-relaxed">日々の学習ステップと進捗を積み上げ、挫折を防ぐ。</p>
-            </div>
-            <div class="bg-[#111622]/90 border border-slate-800 rounded-xl p-4 flex flex-col gap-1.5">
-                <span class="text-[10px] font-black font-mono-code text-rose-400">04 / つながりの壁</span>
-                <h2 class="text-sm font-black text-white">伴走とキャリア接続</h2>
-                <p class="text-[11px] text-slate-400 leading-relaxed">同じ目標の仲間とつながり、成長をキャリアへつなぐ。</p>
-            </div>
-        </section>
-
-        <!-- 3. 核心学習モジュール（旗舰主推 + 3个专项/博客入口） -->
+        <!-- 2. 四つの壁を突破するアプローチ -->
         <section class="flex flex-col gap-4">
             <div class="flex items-center justify-between px-1">
-                <h2 class="text-xs font-black uppercase tracking-widest text-amber-300 font-mono-code">
-                    // LEARNING & CAREER MODULES
+                <h2 class="text-xs font-black uppercase tracking-widest text-sky-400 font-mono-code">
+                    // 01. BREAKING THE 4 BARRIERS
                 </h2>
-                <span class="text-[11px] text-slate-500 font-mono-code">STEP 01 - 02</span>
+                <span class="text-[11px] text-slate-500 font-mono-code">当事者視点の課題解決</span>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="hard-card rounded-2xl p-5 flex flex-col gap-2">
+                    <span class="text-[11px] font-black font-mono-code text-sky-400">01 / 情報の壁</span>
+                    <h3 class="text-base font-black text-white">迷わず選べる入口</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">分散しがちな試験対策・ビザ加点情報・体験記を一箇所に体系化。</p>
+                </div>
+                <div class="hard-card hard-card-teal rounded-2xl p-5 flex flex-col gap-2">
+                    <span class="text-[11px] font-black font-mono-code text-teal-300">02 / 言語の壁</span>
+                    <h3 class="text-base font-black text-white">「解ける前提」をつくる</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">専門用語や長文読解の壁を噛み砕き、馴染みある具体例から論理理解。</p>
+                </div>
+                <div class="hard-card hard-card-amber rounded-2xl p-5 flex flex-col gap-2">
+                    <span class="text-[11px] font-black font-mono-code text-amber-300">03 / 継続の壁</span>
+                    <h3 class="text-base font-black text-white">習慣と記録の見える化</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">エッジAI集中解析とタイムラプス記録で、日々の努力を挫折させない。</p>
+                </div>
+                <div class="hard-card hard-card-rose rounded-2xl p-5 flex flex-col gap-2">
+                    <span class="text-[11px] font-black font-mono-code text-rose-400">04 / つながりの壁</span>
+                    <h3 class="text-base font-black text-white">伴走とキャリア接続</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">相互監督コミュニティと学習ログ証明で、日本企業への就職・定着へ直結。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 核心学習モジュール (BENTO GRID) -->
+        <section id="modules" class="flex flex-col gap-5 scroll-mt-20">
+            <div class="flex items-center justify-between flex-wrap gap-2 px-1">
+                <div>
+                    <h2 class="text-xs font-black uppercase tracking-widest text-amber-300 font-mono-code">
+                        // 02. LEARNING & EXAM MODULES
+                    </h2>
+                    <p class="text-lg sm:text-xl font-black text-white mt-1">目的別・速攻学習ポータル</p>
+                </div>
+                <span class="text-[11px] font-mono-code text-teal-300 bg-teal-400/10 border border-teal-400/30 px-3 py-1 rounded-full">
+                    2027年 新IPA試験制度（CBT）対応準備中
+                </span>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div class="grid grid-cols-1 md:grid-cols-6 gap-5">
 
-                <!-- ★ 主推旗舰卡片 -->
-                <a href="https://ipa.minami.ac.cn/ap" class="md:col-span-3 hard-flagship group rounded-2xl p-6 sm:p-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-                    <div class="flex flex-col gap-3 max-w-2xl">
+                <!-- ★ 主推旗舰卡片：応用情報技術者試験（科目B） -->
+                <a href="https://ipa.minami.ac.cn/ap" class="md:col-span-6 hard-flagship group rounded-2xl p-6 sm:p-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+                    <div class="flex flex-col gap-3.5 max-w-2xl">
                         <div class="flex items-center flex-wrap gap-2">
                             <span class="inline-flex items-center gap-1 text-[11px] font-black bg-amber-300 text-slate-950 border border-slate-950 px-2.5 py-0.5 rounded-md">
                                 ★ メインコンテンツ・公開中
@@ -156,24 +286,28 @@
                             <span class="text-[11px] font-bold text-teal-300 bg-teal-400/10 border border-teal-400/30 px-2.5 py-0.5 rounded-md font-mono-code">
                                 IPA 応用情報技術者試験（科目B）
                             </span>
+                            <span class="text-[11px] font-bold text-sky-300 bg-sky-400/10 border border-sky-400/30 px-2.5 py-0.5 rounded-md">
+                                技人国ビザ特例・高度人材加点対象
+                            </span>
                         </div>
 
-                        <div class="flex items-center gap-3">
+                        <div class="flex items-center gap-3.5">
                             <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-sky-400 to-teal-300 text-slate-950 border-2 border-slate-950 flex items-center justify-center font-black text-2xl shrink-0">
                                 南
                             </div>
-                            <h3 class="text-xl sm:text-2xl font-black tracking-tight text-white group-hover:text-amber-300 transition-colors">
+                            <h3 class="text-2xl sm:text-3xl font-black tracking-tight text-white group-hover:text-amber-300 transition-colors">
                                 南式応用情報速攻！（科目B）
                             </h3>
                         </div>
 
                         <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                            全12分野から文系・実務未経験でも得点源にしやすい<strong class="text-teal-300 font-black">厳選5分野</strong>に特化。過去問の論理的分析ノートとYouTube動画解説をワンクリックで往復できる速攻学習ポータル。
+                            全12分野から文系・実務未経験でも得点源にしやすい<strong class="text-teal-300 font-black">厳選5分野</strong>に特化。
+                            単なる解答解説ではなく、<strong class="text-white">「抽出 → 理解 → 通訳 → 整理 → 応用 → 記述」</strong>の6ステップで過去問の論理的分析ノートとYouTube解説をワンクリック往復。
                         </p>
                     </div>
 
-                    <div class="shrink-0 w-full sm:w-auto flex sm:flex-col items-center sm:items-end justify-between gap-3">
-                        <span class="hard-btn-teal inline-flex items-center gap-2 font-black text-xs sm:text-sm px-5 py-2.5 rounded-xl">
+                    <div class="shrink-0 w-full lg:w-auto flex lg:flex-col items-center lg:items-end justify-between gap-3 pt-2 lg:pt-0 border-t lg:border-t-0 border-slate-700/60">
+                        <span class="hard-btn-teal inline-flex items-center gap-2 font-black text-xs sm:text-sm px-6 py-3 rounded-xl">
                             <span>今すぐ学習を始める</span>
                             <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
                         </span>
@@ -182,7 +316,7 @@
                 </a>
 
                 <!-- 卡片 2：情報処理安全確保支援士 -->
-                <a href="https://ipa.minami.ac.cn/sc" class="hard-card group rounded-2xl p-5 flex flex-col justify-between gap-4">
+                <a href="https://ipa.minami.ac.cn/sc" class="md:col-span-2 hard-card group rounded-2xl p-5 flex flex-col justify-between gap-4">
                     <div class="flex items-start justify-between gap-3">
                         <div class="w-11 h-11 rounded-xl bg-sky-400/15 border-2 border-sky-400/40 text-sky-300 flex items-center justify-center shrink-0">
                             <i data-lucide="shield-check" class="w-5 h-5"></i>
@@ -190,7 +324,7 @@
                         <span class="text-[10px] font-extrabold bg-slate-800 text-slate-200 border border-slate-600 px-2 py-0.5 rounded-md">高度試験・順次公開</span>
                     </div>
                     <div>
-                        <h3 class="text-base font-black text-white group-hover:text-sky-300 transition-colors">情報処理安全確保支援士</h3>
+                        <h3 class="text-base font-black text-white group-hover:text-sky-300 transition-colors">情報処理安全確保支援士 (SC)</h3>
                         <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">高度区分セキュリティスペシャリスト対策ノート・午後問題パターン分析。</p>
                     </div>
                     <div class="flex items-center justify-between text-xs font-extrabold text-sky-300 pt-2.5 border-t border-slate-800">
@@ -200,7 +334,7 @@
                 </a>
 
                 <!-- 卡片 3：TOEIC 速攻トレーニング -->
-                <a href="https://toeic.minami.ac.cn/" class="hard-card hard-card-amber group rounded-2xl p-5 flex flex-col justify-between gap-4">
+                <a href="https://toeic.minami.ac.cn/" class="md:col-span-2 hard-card hard-card-amber group rounded-2xl p-5 flex flex-col justify-between gap-4">
                     <div class="flex items-start justify-between gap-3">
                         <div class="w-11 h-11 rounded-xl bg-amber-300/15 border-2 border-amber-300/40 text-amber-300 flex items-center justify-center shrink-0">
                             <i data-lucide="languages" class="w-5 h-5"></i>
@@ -218,7 +352,7 @@
                 </a>
 
                 <!-- 卡片 4：Minami Tech & Study Blog -->
-                <a href="https://minami.ac.cn/" class="hard-card hard-card-teal group rounded-2xl p-5 flex flex-col justify-between gap-4">
+                <a href="https://minami.ac.cn/" class="md:col-span-2 hard-card hard-card-teal group rounded-2xl p-5 flex flex-col justify-between gap-4">
                     <div class="flex items-start justify-between gap-3">
                         <div class="w-11 h-11 rounded-xl bg-teal-300/15 border-2 border-teal-300/40 text-teal-300 flex items-center justify-center shrink-0">
                             <i data-lucide="book-open" class="w-5 h-5"></i>
@@ -227,7 +361,7 @@
                     </div>
                     <div>
                         <h3 class="text-base font-black text-white group-hover:text-teal-300 transition-colors">Minami Tech & Study Blog</h3>
-                        <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">日本でのITキャリア、資格合格体験記、学習メソッドを発信する公式ブログ。</p>
+                        <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">日本でのITキャリア、36資格の合格体験記、学習メソッドを発信する公式ブログ。</p>
                     </div>
                     <div class="flex items-center justify-between text-xs font-extrabold text-teal-300 pt-2.5 border-t border-slate-800">
                         <span>記事を読む</span>
@@ -235,92 +369,240 @@
                     </div>
                 </a>
 
+                <!-- 卡片 5（新增占位）：JLPT N1/N2 & ビジネス日本語 -->
+                <a href="./jlpt.html" class="md:col-span-3 hard-card hard-card-rose group rounded-2xl p-5 flex flex-col justify-between gap-4">
+                    <div class="flex items-start justify-between gap-3">
+                        <div class="w-11 h-11 rounded-xl bg-rose-400/15 border-2 border-rose-400/40 text-rose-300 flex items-center justify-center shrink-0">
+                            <i data-lucide="message-square-text" class="w-5 h-5"></i>
+                        </div>
+                        <span class="text-[10px] font-extrabold bg-rose-400/15 text-rose-300 border border-rose-400/35 px-2 py-0.5 rounded-md">日本語・就活直結</span>
+                    </div>
+                    <div>
+                        <h3 class="text-base font-black text-white group-hover:text-rose-300 transition-colors">JLPT N1/N2 ＆ 実務ビジネス日本語</h3>
+                        <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">試験合格だけでなく、日本企業が重視する「敬語・報連相・電話対応・社内報告書」まで実践カバー。</p>
+                    </div>
+                    <div class="flex items-center justify-between text-xs font-extrabold text-rose-300 pt-2.5 border-t border-slate-800">
+                        <span>カリキュラムを見る</span>
+                        <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </a>
+
+                <!-- 卡片 6（新增占位）：AI集中トラッカー & タイムラプス -->
+                <a href="./ai-focus.html" class="md:col-span-3 hard-card group rounded-2xl p-5 flex flex-col justify-between gap-4">
+                    <div class="flex items-start justify-between gap-3">
+                        <div class="w-11 h-11 rounded-xl bg-indigo-400/15 border-2 border-indigo-400/40 text-indigo-300 flex items-center justify-center shrink-0">
+                            <i data-lucide="scan-eye" class="w-5 h-5"></i>
+                        </div>
+                        <span class="text-[10px] font-extrabold bg-indigo-400/15 text-indigo-300 border border-indigo-400/35 px-2 py-0.5 rounded-md font-mono-code">BETA · AI TRACKER</span>
+                    </div>
+                    <div>
+                        <h3 class="text-base font-black text-white group-hover:text-sky-300 transition-colors">エッジAI集中解析 ＆ 学習ログ証明</h3>
+                        <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">スマホ1台で集中度を曲線可視化。タイムラプス共有で仲間と相互監督し、努力を「改ざん不能な実績」へ。</p>
+                    </div>
+                    <div class="flex items-center justify-between text-xs font-extrabold text-sky-300 pt-2.5 border-t border-slate-800">
+                        <span>デモを体験する</span>
+                        <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </a>
+
             </div>
         </section>
 
-        <!-- 4. 成長ステップ（PPT ステップアップ・伴走育成モデル） -->
-        <section class="bg-[#111622] border-2 border-slate-800 rounded-2xl p-5 sm:p-6 flex flex-col gap-4">
+        <!-- 4. 交互式：高度専門職ポイント簡易シミュレーター（来自商业计划书核心卖点） -->
+        <section id="visa-sim" class="hard-card rounded-2xl p-6 sm:p-8 flex flex-col gap-6 scroll-mt-20">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+                <div>
+                    <span class="text-[11px] font-black font-mono-code text-teal-300 uppercase">// 03. VISA & CAREER ACCELERATOR</span>
+                    <h2 class="text-xl sm:text-2xl font-black text-white mt-1">資格取得 × 高度専門職ポイント簡易試算</h2>
+                    <p class="text-xs text-slate-400 mt-1">当てはまる項目をクリックして、永住許可申請の短縮要件（通常10年 → 3年 / 最速1年）を確認できます。</p>
+                </div>
+                <div class="bg-[#07090F] border-2 border-teal-400/50 rounded-xl px-4 py-2.5 flex items-center gap-4 shrink-0">
+                    <div>
+                        <div class="text-[10px] font-mono-code text-slate-400">ESTIMATED SCORE</div>
+                        <div class="text-2xl font-black font-mono-code text-teal-300"><span id="sim-total">45</span> <span class="text-xs text-slate-400">pt</span></div>
+                    </div>
+                    <div id="sim-badge" class="text-xs font-black px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 border border-slate-600">
+                        あと 25pt で 3年短縮
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3" id="sim-options">
+                <button type="button" class="pt-chip active rounded-xl p-3.5 text-left flex items-center justify-between gap-2 cursor-pointer" data-pts="20" onclick="toggleChip(this)">
+                    <div>
+                        <div class="text-xs font-black text-white">修士号（大学院修了）</div>
+                        <div class="text-[11px] text-slate-400">学歴ベース（学部卒は10pt）</div>
+                    </div>
+                    <span class="font-mono-code text-xs font-black text-teal-300 shrink-0">+20pt</span>
+                </button>
+                <button type="button" class="pt-chip active rounded-xl p-3.5 text-left flex items-center justify-between gap-2 cursor-pointer" data-pts="15" onclick="toggleChip(this)">
+                    <div>
+                        <div class="text-xs font-black text-white">年齢 29歳以下</div>
+                        <div class="text-[11px] text-slate-400">若手高度人材ボーナス</div>
+                    </div>
+                    <span class="font-mono-code text-xs font-black text-teal-300 shrink-0">+15pt</span>
+                </button>
+                <button type="button" class="pt-chip active rounded-xl p-3.5 text-left flex items-center justify-between gap-2 cursor-pointer" data-pts="10" onclick="toggleChip(this)">
+                    <div>
+                        <div class="text-xs font-black text-white">日本の大学・大学院を卒業</div>
+                        <div class="text-[11px] text-slate-400">本邦高等教育機関ボーナス</div>
+                    </div>
+                    <span class="font-mono-code text-xs font-black text-teal-300 shrink-0">+10pt</span>
+                </button>
+                <button type="button" class="pt-chip rounded-xl p-3.5 text-left flex items-center justify-between gap-2 cursor-pointer" data-pts="15" onclick="toggleChip(this)">
+                    <div>
+                        <div class="text-xs font-black text-white">JLPT N1 / BJT 480点以上</div>
+                        <div class="text-[11px] text-slate-400">FocusLink 重点攻略対象</div>
+                    </div>
+                    <span class="font-mono-code text-xs font-black text-amber-300 shrink-0">+15pt</span>
+                </button>
+                <button type="button" class="pt-chip rounded-xl p-3.5 text-left flex items-center justify-between gap-2 cursor-pointer" data-pts="10" onclick="toggleChip(this)">
+                    <div>
+                        <div class="text-xs font-black text-white">IT国家資格（AP・FE等 複数）</div>
+                        <div class="text-[11px] text-slate-400">法務省告示IT資格（1つ5pt / 最大10pt）</div>
+                    </div>
+                    <span class="font-mono-code text-xs font-black text-sky-400 shrink-0">+10pt</span>
+                </button>
+                <button type="button" class="pt-chip rounded-xl p-3.5 text-left flex items-center justify-between gap-2 cursor-pointer" data-pts="10" onclick="toggleChip(this)">
+                    <div>
+                        <div class="text-xs font-black text-white">年収 400万円〜500万円以上</div>
+                        <div class="text-[11px] text-slate-400">年齢・年収帯に応じた加点</div>
+                    </div>
+                    <span class="font-mono-code text-xs font-black text-teal-300 shrink-0">+10pt</span>
+                </button>
+            </div>
+            <p class="text-[11px] text-slate-500">
+                ※ 出入国在留管理庁「高度人材ポイント制」の制度基準に基づく簡易試算です。実務経験・年収・イノベーション加点等により変動します。
+            </p>
+        </section>
+
+        <!-- 5. 成長ステップ（GROWTH PATHWAY） -->
+        <section id="solution" class="bg-[#111622] border-2 border-slate-800 rounded-2xl p-6 sm:p-8 flex flex-col gap-6 scroll-mt-20">
             <div class="flex items-center justify-between flex-wrap gap-2">
                 <div>
-                    <span class="text-[10px] font-black font-mono-code text-teal-300 uppercase">GROWTH PATHWAY</span>
-                    <h2 class="text-base sm:text-lg font-black text-white">FocusLink が目指す3つのステップ</h2>
+                    <span class="text-[11px] font-black font-mono-code text-teal-300 uppercase">// 04. GROWTH PATHWAY</span>
+                    <h2 class="text-lg sm:text-2xl font-black text-white mt-1">FocusLink が目指す「育成〜定着」3ステップ</h2>
                 </div>
-                <span class="text-[11px] text-slate-400">個人の努力を、信頼とキャリアへ</span>
+                <span class="text-xs text-slate-400 font-semibold">個人の努力を、信頼とキャリアへ</span>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="bg-[#07090F] border border-slate-800 rounded-xl p-4 flex flex-col gap-1.5">
+                <div class="bg-[#07090F] border-2 border-slate-800 rounded-xl p-5 flex flex-col gap-2">
                     <span class="text-xs font-black font-mono-code text-sky-400">STEP 01 · 学ぶ・突破する</span>
-                    <h3 class="text-sm font-bold text-white">基礎力と資格・語学の獲得</h3>
-                    <p class="text-xs text-slate-400 leading-relaxed">過去問演習・解説動画・学習会で「わかる・解ける」を積み上げる。</p>
+                    <h3 class="text-base font-black text-white">基礎力と資格・語学の獲得</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">過去問演習・YouTube解説・勉強会で「わかる・解ける」を積み上げ、客観的な資格を取得。</p>
                 </div>
-                <div class="bg-[#07090F] border border-slate-800 rounded-xl p-4 flex flex-col gap-1.5">
+                <div class="bg-[#07090F] border-2 border-slate-800 rounded-xl p-5 flex flex-col gap-2">
                     <span class="text-xs font-black font-mono-code text-teal-300">STEP 02 · 続ける・見える化する</span>
-                    <h3 class="text-sm font-bold text-white">習慣化と学習プロセスの記録</h3>
-                    <p class="text-xs text-slate-400 leading-relaxed">仲間との進捗共有や学習ログの蓄積で、継続力と主体性を形にする。</p>
+                    <h3 class="text-base font-black text-white">AI習慣化と学習ログの蓄積</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">エッジAI集中解析とタイムラプス共有で、継続力と主体性を企業へ提示できるポートフォリオへ。</p>
                 </div>
-                <div class="bg-[#07090F] border border-slate-800 rounded-xl p-4 flex flex-col gap-1.5">
+                <div class="bg-[#07090F] border-2 border-slate-800 rounded-xl p-5 flex flex-col gap-2">
                     <span class="text-xs font-black font-mono-code text-amber-300">STEP 03 · つながる・定着する</span>
-                    <h3 class="text-sm font-bold text-white">キャリア形成と社会での活躍</h3>
-                    <p class="text-xs text-slate-400 leading-relaxed">学びの軌跡を強みに、日本での就職・成長・定着へとつなげる。</p>
+                    <h3 class="text-base font-black text-white">実務インターンとキャリア形成</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">学習履歴に基づく実践機会の推薦とフィードバック評価で、日本社会での長期的な活躍へ。</p>
                 </div>
             </div>
         </section>
 
-        <!-- 5. 運営理念 & 社群区 -->
-        <section class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <!-- 6. 運営者メッセージ（36資格実績） & WeChat 社群 -->
+        <section id="about" class="grid grid-cols-1 lg:grid-cols-3 gap-5 scroll-mt-20">
 
             <!-- 左侧 2 列：運営者メッセージ -->
-            <div class="md:col-span-2 hard-card rounded-2xl p-5 sm:p-6 flex flex-col justify-between gap-4">
-                <div class="flex items-center justify-between flex-wrap gap-2">
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-400 to-teal-300 text-slate-950 border border-slate-950 flex items-center justify-center font-black text-base shrink-0">
+            <div class="lg:col-span-2 hard-card rounded-2xl p-6 flex flex-col justify-between gap-5">
+                <div class="flex items-center justify-between flex-wrap gap-3">
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-sky-400 to-teal-300 text-slate-950 border-2 border-slate-950 flex items-center justify-center font-black text-xl shrink-0">
                             南
                         </div>
                         <div>
-                            <h3 class="text-sm sm:text-base font-black text-white">About Minami / 運営者メッセージ</h3>
-                            <p class="text-[11px] text-slate-400">盧 易南（Minami）｜在日外国人材の成長とキャリア支援へ</p>
+                            <h3 class="text-base sm:text-lg font-black text-white">About Minami / 運営者メッセージ</h3>
+                            <p class="text-xs text-slate-400">盧 易南（Minami）｜立教大学大学院ビジネスデザイン研究科・NTTグループ出身</p>
                         </div>
                     </div>
-                    <a href="https://www.youtube.com/playlist?list=PLI9LZ_5sMCR4" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-[11px] font-extrabold text-rose-300 bg-rose-500/15 hover:bg-rose-500/25 border border-rose-400/40 px-3 py-1 rounded-lg transition-colors">
-                        <i data-lucide="youtube" class="w-3.5 h-3.5 text-rose-400"></i>
+                    <a href="https://www.youtube.com/playlist?list=PLI9LZ_5sMCR4" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-extrabold text-rose-300 bg-rose-500/15 hover:bg-rose-500/25 border border-rose-400/40 px-3.5 py-1.5 rounded-lg transition-colors">
+                        <i data-lucide="youtube" class="w-4 h-4 text-rose-400"></i>
                         <span>YouTube解説一覧</span>
                     </a>
                 </div>
+
                 <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                    来日後の進学・資格挑戦・就労経験の中で感じたのは、「努力しているのに孤立し、成果や過程が伝わりにくい」という課題でした。<strong class="text-amber-300 font-black">「理解できる土台」と「一緒に進める仲間・仕組み」</strong>を整え、一人ひとりの努力がキャリアにつながる場をつくります。
+                    2017年の来日後、進学・就職・3年間で36個の資格独学挑戦を続ける中で感じたのは、「努力しているのに孤立し、成果や過程が伝わりにくい」という課題でした。<strong class="text-amber-300 font-black">「理解できる土台」と「一緒に進める仲間・仕組み」</strong>を整え、一人ひとりの努力が確かなキャリアにつながる場をつくります。
                 </p>
+
+                <!-- 資格実績バッジ -->
+                <div class="flex flex-wrap gap-1.5 pt-2 border-t border-slate-800">
+                    <span class="text-[10px] font-mono-code font-bold px-2 py-1 rounded bg-sky-400/10 text-sky-300 border border-sky-400/30">基本情報技術者</span>
+                    <span class="text-[10px] font-mono-code font-bold px-2 py-1 rounded bg-teal-400/10 text-teal-300 border border-teal-400/30">宅地建物取引士</span>
+                    <span class="text-[10px] font-mono-code font-bold px-2 py-1 rounded bg-amber-300/10 text-amber-300 border border-amber-300/30">AWS SAP</span>
+                    <span class="text-[10px] font-mono-code font-bold px-2 py-1 rounded bg-slate-800 text-slate-300 border border-slate-700">CKS / CKA / CKAD</span>
+                    <span class="text-[10px] font-mono-code font-bold px-2 py-1 rounded bg-slate-800 text-slate-300 border border-slate-700">RHCE / RHCSA</span>
+                    <span class="text-[10px] font-mono-code font-bold px-2 py-1 rounded bg-slate-800 text-slate-300 border border-slate-700">JLPT N1</span>
+                    <span class="text-[10px] font-mono-code font-bold px-2 py-1 rounded bg-slate-800 text-slate-300 border border-slate-700">G検定 / 生成AI</span>
+                    <span class="text-[10px] font-mono-code font-bold px-2 py-1 rounded bg-slate-800 text-slate-400 border border-slate-700">+ 他25資格</span>
+                </div>
             </div>
 
             <!-- 右侧 1 列：WeChat 学習グループ名片 -->
-            <div class="hard-card hard-card-teal rounded-2xl p-5 sm:p-6 flex flex-col justify-between gap-4">
+            <div class="hard-card hard-card-teal rounded-2xl p-6 flex flex-col justify-between gap-4">
                 <div class="flex items-center justify-between">
-                    <span class="text-[10px] font-black tracking-widest uppercase text-teal-300 font-mono-code">COMMUNITY</span>
+                    <span class="text-[11px] font-black tracking-widest uppercase text-teal-300 font-mono-code">COMMUNITY</span>
                     <span class="text-[10px] font-extrabold bg-amber-300 text-slate-950 px-2 py-0.5 rounded-md">備考：AP/IT</span>
                 </div>
                 <div>
-                    <h3 class="text-sm sm:text-base font-black text-white">WeChat 学習交流グループ</h3>
-                    <p class="text-xs text-slate-400 mt-1">試験情報・勉強会・キャリア相談はこちら。</p>
+                    <h3 class="text-base sm:text-lg font-black text-white">WeChat 学習交流グループ</h3>
+                    <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">定期開催の無料対策勉強会・過去問質問・日本就職キャリア相談はこちら。</p>
                 </div>
-                <div class="bg-[#07090F] border-2 border-slate-700 rounded-xl px-3 py-2 flex items-center justify-between gap-2">
-                    <code class="text-xs font-extrabold font-mono-code text-teal-300">nowminami</code>
-                    <button type="button" onclick="copyWechatID()" class="hard-btn-yellow font-black text-[11px] px-2.5 py-1 rounded-lg flex items-center gap-1 cursor-pointer shrink-0">
-                        <i data-lucide="copy" class="w-3 h-3"></i>
+                <div class="bg-[#07090F] border-2 border-slate-700 rounded-xl px-3.5 py-2.5 flex items-center justify-between gap-2">
+                    <code class="text-sm font-extrabold font-mono-code text-teal-300">nowminami</code>
+                    <button type="button" onclick="copyWechatID()" class="hard-btn-yellow font-black text-xs px-3 py-1.5 rounded-lg flex items-center gap-1.5 cursor-pointer shrink-0">
+                        <i data-lucide="copy" class="w-3.5 h-3.5"></i>
                         <span id="copy-btn-text">IDコピー</span>
                     </button>
                 </div>
             </div>
 
         </section>
+
+        <!-- 7. 採用企業様・教育機関様向け CTA（占位入口） -->
+        <section id="enterprise" class="bg-gradient-to-r from-[#111622] via-[#131c31] to-[#0d2129] border-2 border-slate-700 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 scroll-mt-20">
+            <div class="max-w-2xl">
+                <span class="text-[11px] font-black font-mono-code text-sky-400 uppercase">FOR ENTERPRISE & UNIVERSITIES</span>
+                <h2 class="text-lg sm:text-xl font-black text-white mt-1">外国人材の「継続力・実務適性」をデータで見極めませんか？</h2>
+                <p class="text-xs sm:text-sm text-slate-300 mt-1.5 leading-relaxed">
+                    履歴書だけでは見えない数百時間の学習ログと資格実績をもとに、ミスマッチの少ない高度外国人材の採用・定着を支援します。
+                </p>
+            </div>
+            <a href="./enterprise.html" class="hard-btn-teal font-black text-xs sm:text-sm px-5 py-3 rounded-xl inline-flex items-center gap-2 shrink-0">
+                <span>法人・連携のお問い合わせ</span>
+                <i data-lucide="building-2" class="w-4 h-4"></i>
+            </a>
+        </section>
+
     </main>
 
-    <footer class="border-t-2 border-slate-800/90 bg-[#07090F] py-5 text-center text-[11px] text-slate-500 font-semibold">
-        © FocusLink / Minami. All rights reserved.
+    <!-- Footer -->
+    <footer class="border-t-2 border-slate-800/90 bg-[#07090F] py-8 mt-8">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 font-semibold">
+            <div class="flex items-center gap-2">
+                <span class="font-black text-slate-300">FocusLink / Minami</span>
+                <span>·</span>
+                <span>© 2026 All rights reserved.</span>
+            </div>
+            <div class="flex flex-wrap items-center gap-5">
+                <a href="https://ipa.minami.ac.cn/ap" class="hover:text-sky-300 transition-colors">応用情報(AP)</a>
+                <a href="https://toeic.minami.ac.cn/" class="hover:text-amber-300 transition-colors">TOEIC</a>
+                <a href="https://minami.ac.cn/" class="hover:text-teal-300 transition-colors">Blog</a>
+                <a href="./privacy.html" class="hover:text-slate-300 transition-colors">プライバシーポリシー</a>
+            </div>
+        </div>
     </footer>
 
     <script src="focuslink-bar.js" defer></script>
     <script>
         if (typeof lucide !== 'undefined') lucide.createIcons();
+
+        // WeChat ID コピー
         function copyWechatID() {
             navigator.clipboard.writeText('nowminami').then(() => {
                 const el = document.getElementById('copy-btn-text');
@@ -329,6 +611,33 @@
                     setTimeout(() => el.textContent = 'IDコピー', 2000);
                 }
             });
+        }
+
+        // 高度専門職ポイント簡易シミュレーター
+        function toggleChip(btn) {
+            btn.classList.toggle('active');
+            recalcPoints();
+        }
+
+        function recalcPoints() {
+            const activeChips = document.querySelectorAll('#sim-options .pt-chip.active');
+            let total = 0;
+            activeChips.forEach(chip => {
+                total += parseInt(chip.getAttribute('data-pts') || '0', 10);
+            });
+            document.getElementById('sim-total').textContent = total;
+            const badge = document.getElementById('sim-badge');
+            if (total >= 80) {
+                badge.textContent = '★ 80pt達成：最速1年で永住申請対象！';
+                badge.className = 'text-xs font-black px-3 py-1.5 rounded-lg bg-amber-300 text-slate-950 border border-slate-950';
+            } else if (total >= 70) {
+                badge.textContent = '✓ 70pt達成：原則3年で永住申請対象！';
+                badge.className = 'text-xs font-black px-3 py-1.5 rounded-lg bg-teal-300 text-slate-950 border border-slate-950';
+            } else {
+                const diff = 70 - total;
+                badge.textContent = `あと ${diff}pt で 3年短縮`;
+                badge.className = 'text-xs font-black px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 border border-slate-600';
+            }
         }
     </script>
 </body>
