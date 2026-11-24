@@ -8,22 +8,80 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&family=JetBrains+Mono:wght@500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&family=JetBrains+Mono:wght@600;700;800&display=swap');
+
         body {
             font-family: 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: #090D16;
+            background-color: #07090F;
             color: #F8FAFC;
         }
         .font-mono-code {
             font-family: 'JetBrains Mono', monospace;
         }
-        .fireship-grid {
-            background-image: radial-gradient(rgba(148, 163, 184, 0.14) 1px, transparent 1px);
-            background-size: 24px 24px;
+
+        /* Fireship 标志性硬投影与按压手感 */
+        .hard-card {
+            background-color: #111622;
+            border: 2px solid #263044;
+            box-shadow: 5px 5px 0px #020408;
+            transition: transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease;
+        }
+        .hard-card:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 7px 7px 0px #38bdf8;
+            border-color: #38bdf8;
+        }
+
+        .hard-card-amber:hover {
+            box-shadow: 7px 7px 0px #facc15;
+            border-color: #facc15;
+        }
+
+        .hard-card-teal:hover {
+            box-shadow: 7px 7px 0px #2dd4bf;
+            border-color: #2dd4bf;
+        }
+
+        .hard-flagship {
+            background: linear-gradient(135deg, #121929 0%, #171530 55%, #0e2229 100%);
+            border: 2px solid #38bdf8;
+            box-shadow: 7px 7px 0px #2dd4bf;
+            transition: transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
+        }
+        .hard-flagship:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 10px 10px 0px #facc15;
+            border-color: #facc15;
+        }
+
+        .hard-btn-yellow {
+            background-color: #facc15;
+            color: #07090F;
+            border: 2px solid #07090F;
+            box-shadow: 4px 4px 0px #020408;
+            transition: transform 120ms ease, box-shadow 120ms ease, background-color 120ms ease;
+        }
+        .hard-btn-yellow:hover {
+            background-color: #fde047;
+            transform: translate(1px, 1px);
+            box-shadow: 2px 2px 0px #020408;
+        }
+
+        .hard-btn-teal {
+            background-color: #2dd4bf;
+            color: #07090F;
+            border: 2px solid #07090F;
+            box-shadow: 4px 4px 0px #020408;
+            transition: transform 120ms ease, box-shadow 120ms ease, background-color 120ms ease;
+        }
+        .hard-btn-teal:hover {
+            background-color: #facc15;
+            transform: translate(1px, 1px);
+            box-shadow: 2px 2px 0px #020408;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col antialiased fireship-grid selection:bg-sky-400 selection:text-slate-950">
+<body class="min-h-screen flex flex-col antialiased selection:bg-amber-300 selection:text-slate-950">
 
     <!-- 顶部全局导航栏 -->
     <div id="focuslink-bar-root"></div>
@@ -31,145 +89,147 @@
     <!-- 主内容区 -->
     <main class="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 py-10 sm:py-14 flex flex-col gap-10">
 
-        <!-- 1. Hero 品牌宣言区（Fireship 风格：高对比关键词 + 直击痛点 + 强行动号召） -->
-        <section class="text-center flex flex-col items-center gap-4">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-400/30 text-sky-300 text-xs font-bold tracking-wide">
-                <span class="w-2 h-2 rounded-full bg-teal-400 animate-pulse"></span>
-                <span>FOCUSLINK LEARNING ECOSYSTEM</span>
+        <!-- 1. Hero 区 -->
+        <section class="flex flex-col items-center text-center gap-4">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-sky-400/10 border-2 border-sky-400/40 text-sky-300 text-xs font-extrabold tracking-wider uppercase">
+                <span class="w-2 h-2 rounded-full bg-teal-300 animate-ping"></span>
+                <span>FocusLink Learning Ecosystem</span>
             </div>
 
-            <h1 class="text-3xl sm:text-5xl font-black tracking-tight leading-[1.18] max-w-3xl">
+            <h1 class="text-3xl sm:text-5xl font-black tracking-tight leading-[1.15] max-w-3xl">
                 在日中国人IT人材の<br class="sm:hidden">
-                <span class="text-sky-400">成長</span>と<span class="text-teal-400">スキルアップ</span>を<br class="hidden sm:inline">
+                <span class="px-2 py-0.5 bg-sky-400 text-slate-950 rounded-md inline-block -rotate-1">成長</span>と
+                <span class="px-2 py-0.5 bg-teal-300 text-slate-950 rounded-md inline-block rotate-1">スキルアップ</span>を<br class="hidden sm:inline">
                 最速でブーストする。
             </h1>
 
             <p class="text-xs sm:text-sm text-slate-400 max-w-2xl leading-relaxed">
-                国家資格の速攻対策・TOEICトレーニング・技術キャリアブログを一元化。
-                <span class="text-slate-200 font-semibold">遠回りしない実践型学習ポータル。</span>
+                国家資格試験の速攻対策・英語学習・技術キャリアブログを一元化した実践型ポータル。
+                <strong class="text-white font-bold">遠回りせず、手を動かして突破する。</strong>
             </p>
 
-            <!-- 主 CTA + 亮点标签 -->
             <div class="flex flex-wrap items-center justify-center gap-3 pt-1">
-                <a href="https://ipa.minami.ac.cn/ap" class="inline-flex items-center gap-2 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs sm:text-sm px-5 py-2.5 rounded-xl shadow-[0_0_24px_rgba(251,191,36,0.28)] transition-all">
+                <a href="https://ipa.minami.ac.cn/ap" class="hard-btn-yellow inline-flex items-center gap-2 font-black text-xs sm:text-sm px-5 py-2.5 rounded-xl">
                     <span>科目B 速攻演習を始める</span>
                     <i data-lucide="zap" class="w-4 h-4 fill-slate-950"></i>
                 </a>
-                <a href="https://www.youtube.com/playlist?list=PLI9LZ_5sMCR4" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl transition-all">
+                <a href="https://www.youtube.com/playlist?list=PLI9LZ_5sMCR4" target="_blank" rel="noopener noreferrer" class="hard-card inline-flex items-center gap-2 text-slate-200 font-extrabold text-xs sm:text-sm px-4 py-2.5 rounded-xl">
                     <i data-lucide="play-circle" class="w-4 h-4 text-rose-400"></i>
-                    <span>YouTube解説リスト</span>
+                    <span>YouTube解説一覧</span>
                 </a>
             </div>
 
             <div class="flex flex-wrap items-center justify-center gap-2 pt-1">
-                <span class="inline-flex items-center gap-1.5 text-[11px] font-bold text-slate-300 bg-slate-900/90 border border-slate-800 px-3 py-1 rounded-lg">
-                    <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-teal-400"></i>
+                <span class="inline-flex items-center gap-1.5 text-[11px] font-bold text-slate-200 bg-[#111622] border border-slate-700 px-3 py-1 rounded-lg">
+                    <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-teal-300"></i>
                     <span>厳選過去問演習</span>
                 </span>
-                <span class="inline-flex items-center gap-1.5 text-[11px] font-bold text-slate-300 bg-slate-900/90 border border-slate-800 px-3 py-1 rounded-lg">
+                <span class="inline-flex items-center gap-1.5 text-[11px] font-bold text-slate-200 bg-[#111622] border border-slate-700 px-3 py-1 rounded-lg">
                     <i data-lucide="video" class="w-3.5 h-3.5 text-sky-400"></i>
                     <span>YouTube動画解説連動</span>
                 </span>
-                <span class="inline-flex items-center gap-1.5 text-[11px] font-bold text-slate-300 bg-slate-900/90 border border-slate-800 px-3 py-1 rounded-lg">
-                    <i data-lucide="users" class="w-3.5 h-3.5 text-amber-400"></i>
+                <span class="inline-flex items-center gap-1.5 text-[11px] font-bold text-slate-200 bg-[#111622] border border-slate-700 px-3 py-1 rounded-lg">
+                    <i data-lucide="users" class="w-3.5 h-3.5 text-amber-300"></i>
                     <span>在日IT学習コミュニティ</span>
                 </span>
             </div>
         </section>
 
-        <!-- 2. 核心模块网格（旗舰主推 + 3个专项/速攻模块） -->
+        <!-- 2. 核心模块区 -->
         <section class="flex flex-col gap-4">
             <div class="flex items-center justify-between px-1">
-                <span class="text-xs font-black uppercase tracking-widest text-slate-400">CORE MODULES & SNACKS</span>
-                <span class="text-[11px] text-slate-500 font-mono-code">FOCUSLINK / MINAMI</span>
+                <h2 class="text-xs font-black uppercase tracking-widest text-amber-300 font-mono-code">
+                    // FLAGSHIP & LEARNING MODULES
+                </h2>
+                <span class="text-[11px] text-slate-500 font-mono-code">minami.ac.cn</span>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
 
-                <!-- ★ 主推旗舰卡片（占满整行 3 列）：南式応用情報速攻！ -->
-                <a href="https://ipa.minami.ac.cn/ap" class="md:col-span-3 group relative overflow-hidden bg-gradient-to-br from-slate-900 via-[#101c36] to-slate-950 rounded-2xl p-6 sm:p-7 border border-sky-400/30 hover:border-teal-400/70 shadow-lg hover:shadow-[0_12px_36px_rgba(20,184,166,0.14)] transition-all flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-                    <div class="flex flex-col gap-3 max-w-2xl relative z-10">
+                <!-- ★ 主推旗舰卡片 -->
+                <a href="https://ipa.minami.ac.cn/ap" class="md:col-span-3 hard-flagship group rounded-2xl p-6 sm:p-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+                    <div class="flex flex-col gap-3 max-w-2xl">
                         <div class="flex items-center flex-wrap gap-2">
-                            <span class="inline-flex items-center gap-1 text-[10.5px] font-black bg-teal-400 text-slate-950 px-2.5 py-0.5 rounded-full">
-                                ★ FLAGSHIP・公開中
+                            <span class="inline-flex items-center gap-1 text-[11px] font-black bg-amber-300 text-slate-950 border border-slate-950 px-2.5 py-0.5 rounded-md">
+                                ★ メインコンテンツ・公開中
                             </span>
-                            <span class="text-[11px] font-bold text-sky-300 bg-sky-500/10 border border-sky-400/20 px-2.5 py-0.5 rounded-full">
+                            <span class="text-[11px] font-bold text-teal-300 bg-teal-400/10 border border-teal-400/30 px-2.5 py-0.5 rounded-md font-mono-code">
                                 IPA 応用情報技術者試験（科目B）
                             </span>
                         </div>
 
                         <div class="flex items-center gap-3">
-                            <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-sky-400 to-teal-400 text-slate-950 flex items-center justify-center font-black text-xl shrink-0">
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-sky-400 to-teal-300 text-slate-950 border-2 border-slate-950 flex items-center justify-center font-black text-2xl shrink-0">
                                 南
                             </div>
-                            <h2 class="text-xl sm:text-2xl font-black tracking-tight text-white group-hover:text-teal-300 transition-colors">
+                            <h3 class="text-xl sm:text-2xl font-black tracking-tight text-white group-hover:text-amber-300 transition-colors">
                                 南式応用情報速攻！（科目B）
-                            </h2>
+                            </h3>
                         </div>
 
                         <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                            全12分野から文系・実務未経験でも得点源にしやすい<strong class="text-white font-bold">厳選5分野</strong>に特化。過去問の論理的分析ノートとYouTube動画解説をワンクリックで往復できる速攻学習ポータル。
+                            全12分野から文系・実務未経験でも得点源にしやすい<strong class="text-teal-300 font-black">厳選5分野</strong>に特化。過去問の論理的分析ノートとYouTube動画解説をワンクリックで往復できる速攻学習ポータル。
                         </p>
                     </div>
 
-                    <div class="shrink-0 w-full sm:w-auto flex sm:flex-col items-center sm:items-end justify-between gap-3 relative z-10">
-                        <span class="inline-flex items-center gap-2 bg-teal-400 group-hover:bg-amber-300 text-slate-950 font-black text-xs sm:text-sm px-5 py-2.5 rounded-xl transition-all">
+                    <div class="shrink-0 w-full sm:w-auto flex sm:flex-col items-center sm:items-end justify-between gap-3">
+                        <span class="hard-btn-teal inline-flex items-center gap-2 font-black text-xs sm:text-sm px-5 py-2.5 rounded-xl">
                             <span>今すぐ学習を始める</span>
                             <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
                         </span>
-                        <span class="text-[11px] text-slate-400 font-mono-code">ipa.minami.ac.cn/ap</span>
+                        <span class="text-[11px] text-sky-300/90 font-mono-code">ipa.minami.ac.cn/ap</span>
                     </div>
                 </a>
 
                 <!-- 卡片 2：情報処理安全確保支援士 -->
-                <a href="https://ipa.minami.ac.cn/sc" class="group bg-slate-900/90 hover:bg-slate-900 border border-slate-800 hover:border-sky-400/60 rounded-2xl p-5 transition-all flex flex-col justify-between gap-4">
+                <a href="https://ipa.minami.ac.cn/sc" class="hard-card group rounded-2xl p-5 flex flex-col justify-between gap-4">
                     <div class="flex items-start justify-between gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-sky-500/15 border border-sky-400/30 text-sky-400 flex items-center justify-center shrink-0">
+                        <div class="w-11 h-11 rounded-xl bg-sky-400/15 border-2 border-sky-400/40 text-sky-300 flex items-center justify-center shrink-0">
                             <i data-lucide="shield-check" class="w-5 h-5"></i>
                         </div>
-                        <span class="text-[10px] font-bold bg-slate-800 text-slate-300 border border-slate-700 px-2 py-0.5 rounded-full">高度試験・順次公開</span>
+                        <span class="text-[10px] font-extrabold bg-slate-800 text-slate-200 border border-slate-600 px-2 py-0.5 rounded-md">高度試験・順次公開</span>
                     </div>
                     <div>
-                        <h2 class="text-base font-black text-white group-hover:text-sky-300 transition-colors">情報処理安全確保支援士</h2>
+                        <h3 class="text-base font-black text-white group-hover:text-sky-300 transition-colors">情報処理安全確保支援士</h3>
                         <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">高度区分セキュリティスペシャリスト対策ノート・午後問題パターン分析。</p>
                     </div>
-                    <div class="flex items-center justify-between text-xs font-bold text-slate-300 group-hover:text-sky-300 pt-2.5 border-t border-slate-800">
+                    <div class="flex items-center justify-between text-xs font-extrabold text-sky-300 pt-2.5 border-t border-slate-800">
                         <span>ポータルを開く</span>
                         <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
                     </div>
                 </a>
 
                 <!-- 卡片 3：TOEIC 速攻トレーニング -->
-                <a href="https://toeic.minami.ac.cn/" class="group bg-slate-900/90 hover:bg-slate-900 border border-slate-800 hover:border-amber-400/60 rounded-2xl p-5 transition-all flex flex-col justify-between gap-4">
+                <a href="https://toeic.minami.ac.cn/" class="hard-card hard-card-amber group rounded-2xl p-5 flex flex-col justify-between gap-4">
                     <div class="flex items-start justify-between gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-amber-400/15 border border-amber-400/30 text-amber-400 flex items-center justify-center shrink-0">
+                        <div class="w-11 h-11 rounded-xl bg-amber-300/15 border-2 border-amber-300/40 text-amber-300 flex items-center justify-center shrink-0">
                             <i data-lucide="languages" class="w-5 h-5"></i>
                         </div>
-                        <span class="text-[10px] font-bold bg-amber-400/10 text-amber-300 border border-amber-400/25 px-2 py-0.5 rounded-full">英語・キャリア</span>
+                        <span class="text-[10px] font-extrabold bg-amber-300/15 text-amber-300 border border-amber-300/35 px-2 py-0.5 rounded-md">英語・キャリア</span>
                     </div>
                     <div>
-                        <h2 class="text-base font-black text-white group-hover:text-amber-300 transition-colors">TOEIC 速攻トレーニング</h2>
+                        <h3 class="text-base font-black text-white group-hover:text-amber-300 transition-colors">TOEIC 速攻トレーニング</h3>
                         <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">頻出語彙・文法パターン・体系化マップによるスコアアップ集中演習。</p>
                     </div>
-                    <div class="flex items-center justify-between text-xs font-bold text-slate-300 group-hover:text-amber-300 pt-2.5 border-t border-slate-800">
+                    <div class="flex items-center justify-between text-xs font-extrabold text-amber-300 pt-2.5 border-t border-slate-800">
                         <span>トレーニングへ</span>
                         <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
                     </div>
                 </a>
 
                 <!-- 卡片 4：Minami Tech & Study Blog -->
-                <a href="https://minami.ac.cn/" class="group bg-slate-900/90 hover:bg-slate-900 border border-slate-800 hover:border-teal-400/60 rounded-2xl p-5 transition-all flex flex-col justify-between gap-4">
+                <a href="https://minami.ac.cn/" class="hard-card hard-card-teal group rounded-2xl p-5 flex flex-col justify-between gap-4">
                     <div class="flex items-start justify-between gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-teal-400/15 border border-teal-400/30 text-teal-400 flex items-center justify-center shrink-0">
+                        <div class="w-11 h-11 rounded-xl bg-teal-300/15 border-2 border-teal-300/40 text-teal-300 flex items-center justify-center shrink-0">
                             <i data-lucide="book-open" class="w-5 h-5"></i>
                         </div>
-                        <span class="text-[10px] font-bold bg-teal-400/10 text-teal-300 border border-teal-400/25 px-2 py-0.5 rounded-full">技術・体験記</span>
+                        <span class="text-[10px] font-extrabold bg-teal-300/15 text-teal-300 border border-teal-300/35 px-2 py-0.5 rounded-md">技術・体験記</span>
                     </div>
                     <div>
-                        <h2 class="text-base font-black text-white group-hover:text-teal-300 transition-colors">Minami Tech & Study Blog</h2>
+                        <h3 class="text-base font-black text-white group-hover:text-teal-300 transition-colors">Minami Tech & Study Blog</h3>
                         <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">日本でのITキャリア、資格合格体験記、学習メソッドを発信する公式ブログ。</p>
                     </div>
-                    <div class="flex items-center justify-between text-xs font-bold text-slate-300 group-hover:text-teal-300 pt-2.5 border-t border-slate-800">
+                    <div class="flex items-center justify-between text-xs font-extrabold text-teal-300 pt-2.5 border-t border-slate-800">
                         <span>記事を読む</span>
                         <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
                     </div>
@@ -178,14 +238,14 @@
             </div>
         </section>
 
-        <!-- 3. 理念 & コミュニティ区（Fireship 的“顿悟时刻/方法论” + 社群卡片） -->
-        <section class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
+        <!-- 3. 理念 & 社群区 -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-5">
 
-            <!-- 左侧 2 列：About Minami / 運営理念 -->
-            <div class="md:col-span-2 bg-slate-900/90 border border-slate-800 rounded-2xl p-5 sm:p-6 flex flex-col justify-between gap-4">
+            <!-- 左侧 2 列：運営者メッセージ -->
+            <div class="md:col-span-2 hard-card rounded-2xl p-5 sm:p-6 flex flex-col justify-between gap-4">
                 <div class="flex items-center justify-between flex-wrap gap-2">
                     <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-400 to-teal-400 text-slate-950 flex items-center justify-center font-black text-base shrink-0">
+                        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-400 to-teal-300 text-slate-950 border border-slate-950 flex items-center justify-center font-black text-base shrink-0">
                             南
                         </div>
                         <div>
@@ -193,29 +253,29 @@
                             <p class="text-[11px] text-slate-400">在日中国人IT人材の成長と社会・産業のDX推進へ</p>
                         </div>
                     </div>
-                    <a href="https://www.youtube.com/playlist?list=PLI9LZ_5sMCR4" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-[11px] font-bold text-rose-300 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 px-3 py-1 rounded-lg transition-colors">
+                    <a href="https://www.youtube.com/playlist?list=PLI9LZ_5sMCR4" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-[11px] font-extrabold text-rose-300 bg-rose-500/15 hover:bg-rose-500/25 border border-rose-400/40 px-3 py-1 rounded-lg transition-colors">
                         <i data-lucide="youtube" class="w-3.5 h-3.5 text-rose-400"></i>
                         <span>YouTube解説一覧</span>
                     </a>
                 </div>
                 <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                    日本のIT資格試験は単なる技術知識だけでなく、<strong class="text-teal-300 font-bold">「日本語読解力」と「論理的分析力」</strong>が合否を分けます。独学で遠回りしないよう、整理されたノート・過去問演習・動画解説を一つのポータルにまとめました。
+                    日本のIT資格試験は単なる技術知識だけでなく、<strong class="text-amber-300 font-black">「日本語読解力」と「論理的分析力」</strong>が合否を分けます。独学で遠回りしないよう、整理されたノート・過去問演習・動画解説を一つのポータルにまとめました。
                 </p>
             </div>
 
             <!-- 右侧 1 列：WeChat 学習グループ名片 -->
-            <div class="bg-gradient-to-b from-slate-900 to-slate-950 border border-teal-400/30 rounded-2xl p-5 sm:p-6 flex flex-col justify-between gap-4">
+            <div class="hard-card hard-card-teal rounded-2xl p-5 sm:p-6 flex flex-col justify-between gap-4">
                 <div class="flex items-center justify-between">
-                    <span class="text-[10px] font-black tracking-widest uppercase text-teal-400 font-mono-code">COMMUNITY</span>
-                    <span class="text-[10px] font-bold bg-white/10 text-slate-200 px-2 py-0.5 rounded">備考：AP/IT</span>
+                    <span class="text-[10px] font-black tracking-widest uppercase text-teal-300 font-mono-code">COMMUNITY</span>
+                    <span class="text-[10px] font-extrabold bg-amber-300 text-slate-950 px-2 py-0.5 rounded-md">備考：AP/IT</span>
                 </div>
                 <div>
                     <h3 class="text-sm sm:text-base font-black text-white">WeChat 学習交流グループ</h3>
                     <p class="text-xs text-slate-400 mt-1">試験情報の共有や学習相談はこちら。</p>
                 </div>
-                <div class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 flex items-center justify-between gap-2">
-                    <code class="text-xs font-bold font-mono-code text-teal-300">nowminami</code>
-                    <button type="button" onclick="copyWechatID()" class="bg-teal-400 hover:bg-amber-300 text-slate-950 font-black text-[11px] px-2.5 py-1 rounded-lg flex items-center gap-1 transition-colors cursor-pointer shrink-0">
+                <div class="bg-[#07090F] border-2 border-slate-700 rounded-xl px-3 py-2 flex items-center justify-between gap-2">
+                    <code class="text-xs font-extrabold font-mono-code text-teal-300">nowminami</code>
+                    <button type="button" onclick="copyWechatID()" class="hard-btn-yellow font-black text-[11px] px-2.5 py-1 rounded-lg flex items-center gap-1 cursor-pointer shrink-0">
                         <i data-lucide="copy" class="w-3 h-3"></i>
                         <span id="copy-btn-text">IDコピー</span>
                     </button>
@@ -225,7 +285,7 @@
         </section>
     </main>
 
-    <footer class="border-t border-slate-800/80 bg-slate-950/80 py-5 text-center text-[11px] text-slate-500 font-medium">
+    <footer class="border-t-2 border-slate-800/90 bg-[#07090F] py-5 text-center text-[11px] text-slate-500 font-semibold">
         © FocusLink / Minami. All rights reserved.
     </footer>
 
